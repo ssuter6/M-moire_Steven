@@ -1,0 +1,67 @@
+#Title{
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    top: 5px;
+    height: 125px;
+    border-style:solid ;
+    border-color: black;
+    background-color: rgb(255, 255, 255);
+}
+
+#Selection{
+    position: absolute;
+    left: 5px;
+    top: 140px;
+    height: 605px;
+    width: 350px;
+    border-style:solid ;
+    border-color: black;
+    background-color: rgb(255, 255, 255);
+}
+
+#Map{
+    position: absolute;
+    left: 365px;
+    top: 140px;
+    height: 450px;
+    width: 850px;
+    border-style:solid ;
+    border-color: black;
+    background-color: rgb(255, 255, 255);
+}
+
+#Info{
+    position: absolute;
+    left: 365px;
+    top: 600px;
+    height: 145px;
+    width: 850px;
+    border-style:solid ;
+    border-color: black;
+    background-color: rgb(255, 255, 255);
+}
+
+#Visu_info1{
+    position: absolute;
+    left: 1225px;
+    top: 140px;
+    height: 297.5px;
+    right: 5px;
+    border-style:solid ;
+    border-color: black;
+    background-color: rgb(255, 255, 255);
+
+}
+
+#Visu_info2{
+    position: absolute;
+    left: 1225px;
+    top: 447.5px;
+    height: 297.5px;
+    right: 5px;
+    border-style:solid ;
+    border-color: black;
+    background-color: rgb(255, 255, 255);
+
+}

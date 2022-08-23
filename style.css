@@ -62,6 +62,7 @@ h1 {
 
 }
 */
+
 .sidebar {
     height: 90%;
     width: 0;
@@ -93,19 +94,18 @@ h1 {
     position: absolute;
     top: 0;
     right: 25px;
-    font-size: 36px;
+    font-size: 26px;
     margin-left: 50px;
   }
   
   .openbtn {
-    font-size: 20px;
+    font-size: 26px;
     cursor: pointer;
     background-color: #111;
     color: white;
-    padding: 10px 15px;
     border: none;
     position: absolute;
-    top: 2px;
+    top: 1px;
     left: 5px;
     bottom: 2px;
     z-index: 50;
@@ -154,6 +154,158 @@ h1 {
   }
 
   a.closeFdc{
+    position:absolute;
+    top:-20px;
+    right: 25px;
+    font-size: 26px;
+    margin-left: 50px;
+    color: #f1f1f1;
+    text-align: center;
+  
+  }
+
+  
+  button.OpenDth {
+    cursor: pointer;
+    background-color: #111;
+    border: none;
+    position: relative;
+    z-index: 50;
+    border-radius: 10px;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.0s;
+  }
+
+  .OpenDth:hover {
+    color: #f1f1f1
+  }
+
+  .OuvrirDth {
+    position: relative;
+    height: 0px;
+    overflow-x: hidden;
+    background-color: #f1f1f1;
+  }
+
+  a.closeDth{
+    position:absolute;
+    top:-20px;
+    right: 25px;
+    font-size: 26px;
+    margin-left: 50px;
+    color: #f1f1f1;
+    text-align: center;
+  
+  }
+
+  
+  button.OpenMD {
+    cursor: pointer;
+    background-color: #111;
+    border: none;
+    position: relative;
+    z-index: 50;
+    border-radius: 10px;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.0s;
+  }
+
+  .OpenMD:hover {
+    color: #f1f1f1
+  }
+
+  .OuvrirMD {
+    position: relative;
+    height: 0px;
+    overflow-x: hidden;
+    background-color: #f1f1f1;
+  }
+
+  a.closeMD{
+    position:absolute;
+    top:-20px;
+    right: 25px;
+    font-size: 26px;
+    margin-left: 50px;
+    color: #f1f1f1;
+    text-align: center;
+  
+  }
+
+  
+  button.OpenImp {
+    cursor: pointer;
+    background-color: #111;
+    border: none;
+    position: relative;
+    z-index: 50;
+    border-radius: 10px;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.0s;
+  }
+
+  .OpenImp:hover {
+    color: #f1f1f1
+  }
+
+  .OuvrirImp {
+    position: relative;
+    height: 0px;
+    overflow-x: hidden;
+    background-color: #f1f1f1;
+  }
+
+  a.closeImp{
+    position:absolute;
+    top:-20px;
+    right: 25px;
+    font-size: 26px;
+    margin-left: 50px;
+    color: #f1f1f1;
+    text-align: center;
+  
+  }
+
+    
+  button.OpenDroits {
+    cursor: pointer;
+    background-color: #111;
+    border: none;
+    position: relative;
+    z-index: 50;
+    border-radius: 10px;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.0s;
+  }
+
+  .OpenDroits:hover {
+    color: #f1f1f1
+  }
+
+  .OuvrirDroits {
+    position: relative;
+    height: 0px;
+    overflow-x: hidden;
+    background-color: #f1f1f1;
+  }
+
+  a.closeDroits{
     position:absolute;
     top:-20px;
     right: 25px;

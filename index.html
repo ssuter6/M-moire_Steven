@@ -20,18 +20,15 @@
     <!-- Load Esri Leaflet Vector from CDN -->
     <script src="https://unpkg.com/esri-leaflet-vector@3.1.3/dist/esri-leaflet-vector.js" crossorigin=""></script>
     
-    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
     <body>
     
         <div id="main">
             <!-- Création du Sidebar -->
             <div id="mySidebar" class="sidebar">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <a href="#">Fond de carte</a>
-                <a href="#">Données thématiques</a>
-                <a href="#">Mesurer/Dessiner</a>
-                <a href="#">Imprimer</a>
-                <a href="#">Droits/auteur</a>
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Close &times;</a>
+
                 <div id="boutonFdc" class="Fdc">
                     <button id="OpenFdc" class="OpenFdc" onclick="openFdc()"> Fond de carte </button>
                     <div id="OuvrirFdc" class="OuvrirFdc">
@@ -42,9 +39,35 @@
                 <div id="boutonDth" class="Dth">
                     <button id="OpenDth" class="OpenDth" onclick="openDth()"> Données thématiques </button>
                     <div id="OuvrirDth" class="OuvrirDth">
+                        <a href="javascript:void(0)" class="closeDth" onclick="closeDth()">&times;</a>
+
                     </div>
                 </div>
-                
+
+                <div id="boutonMD" class="MD">
+                    <button id="OpenMD" class="OpenMD" onclick="openMD()"> Mesurer/Dessiner </button>
+                    <div id="OuvrirMD" class="OuvrirMD">
+                        <a href="javascript:void(0)" class="closeMD" onclick="closeMD()">&times;</a>
+
+                    </div>
+                </div>
+
+                <div id="boutonImp" class="Imp">
+                    <button id="OpenImp" class="OpenImp" onclick="openImp()"> Imprimer </button>
+                    <div id="OuvrirImp" class="OuvrirImp">
+                        <a href="javascript:void(0)" class="closeImp" onclick="closeImp()">&times;</a>
+
+                    </div>
+                </div>
+
+                <div id="boutonDroits" class="Droits">
+                    <button id="OpenDroits" class="OpenDroits" onclick="openDroits()"> Droits/auteurs </button>
+                    <div id="OuvrirDroits" class="OuvrirDroits">
+                        <a href="javascript:void(0)" class="closeDroits" onclick="closeDroits()">&times;</a>
+
+                    </div>
+                </div>
+
             </div>
             <!--Titre avec bouton permettant d'ouvrir le menu de selection des données-->
             <div id="Title">

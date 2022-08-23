@@ -4,20 +4,72 @@
         <meta charset="UTF-8">
         <title>Projet de master</title>
 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+        crossorigin=""></script>
+
+           <!-- Load Esri Leaflet from CDN -->
+    <script src="https://unpkg.com/esri-leaflet@^3.0.8/dist/esri-leaflet.js"></script>
+
+    <!-- Load Esri Leaflet Vector from CDN -->
+    <script src="https://unpkg.com/esri-leaflet-vector@3.1.3/dist/esri-leaflet-vector.js" crossorigin=""></script>
+    
     </head>
     <body>
-        <div id="Title">
-            <h1>GEOPortail District d'Aigle</h1>
+    
+        <div id="main">
+            <!-- Création du Sidebar -->
+            <div id="mySidebar" class="sidebar">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="#">Fond de carte</a>
+                <a href="#">Données thématiques</a>
+                <a href="#">Mesurer/Dessiner</a>
+                <a href="#">Imprimer</a>
+                <a href="#">Droits/auteur</a>
+                <div id="boutonFdc" class="Fdc">
+                    <button id="OpenFdc" class="OpenFdc" onclick="openFdc()"> Fond de carte </button>
+                    <div id="OuvrirFdc" class="OuvrirFdc">
+                        <a href="javascript:void(0)" class="closeFdc" onclick="closeFdc()">&times;</a>
+                    </div>
+                </div>
+
+                <div id="boutonDth" class="Dth">
+                    <button id="OpenDth" class="OpenDth" onclick="openDth()"> Données thématiques </button>
+                    <div id="OuvrirDth" class="OuvrirDth">
+                    </div>
+                </div>
+                
+            </div>
+            <!--Titre avec bouton permettant d'ouvrir le menu de selection des données-->
+            <div id="Title">
+                <h1>GEOPortail District d'Aigle</h1>
+                <button class="openbtn" onclick="openNav()">☰ Choix des données</button> 
+            </div>
+
+            <!--Carte-->
+            <div id="Map"></div>
+
+
+           <!--
+            <!--
+                Onglet information-->
+            <div id="Info"></div>
+
+            <!--Onglet visualisation 1-->
+            <div id="Visu_info1"></div>
+
+            <!--Onglet visualisation 1-->
+            <div id="Visu_info2"></div> 
+            -->
         </div>
+        
+        <script src="script.js"></script>
 
-        <div id="Selection">Séléction des données</div>
-
-        <div id="Map"></div>
-
-        <div id="Info"></div>
-
-        <div id="Visu_info1"></div>
-        <div id="Visu_info2"></div>
     </body>
     </html>

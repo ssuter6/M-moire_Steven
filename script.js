@@ -22,7 +22,6 @@ googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
 });
 
 
-
 //Creation of map tiles
 var osmMap = L.tileLayer(osmURL, {attribution: osmAttrib});
 var cartoMap = L.tileLayer(cartoURL, {attribution: cartoAttrib});
@@ -36,42 +35,6 @@ var stamenMap = L.tileLayer(stamenURL,{
 
 var map = L.map('Map',{layers:googleSat	}).setView([46.32, 7.05], 11.5);
 
-//fonction qui permet d'ourir le fond de carte google satellite
-function OuvrirImg_sat() {
-    //create new layer
-    L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
-		maxZoom: 18,
-		subdomains:['mt0','mt1','mt2','mt3']
-	}).addTo(map);
-	//add it to a control
-    
-};
-
-function OuvrirImg_OSM(){
-    //create new layer
-	L.tileLayer('https://{s}.tile.jawg.io/jawg-matrix/{z}/{x}/{y}{r}.png?access-token={accessToken}', {
-		attribution: '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-		minZoom: 0,
-		maxZoom: 20,
-		subdomains: 'abcd',
-		accessToken: 'PC2JcrjT5SXkrWg5SDm4ezZKZJoZyNxzqAQ41pkWxK7DonJJV4zK76ZCcRVtfVfn'
-	}).addTo(map);
-	//add it to a control
-};
-
-function OuvrirImg_E(){
-	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-		attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
-	}).addTo(map);
-}
-
-function OuvrirImg_OsmCH(){
-	L.tileLayer('https://tile.osm.ch/switzerland/{z}/{x}/{y}.png', {
-	maxZoom: 18,
-	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-	bounds: [[45, 5], [48, 11]]
-}).addTo(map);
-}
 
 //Base layers definition and addition
 var baseLayers = {
@@ -79,7 +42,7 @@ var baseLayers = {
 	"OSM Mapnik": osmMap,
 	"Carto DarkMatter": cartoMap,
 	"Stamen Toner": stamenMap
-}
+};
 	  
 //Add baseLayers to map as control layers
 	c = L.control.layers(baseLayers);
@@ -87,11 +50,8 @@ var baseLayers = {
 	scale =	L.control.scale().addTo(map);
 
 
-	
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		 /////////////////////////////////////////SIDEBAR/////////////////////////////////////////////////
+//////////////////////////////////////////////////SIDEBAR////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	 //Fonction qui permet d'ouvrir et de fermer notre sidebar 
@@ -105,7 +65,10 @@ var baseLayers = {
 		document.getElementById("Title").style.marginLeft= "0";
 	  }	
 	  
-	// Fonction qui permet d'ouvrir et de fermer la section liée au fond de carte
+
+	//////////////////////////////////////////////////////////////////////////////////
+	// Les fonction permettant d'ouvrir l'onglet de selection lié aux fonds de cartes
+	/////////////////////////////////////////////////////////////////////////////////
 	  function openFdc() {
 		document.getElementById("OuvrirFdc").style.height = "200px";
 		document.getElementById("OuvrirFdc").style.backgroundColor = 'lightgrey' ; 
@@ -116,14 +79,58 @@ var baseLayers = {
 		document.getElementById("OpenFdc").style.color = 'white' ;
 	  }	
 
-	  function closeFdc(){
-		document.getElementById("OuvrirFdc").style.height = "0px";
-		document.getElementById("boutonFdc").style.backgroundColor = '#111' ; 
-		document.getElementById("OpenFdc").style.backgroundColor = '#111' ;
-		document.getElementById("OpenFdc").style.color = '#818181' ;
-	  }
+	//fonction qui permet d'ourir le fond de carte google satellite
+		function OuvrirImg_sat() {
+    	//création de la nouvelle couche
+    		L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+			maxZoom: 18,
+			subdomains:['mt0','mt1','mt2','mt3']
+			}).addTo(map);
+    	};
 
-	// Fonction qui perment d'ouvrir et de fermer la section liée au données thématiques
+	//fonction qui permet d'ourir le fond de carte OSM
+		function OuvrirImg_OSM(){
+        	//création de la nouvelle couche
+			L.tileLayer('https://{s}.tile.jawg.io/jawg-matrix/{z}/{x}/{y}{r}.png?access-token={accessToken}', {
+			attribution: '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+			minZoom: 0,
+			maxZoom: 20,
+			subdomains: 'abcd',
+			accessToken: 'PC2JcrjT5SXkrWg5SDm4ezZKZJoZyNxzqAQ41pkWxK7DonJJV4zK76ZCcRVtfVfn'
+			}).addTo(map);
+		};
+
+	//fonction qui permet d'ourir le fond de carte Esri terrain
+		function OuvrirImg_E(){
+	    	//création de la nouvelle couche
+			L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+			attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
+			}).addTo(map);
+		};
+
+	//fonction qui permet d'ourir le fond de carte OSM CH
+		function OuvrirImg_OsmCH(){
+	    	//création de la nouvelle couche
+			L.tileLayer('https://tile.osm.ch/switzerland/{z}/{x}/{y}.png', {
+			maxZoom: 18,
+			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+			bounds: [[45, 5], [48, 11]]
+			}).addTo(map);
+		};
+
+		//Fonction qui permet de fermet l'onglet de selection lié au fond de carte
+	  	function closeFdc(){
+			document.getElementById("OuvrirFdc").style.height = "0px";
+			document.getElementById("boutonFdc").style.backgroundColor = '#111' ; 
+			document.getElementById("OpenFdc").style.backgroundColor = '#111' ;
+			document.getElementById("OpenFdc").style.color = '#818181' ;
+	  	}
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+////////Fonction qui perment d'ouvrir et de fermer la section liée au données thématiques//////
+///////////////////////////////////////////////////////////////////////////////////////////////
 	  function openDth() {
 		document.getElementById("OuvrirDth").style.height = "200px";
 		document.getElementById("OuvrirDth").style.backgroundColor = 'green' ; 

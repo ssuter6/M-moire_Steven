@@ -19,7 +19,10 @@
 
     <!-- Load Esri Leaflet Vector from CDN -->
     <script src="https://unpkg.com/esri-leaflet-vector@3.1.3/dist/esri-leaflet-vector.js" crossorigin=""></script>
-    
+
+    <!--Librairies de fond carte leaflet-->
+    <script src="leaflet_provider.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
     <body>
@@ -27,12 +30,34 @@
         <div id="main">
             <!-- Création du Sidebar -->
             <div id="mySidebar" class="sidebar">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Close &times;</a>
-
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Fermer</a>
+                
+                <!-- Bouton permettant d'accéder aux différents fonds de carte-->
                 <div id="boutonFdc" class="Fdc">
-                    <button id="OpenFdc" class="OpenFdc" onclick="openFdc()"> Fond de carte </button>
-                    <div id="OuvrirFdc" class="OuvrirFdc">
-                        <a href="javascript:void(0)" class="closeFdc" onclick="closeFdc()">&times;</a>
+                    <button id="OpenFdc" class="OpenFdc" onclick="openFdc()"> Fond de carte  </button>
+                    <a href="javascript:void(0)" class="OpenFdc" onclick="closeFdc()">&times;</a>
+
+                    <div id="OuvrirFdc" class="OuvrirFdc">                        
+                        <figure id="img" class="img">
+                            <img src="C:/Users/user/Documents/GitHub/M-moire_Steven/image/OSM_CH.jpg" style="width:105px ;height:105px; margin-right:22px;border-radius: 5px;">
+                            <img src="C:/Users/user/Documents/GitHub/M-moire_Steven/image/esri_osm.jpg" style="width:105px; height:105px;border-radius: 5px;">
+
+                            <!--Bouton qui affiche le fond de carte satellite sur la carte-->
+                            <button class="Img_OsmCH" onclick="OuvrirImg_OsmCH()"> OSM </button>
+                            <button class="Img_osm" onclick="OuvrirImg_OSM()"> OSM sombre </button>                          
+                        </figure>
+
+                        <figure id="img" class="img">
+                            <img src="C:/Users/user/Documents/GitHub/M-moire_Steven/image/esri_cartopo.jpg" style="width:105px; height:105px; margin-right:22px; border-radius: 5px;">
+                            <img src="C:/Users/user/Documents/GitHub/M-moire_Steven/image/image_sat_terre.jpg" style="width:105px; height:105px;border-radius: 5px;">
+
+                            <!--Bouton qui affiche le fond de carte satellite sur la carte-->
+                            <figcaption>
+                                <button id= "Img_e" class="Img_e" onclick="OuvrirImg_E()"> Esri carte topo</map> </button>
+                                <button id= "OuvrirImg_sat" class="OuvrirImg_sat" onclick="OuvrirImg_sat()"> Photos aériennes </button>
+                            </figcaption>
+                        </figure>
+                        
                     </div>
                 </div>
 
@@ -93,6 +118,7 @@
         </div>
         
         <script src="script.js"></script>
+
 
     </body>
     </html>

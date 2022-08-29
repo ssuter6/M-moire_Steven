@@ -16,6 +16,13 @@ var cartoAttrib = '&copy; ' + osmLink + ' &copy; ' + cartoLink;
 var stamenURL = 'http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.{ext}';
 var stamenAttrib = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 
+googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+    maxZoom: 20,
+    subdomains:['mt0','mt1','mt2','mt3']
+});
+
+
+
 //Creation of map tiles
 var osmMap = L.tileLayer(osmURL, {attribution: osmAttrib});
 var cartoMap = L.tileLayer(cartoURL, {attribution: cartoAttrib});
@@ -27,95 +34,59 @@ var stamenMap = L.tileLayer(stamenURL,{
     ext: 'png'
 });
 
-var map = L.map('Map',{layers:osmMap}).setView([46.32, 7.05], 11.5);
+var map = L.map('Map',{layers:googleSat	}).setView([46.32, 7.05], 11.5);
+
+//fonction qui permet d'ourir le fond de carte google satellite
+function OuvrirImg_sat() {
+    //create new layer
+    L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+		maxZoom: 18,
+		subdomains:['mt0','mt1','mt2','mt3']
+	}).addTo(map);
+	//add it to a control
+    
+};
+
+function OuvrirImg_OSM(){
+    //create new layer
+	L.tileLayer('https://{s}.tile.jawg.io/jawg-matrix/{z}/{x}/{y}{r}.png?access-token={accessToken}', {
+		attribution: '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+		minZoom: 0,
+		maxZoom: 20,
+		subdomains: 'abcd',
+		accessToken: 'PC2JcrjT5SXkrWg5SDm4ezZKZJoZyNxzqAQ41pkWxK7DonJJV4zK76ZCcRVtfVfn'
+	}).addTo(map);
+	//add it to a control
+};
+
+function OuvrirImg_E(){
+	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+		attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
+	}).addTo(map);
+}
+
+function OuvrirImg_OsmCH(){
+	L.tileLayer('https://tile.osm.ch/switzerland/{z}/{x}/{y}.png', {
+	maxZoom: 18,
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	bounds: [[45, 5], [48, 11]]
+}).addTo(map);
+}
 
 //Base layers definition and addition
 var baseLayers = {
+	"sat": googleSat,
 	"OSM Mapnik": osmMap,
 	"Carto DarkMatter": cartoMap,
 	"Stamen Toner": stamenMap
 }
 	  
 //Add baseLayers to map as control layers
-	c = L.control.layers(baseLayers).addTo(map);
-	$('#OuvrirFdc').append(c.onAdd(map))
-	
+	c = L.control.layers(baseLayers);
+//ajout d'échelle sur la carte
 	scale =	L.control.scale().addTo(map);
 
-// Initialise the FeatureGroup to store editable layers
-var editableLayers = new L.FeatureGroup();
-map.addLayer(editableLayers);
 
-// define custom marker
-var MyCustomMarker = L.Icon.extend({
-  options: {
-    shadowUrl: null,
-    iconAnchor: new L.Point(12, 12),
-    iconSize: new L.Point(24, 24),
-    iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Information_icon4_orange.svg'
-  }
-});
-
-var drawPluginOptions = {
-  position: 'topright',
-  draw: {
-    polyline: {
-      shapeOptions: {
-        color: '#f357a1',
-        weight: 10
-      }
-    },
-    polygon: {
-      allowIntersection: false, // Restricts shapes to simple polygons
-      drawError: {
-        color: '#e1e100', // Color the shape will turn when intersects
-        message: '<strong>Polygon draw does not allow intersections!<strong> (allowIntersection: false)' // Message that will show when intersect
-      },
-      shapeOptions: {
-        color: '#bada55'
-      }
-    },
-    circle: false, // Turns off this drawing tool
-    rectangle: {
-      shapeOptions: {
-        clickable: false
-      }
-    },
-    marker: {
-      icon: new MyCustomMarker()
-    }
-  },
-  edit: {
-    featureGroup: editableLayers, //REQUIRED!!
-    remove: false
-  }
-};
-
-
-
-
-
-// Initialise the draw control and pass it the FeatureGroup of editable layers
-var drawControl = new L.Control.Draw(drawPluginOptions);
-map.addControl(drawControl);
-
-
-var editableLayers = new L.FeatureGroup();
-map.addLayer(editableLayers);
-
-
-
-
-map.on('draw:created', function(e) {
-  var type = e.layerType,
-    layer = e.layer;
-
-  if (type === 'marker') {
-    layer.bindPopup('A popup!');
-  }
-
-  editableLayers.addLayer(layer);
-});
 	
 
 
@@ -137,16 +108,18 @@ map.on('draw:created', function(e) {
 	// Fonction qui permet d'ouvrir et de fermer la section liée au fond de carte
 	  function openFdc() {
 		document.getElementById("OuvrirFdc").style.height = "200px";
-		document.getElementById("OuvrirFdc").style.backgroundColor = 'green' ; 
-		document.getElementById("boutonFdc").style.backgroundColor = 'green' ; 
-		document.getElementById("OpenFdc").style.backgroundColor = 'green' ;
+		document.getElementById("OuvrirFdc").style.backgroundColor = 'lightgrey' ; 
+		document.getElementById("boutonFdc").style.backgroundColor = 'grey' ; 
+		document.getElementById("OuvrirFdc").style.borderBottomLeftRadius = '5px'; 
+		document.getElementById("OuvrirFdc").style.borderBottomrightRadius = '5px'; 
+		document.getElementById("OpenFdc").style.backgroundColor = 'grey' ;
 		document.getElementById("OpenFdc").style.color = 'white' ;
 	  }	
 
 	  function closeFdc(){
 		document.getElementById("OuvrirFdc").style.height = "0px";
-		document.getElementById("boutonFdc").style.backgroundColor = 'black' ; 
-		document.getElementById("OpenFdc").style.backgroundColor = 'black' ;
+		document.getElementById("boutonFdc").style.backgroundColor = '#111' ; 
+		document.getElementById("OpenFdc").style.backgroundColor = '#111' ;
 		document.getElementById("OpenFdc").style.color = '#818181' ;
 	  }
 
@@ -217,5 +190,7 @@ map.on('draw:created', function(e) {
 		document.getElementById("OpenDroits").style.color = '#818181' ;
 
 	  }
+
+	 
 	  
 	  

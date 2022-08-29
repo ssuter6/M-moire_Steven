@@ -30,7 +30,8 @@
         <div id="main">
             <!-- Création du Sidebar -->
             <div id="mySidebar" class="sidebar">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Fermer</a>
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Fermer</a>
+                
                 
                 <!-- Bouton permettant d'accéder aux différents fonds de carte-->
                 <div id="boutonFdc" class="Fdc">
@@ -39,7 +40,7 @@
 
                     <div id="OuvrirFdc" class="OuvrirFdc">                        
                         <figure id="img" class="img">
-                            <img src="C:/Users/user/Documents/GitHub/M-moire_Steven/image/OSM_CH.jpg" style="width:105px ;height:105px; margin-right:22px;border-radius: 5px;">
+                            <img src="C:/Users/user/Documents/GitHub/M-moire_Steven/image/OSM_CH.jpg" style="width:105px ;height:105px; margin-right:45px;border-radius: 5px;">
                             <img src="C:/Users/user/Documents/GitHub/M-moire_Steven/image/esri_osm.jpg" style="width:105px; height:105px;border-radius: 5px;">
 
                             <!--Bouton qui affiche le fond de carte satellite sur la carte-->
@@ -48,12 +49,12 @@
                         </figure>
 
                         <figure id="img" class="img">
-                            <img src="C:/Users/user/Documents/GitHub/M-moire_Steven/image/esri_cartopo.jpg" style="width:105px; height:105px; margin-right:22px; border-radius: 5px;">
+                            <img src="C:/Users/user/Documents/GitHub/M-moire_Steven/image/esri_cartopo.jpg" style="width:105px; height:105px; margin-right:45px; border-radius: 5px;">
                             <img src="C:/Users/user/Documents/GitHub/M-moire_Steven/image/image_sat_terre.jpg" style="width:105px; height:105px;border-radius: 5px;">
 
                             <!--Bouton qui affiche le fond de carte satellite sur la carte-->
                             <figcaption>
-                                <button id= "Img_e" class="Img_e" onclick="OuvrirImg_E()"> Esri carte topo</map> </button>
+                                <button id= "Img_e" class="Img_e" onclick="OuvrirImg_E()"> Esri carte topo (CH)</map> </button>
                                 <button id= "OuvrirImg_sat" class="OuvrirImg_sat" onclick="OuvrirImg_sat()"> Photos aériennes </button>
                             </figcaption>
                         </figure>
@@ -63,11 +64,13 @@
 
                 <div id="boutonDth" class="Dth">
                     <button id="OpenDth" class="OpenDth" onclick="openDth()"> Données thématiques </button>
-                    <div id="OuvrirDth" class="OuvrirDth">
-                        <a href="javascript:void(0)" class="closeDth" onclick="closeDth()">&times;</a>
+                    <a href="javascript:void(0)" class="OpenDth" onclick="closeDth()">&times;</a>
 
-                    </div>
+                    <div id="OuvrirDth"></div>
                 </div>
+
+
+
 
                 <div id="boutonMD" class="MD">
                     <button id="OpenMD" class="OpenMD" onclick="openMD()"> Mesurer/Dessiner </button>

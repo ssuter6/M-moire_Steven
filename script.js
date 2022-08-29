@@ -34,7 +34,7 @@ var stamenMap = L.tileLayer(stamenURL,{
 });
 
 var map = L.map('Map',{layers:googleSat	}).setView([46.32, 7.05], 11.5);
-
+map.removeControl(map.zoomControl);
 
 //Base layers definition and addition
 var baseLayers = {
@@ -46,8 +46,14 @@ var baseLayers = {
 	  
 //Add baseLayers to map as control layers
 	c = L.control.layers(baseLayers);
-//ajout d'échelle sur la carte
-	scale =	L.control.scale().addTo(map);
+	
+//ajout d'échelle et du zoom sur la carte
+	zoom =L.control.zoom({
+		position: 'bottomleft'
+		}).addTo(map);
+	scale =	L.control.scale({
+			position:"bottomleft"
+		}).addTo(map);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -56,8 +62,8 @@ var baseLayers = {
 
 	 //Fonction qui permet d'ouvrir et de fermer notre sidebar 
 	 function openNav() {
-		document.getElementById("mySidebar").style.width = "355px";
-		document.getElementById("Title").style.marginLeft = "355px";
+		document.getElementById("mySidebar").style.width = "375px";
+		document.getElementById("Title").style.marginLeft = "375px";
 	  }
 	  
 	  function closeNav() {
@@ -133,16 +139,18 @@ var baseLayers = {
 ///////////////////////////////////////////////////////////////////////////////////////////////
 	  function openDth() {
 		document.getElementById("OuvrirDth").style.height = "200px";
-		document.getElementById("OuvrirDth").style.backgroundColor = 'green' ; 
-		document.getElementById("boutonDth").style.backgroundColor = 'green' ; 
-		document.getElementById("OpenDth").style.backgroundColor = 'green' ;
+		document.getElementById("OuvrirDth").style.backgroundColor = 'lightgrey' ; 
+		document.getElementById("boutonDth").style.backgroundColor = 'grey' ; 
+		document.getElementById("OuvrirDth").style.borderBottomLeftRadius = '5px'; 
+		document.getElementById("OuvrirDth").style.borderBottomrightRadius = '5px'; 
+		document.getElementById("OpenDth").style.backgroundColor = 'grey' ;
 		document.getElementById("OpenDth").style.color = 'white' ;
 	  }	
 
 	  function closeDth(){
 		document.getElementById("OuvrirDth").style.height = "0px";
-		document.getElementById("boutonDth").style.backgroundColor = 'black' ; 
-		document.getElementById("OpenDth").style.backgroundColor = 'black' ;
+		document.getElementById("boutonDth").style.backgroundColor = '#111' ; 
+		document.getElementById("OpenDth").style.backgroundColor = '#111' ;
 		document.getElementById("OpenDth").style.color = '#818181' ;
 
 	  }

@@ -2,58 +2,161 @@
 //////////////////////////////////////Paramètre de la carte//////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//OSM tiles attribution and URL
-var osmLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-var osmURL = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-var osmAttrib = '&copy; ' + osmLink;
+var southWest = L.latLng(46.5, 6.6),
+    northEast = L.latLng(46.1, 7.5),
+    bounds = L.latLngBounds(southWest, northEast);
 
-//Carto tiles attribution and URL
-var cartoLink = '<a href="http://cartodb.com/attributions">CartoDB</a>';
-var cartoURL = 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png';
-var cartoAttrib = '&copy; ' + osmLink + ' &copy; ' + cartoLink;
+	var googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+		maxBounds:bounds,
+		minZoom:10.5,
+		maxZoom: 22,
+		subdomains:['mt0','mt1','mt2','mt3']
+	});
 
-//Stamen Toner tiles attribution and URL
-var stamenURL = 'http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.{ext}';
-var stamenAttrib = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+	var OSM_Sombre = L.tileLayer('https://{s}.tile.jawg.io/jawg-matrix/{z}/{x}/{y}{r}.png?access-token={accessToken}', {
+		attribution: '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+		minZoom:10.5,
+		maxZoom: 22,
+		subdomains: 'abcd',
+		maxBounds: bounds,
+		accessToken: 'PC2JcrjT5SXkrWg5SDm4ezZKZJoZyNxzqAQ41pkWxK7DonJJV4zK76ZCcRVtfVfn'
+	});
 
-googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
-    maxZoom: 20,
-    subdomains:['mt0','mt1','mt2','mt3']
-});
-
-
-//Creation of map tiles
-var osmMap = L.tileLayer(osmURL, {attribution: osmAttrib});
-var cartoMap = L.tileLayer(cartoURL, {attribution: cartoAttrib});
-var stamenMap = L.tileLayer(stamenURL,{
-    attribution: stamenAttrib,
-    subdomains: 'abcd',
-    minZoom: 0,
-    maxZoom: 20,
-    ext: 'png'
-});
-
-var map = L.map('Map',{layers:googleSat	}).setView([46.32, 7.05], 11.5);
-map.removeControl(map.zoomControl);
-
-//Base layers definition and addition
-var baseLayers = {
-	"sat": googleSat,
-	"OSM Mapnik": osmMap,
-	"Carto DarkMatter": cartoMap,
-	"Stamen Toner": stamenMap
-};
-	  
-//Add baseLayers to map as control layers
-	c = L.control.layers(baseLayers);
+	var Img_sat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+			minZoom:10.5,
+			maxZoom: 22,
+			maxBounds: bounds,
+			subdomains:['mt0','mt1','mt2','mt3']
+		});
 	
-//ajout d'échelle et du zoom sur la carte
-	zoom =L.control.zoom({
-		position: 'bottomleft'
-		}).addTo(map);
-	scale =	L.control.scale({
+	var esri = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+		attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community',
+		minZoom:10.5,
+		maxZoom: 22,
+		maxBounds: bounds,
+		});
+	
+	var osmCh = L.tileLayer('https://tile.osm.ch/switzerland/{z}/{x}/{y}.png', {
+		minZoom:10.5,
+		maxZoom: 22,
+		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+		maxBounds: bounds,
+		});
+
+	
+	//////////Definition de nos couche de bases////////////////
+	var baseLayers = {
+		"sat": googleSat,
+		"sat2": Img_sat,
+		"OSM": osmCh,
+		"osm_sombre" : OSM_Sombre,
+		"Esri": esri
+		};
+
+	var map = 	L.map('Map',{layers:Img_sat,maxBounds:bounds,pmIgnore: false}).setView([46.32, 7.05], 11.5);
+	  
+	
+	//Add baseLayers to map as control layers
+		c = L.control.layers(baseLayers);
+
+	//ajout d'échelle et du zoom sur la carte
+		zoom =L.control.zoom({
+			position: 'bottomleft'
+			}).addTo(map);
+		
+		scale =	L.control.scale({
 			position:"bottomleft"
-		}).addTo(map);
+			}).addTo(map);
+	
+		map.removeControl(map.zoomControl);
+
+		
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////Outils de mesure////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+var featureGroup = L.featureGroup().addTo(map);
+
+        var drawControl = new L.Control.Draw({
+        edit: {
+            featureGroup: featureGroup
+        },
+        draw: {
+            polygon: false,
+            polyline: false,
+            rectangle: false,
+            circle: false,
+            marker: false
+        }
+    });
+
+
+// Modification de l'icon du marker
+L.Marker.prototype.options.icon = L.icon({
+    iconUrl: "C:/Users/user/Documents/GitHub/M-moire_Steven/image/marker.jpg",
+	iconSize: [30, 40],
+});
+
+
+// Fonction permettant d'ajouter des marqueurs sur la carte
+function Marqueur_Act(){
+	var options_marqueurs ={
+		drawMarker:false,
+		};
+
+	map.pm.enableDraw('Marker', options_marqueurs);	
+}
+
+// Fonction permettant d'arrêter d'ajouter des marqueurs sur la carte
+function Marqueur_Inact(){
+	map.pm.disableDraw('Marker');
+};
+
+
+// Fonction permettant de mesurer des distances sur la carte
+function Mesure_Distance_Act(){
+	var options_mesure_distance ={
+		drawLine:false,
+		};
+
+	map.pm.enableDraw('Line', options_mesure_distance);	
+}
+
+// Fonction permettant de calculer des surfaces sur la carte
+function Mesure_surface_Act(){
+	var options_mesure_surfaces ={
+		drawPolyLine:false,
+		snappable: true,
+  		snapDistance: 20,
+		};
+
+	map.pm.enableDraw('Poly', options_mesure_surfaces);
+};
+
+
+// Fonction permettant d'effacer les actions réalisées sur la carte
+function effacer(){
+		map.pm.toggleGlobalRemovalMode();
+};
+
+/*
+let i = 0
+
+map.on('pm:create', function(e){
+	console.log(e)
+	/*i += 1;
+	let lat1 = e.layer._latlngs[0].lat
+	let lat2 = e.layer._latlngs[1].lat
+	let dist = lat1 - lat2;
+	
+});*/
+
+
+
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -72,65 +175,102 @@ var baseLayers = {
 	  }	
 	  
 
-	//////////////////////////////////////////////////////////////////////////////////
-	// Les fonction permettant d'ouvrir l'onglet de selection lié aux fonds de cartes
-	/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////// Les fonction permettant d'ouvrir l'onglet de selection lié aux fonds de cartes////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	  function openFdc() {
-		document.getElementById("OuvrirFdc").style.height = "200px";
+		document.getElementById("OuvrirFdc").style.height = "260px";
 		document.getElementById("OuvrirFdc").style.backgroundColor = 'lightgrey' ; 
 		document.getElementById("boutonFdc").style.backgroundColor = 'grey' ; 
 		document.getElementById("OuvrirFdc").style.borderBottomLeftRadius = '5px'; 
 		document.getElementById("OuvrirFdc").style.borderBottomrightRadius = '5px'; 
 		document.getElementById("OpenFdc").style.backgroundColor = 'grey' ;
 		document.getElementById("OpenFdc").style.color = 'white' ;
-	  }	
+	  };
+
 
 	//fonction qui permet d'ourir le fond de carte google satellite
 		function OuvrirImg_sat() {
-    	//création de la nouvelle couche
-    		L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
-			maxZoom: 18,
-			subdomains:['mt0','mt1','mt2','mt3']
-			}).addTo(map);
-    	};
+
+			if (map.hasLayer(esri)) {
+				map.removeLayer(esri);
+			};	
+			if (map.hasLayer(osmCh)) {
+				map.removeLayer(osmCh);
+			};
+			if (map.hasLayer(OSM_Sombre)) {
+				map.removeLayer(OSM_Sombre);
+			};
+
+			//création de la nouvelle couche
+			map.addLayer(Img_sat);
+		};
+			
+
 
 	//fonction qui permet d'ourir le fond de carte OSM
 		function OuvrirImg_OSM(){
-        	//création de la nouvelle couche
-			L.tileLayer('https://{s}.tile.jawg.io/jawg-matrix/{z}/{x}/{y}{r}.png?access-token={accessToken}', {
-			attribution: '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-			minZoom: 0,
-			maxZoom: 20,
-			subdomains: 'abcd',
-			accessToken: 'PC2JcrjT5SXkrWg5SDm4ezZKZJoZyNxzqAQ41pkWxK7DonJJV4zK76ZCcRVtfVfn'
-			}).addTo(map);
+
+			if (map.hasLayer(esri)) {
+				map.removeLayer(esri);
+			};	
+			if (map.hasLayer(osmCh)) {
+				map.removeLayer(osmCh);
+			};
+			if (map.hasLayer(Img_sat)) {
+				map.removeLayer(Img_sat);
+			};
+
+				//création de la nouvelle couche
+				map.addLayer(OSM_Sombre);
 		};
+
 
 	//fonction qui permet d'ourir le fond de carte Esri terrain
 		function OuvrirImg_E(){
-	    	//création de la nouvelle couche
-			L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-			attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
-			}).addTo(map);
+
+			if (map.hasLayer(OSM_Sombre)) {
+				map.removeLayer(OSM_Sombre);
+			};	
+			if (map.hasLayer(osmCh)) {
+				map.removeLayer(osmCh);
+			};
+			if (map.hasLayer(Img_sat)) {
+				map.removeLayer(Img_sat);
+			};
+			
+			//création de la nouvelle couche
+			map.addLayer(esri);	  
 		};
+
 
 	//fonction qui permet d'ourir le fond de carte OSM CH
 		function OuvrirImg_OsmCH(){
-	    	//création de la nouvelle couche
-			L.tileLayer('https://tile.osm.ch/switzerland/{z}/{x}/{y}.png', {
-			maxZoom: 18,
-			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-			bounds: [[45, 5], [48, 11]]
-			}).addTo(map);
+
+			if (map.hasLayer(esri)) {
+				map.removeLayer(esri);
+			};	
+			if (map.hasLayer(OSM_Sombre)) {
+				map.removeLayer(OSM_Sombre);
+			};
+			if (map.hasLayer(Img_sat)) {
+				map.removeLayer(Img_sat);
+			};
+
+			//création de la nouvelle couche
+			map.addLayer(osmCh); 
 		};
 
-		//Fonction qui permet de fermet l'onglet de selection lié au fond de carte
-	  	function closeFdc(){
-			document.getElementById("OuvrirFdc").style.height = "0px";
-			document.getElementById("boutonFdc").style.backgroundColor = '#111' ; 
-			document.getElementById("OpenFdc").style.backgroundColor = '#111' ;
-			document.getElementById("OpenFdc").style.color = '#818181' ;
-	  	}
+
+	//Fonction qui permet de fermet l'onglet de selection lié au fond de carte
+	function closeFdc(){
+		document.getElementById("OuvrirFdc").style.height = "0px";
+		document.getElementById("boutonFdc").style.backgroundColor = '#111' ; 
+		document.getElementById("OpenFdc").style.backgroundColor = '#111' ;
+		document.getElementById("OpenFdc").style.color = '#818181' ;
+	}
+
 
 
 
@@ -138,7 +278,7 @@ var baseLayers = {
 ////////Fonction qui perment d'ouvrir et de fermer la section liée au données thématiques//////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 	  function openDth() {
-		document.getElementById("OuvrirDth").style.height = "200px";
+		document.getElementById("OuvrirDth").style.height = "260px";
 		document.getElementById("OuvrirDth").style.backgroundColor = 'lightgrey' ; 
 		document.getElementById("boutonDth").style.backgroundColor = 'grey' ; 
 		document.getElementById("OuvrirDth").style.borderBottomLeftRadius = '5px'; 
@@ -157,24 +297,26 @@ var baseLayers = {
 
 	  // Fonction qui perment d'ouvrir et de fermer la section permettant de mesurer et dessiner sur la carte
 	  function openMD() {
-		document.getElementById("OuvrirMD").style.height = "200px";
-		document.getElementById("OuvrirMD").style.backgroundColor = 'green' ; 
-		document.getElementById("boutonMD").style.backgroundColor = 'green' ; 
-		document.getElementById("OpenMD").style.backgroundColor = 'green' ;
+		document.getElementById("OuvrirMD").style.height = "260px";
+		document.getElementById("OuvrirMD").style.backgroundColor = 'lightgrey' ; 
+		document.getElementById("boutonMD").style.backgroundColor = 'grey' ; 
+		document.getElementById("OuvrirMD").style.borderBottomLeftRadius = '5px'; 
+		document.getElementById("OuvrirMD").style.borderBottomrightRadius = '5px';
+		document.getElementById("OpenMD").style.backgroundColor = 'grey' ;
 		document.getElementById("OpenMD").style.color = 'white' ;
 	  }	
 
 	  function closeMD(){
 		document.getElementById("OuvrirMD").style.height = "0px";
-		document.getElementById("boutonMD").style.backgroundColor = 'black' ; 
-		document.getElementById("OpenMD").style.backgroundColor = 'black' ;
+		document.getElementById("boutonMD").style.backgroundColor = '#111' ; 
+		document.getElementById("OpenMD").style.backgroundColor = '#111' ;
 		document.getElementById("OpenMD").style.color = '#818181' ;
 
 	  }
 
 	  	  // Fonction qui perment d'ouvrir et de fermer la section permettant d'imprimer la carte
 	  function openImp() {
-		document.getElementById("OuvrirImp").style.height = "200px";
+		document.getElementById("OuvrirImp").style.height = "260px";
 		document.getElementById("OuvrirImp").style.backgroundColor = 'green' ; 
 		document.getElementById("boutonImp").style.backgroundColor = 'green' ; 
 		document.getElementById("OpenImp").style.backgroundColor = 'green' ;
@@ -206,6 +348,4 @@ var baseLayers = {
 
 	  }
 
-	 
-	  
-	  
+	

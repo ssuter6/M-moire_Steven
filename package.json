@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "leaflet-draw": "^1.0.4",
+    "react-leaflet-measure": "^2.1.1"
+  }
+}

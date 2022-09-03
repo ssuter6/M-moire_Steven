@@ -15,7 +15,7 @@
         crossorigin=""></script>
 
            <!-- Load Esri Leaflet from CDN -->
-    <script src="https://unpkg.com/esri-leaflet@^3.0.8/dist/esri-leaflet.js"></script>
+    <script src="https://unpkg.com/esri-leaflet@3.0.8/dist/esri-leaflet.js"></script>
 
     <!-- Load Esri Leaflet Vector from CDN -->
     <script src="https://unpkg.com/esri-leaflet-vector@3.1.3/dist/esri-leaflet-vector.js" crossorigin=""></script>
@@ -23,11 +23,28 @@
     <!--Librairies de fond carte leaflet-->
     <script src="leaflet_provider.js"></script>
 
+    <!--Librairies pour ajouter des outils à la carte leaflet (outils de mesures)-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.css" />
+    <script src="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css" />  
+    <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js"></script>  
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
     <body>
     
         <div id="main">
+            <!--Titre avec bouton permettant d'ouvrir le menu de selection des données-->
+            <div id="Title">
+                <h1>GEOPortail District d'Aigle</h1>
+                <button class="openbtn" onclick="openNav()">☰ Choix des données</button> 
+            </div>
+            
             <!-- Création du Sidebar -->
             <div id="mySidebar" class="sidebar">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Fermer</a>
@@ -74,9 +91,49 @@
 
                 <div id="boutonMD" class="MD">
                     <button id="OpenMD" class="OpenMD" onclick="openMD()"> Mesurer/Dessiner </button>
-                    <div id="OuvrirMD" class="OuvrirMD">
-                        <a href="javascript:void(0)" class="closeMD" onclick="closeMD()">&times;</a>
+                        <a href="javascript:void(0)" class="OpenMD" onclick="closeMD()">&times;</a>
 
+                        <div id="OuvrirMD" class="OuvrirMD">
+                            <ul>
+                                <li>
+                                    <div id="marqueurs" class="marqueurs">
+                                        <p>
+                                            <img src="../M-moire_Steven/image/marker.jpg" width="30px", height="40px">&nbsp;
+                                                Ajouter un marqueur&emsp;
+                                            <button id="Marqueur_Act" onclick="Marqueur_Act()"> On</button>
+                                            <button id="Marqueur_Inact" onclick="Marqueur_Inact()"> Off</button>
+                                        </p>
+                                     </div>
+                                </li>
+
+                                <li>
+                                    <div id="distance" class="distance">
+                                        <p>
+                                            <img src="../M-moire_Steven/image/ruler.jpg" width="40px", height="40px">&nbsp;
+                                                Mesurer une distance&nbsp;&nbsp;
+                                            <button id="Mesure_Distance_Act" onclick="Mesure_Distance_Act()"> Activer</button>
+                                        </p>
+                                     </div>
+                                </li>
+
+                                    <div id="polygone" class="polygone">
+                                        <p>
+                                            <img src="../M-moire_Steven/image/surface.jpg" width="40px", height="40px">&nbsp;
+                                                Mesurer une surface&ensp;&ensp;&nbsp;
+                                            <button id="Mesure_surface_Act" onclick="Mesure_surface_Act()"> Activer</button>
+                                        </p>
+                                    </div>
+                                
+                                <li>Mesurer des surface</li>
+                                <li>Mesurer des distances</li>
+                                <li>Mesurer des surfaces</li>
+                                <li>
+                                    <div id="effacer" class="effacer">
+                                        <p>Effacer les actions</p>
+                                        <button id="delete" onclick="effacer()"> Activer</button>
+                                    </div>
+                                </li>
+                              </ul>
                     </div>
                 </div>
 
@@ -97,19 +154,13 @@
                 </div>
 
             </div>
-            <!--Titre avec bouton permettant d'ouvrir le menu de selection des données-->
-            <div id="Title">
-                <h1>GEOPortail District d'Aigle</h1>
-                <button class="openbtn" onclick="openNav()">☰ Choix des données</button> 
-            </div>
+
+
 
             <!--Carte-->
             <div id="Map"></div>
 
-
-           <!--
-            <!--
-                Onglet information-->
+            <!--Onglet information-->
             <div id="Info"></div>
 
             <!--Onglet visualisation 1-->

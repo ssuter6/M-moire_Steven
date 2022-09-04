@@ -70,77 +70,6 @@ var southWest = L.latLng(46.5, 6.6),
 	
 		map.removeControl(map.zoomControl);
 
-		
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////Outils de mesure////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-var featureGroup = L.featureGroup().addTo(map);
-
-        var drawControl = new L.Control.Draw({
-        edit: {
-            featureGroup: featureGroup
-        },
-        draw: {
-            polygon: false,
-            polyline: false,
-            rectangle: false,
-            circle: false,
-            marker: false
-        }
-    });
-
-
-// Modification de l'icon du marker
-L.Marker.prototype.options.icon = L.icon({
-    iconUrl: "C:/Users/user/Documents/GitHub/M-moire_Steven/image/marker.jpg",
-	iconSize: [30, 40],
-});
-
-
-// Fonction permettant d'ajouter des marqueurs sur la carte
-function Marqueur_Act(){
-	var options_marqueurs ={
-		drawMarker:false,
-		};
-
-	map.pm.enableDraw('Marker', options_marqueurs);	
-}
-
-// Fonction permettant d'arrêter d'ajouter des marqueurs sur la carte
-function Marqueur_Inact(){
-	map.pm.disableDraw('Marker');
-};
-
-
-// Fonction permettant de mesurer des distances sur la carte
-function Mesure_Distance_Act(){
-	var options_mesure_distance ={
-		drawLine:false,
-		};
-
-	map.pm.enableDraw('Line', options_mesure_distance);	
-}
-
-// Fonction permettant de calculer des surfaces sur la carte
-function Mesure_surface_Act(){
-	var options_mesure_surfaces ={
-		drawPolyLine:false,
-		snappable: true,
-  		snapDistance: 20,
-		};
-
-	map.pm.enableDraw('Poly', options_mesure_surfaces);
-};
-
-
-// Fonction permettant d'effacer les actions réalisées sur la carte
-function effacer(){
-		map.pm.toggleGlobalRemovalMode();
-};
 
 /*
 let i = 0
@@ -189,7 +118,6 @@ map.on('pm:create', function(e){
 		document.getElementById("OpenFdc").style.color = 'white' ;
 	  };
 
-
 	//fonction qui permet d'ourir le fond de carte google satellite
 		function OuvrirImg_sat() {
 
@@ -207,8 +135,6 @@ map.on('pm:create', function(e){
 			map.addLayer(Img_sat);
 		};
 			
-
-
 	//fonction qui permet d'ourir le fond de carte OSM
 		function OuvrirImg_OSM(){
 
@@ -225,7 +151,6 @@ map.on('pm:create', function(e){
 				//création de la nouvelle couche
 				map.addLayer(OSM_Sombre);
 		};
-
 
 	//fonction qui permet d'ourir le fond de carte Esri terrain
 		function OuvrirImg_E(){
@@ -244,7 +169,6 @@ map.on('pm:create', function(e){
 			map.addLayer(esri);	  
 		};
 
-
 	//fonction qui permet d'ourir le fond de carte OSM CH
 		function OuvrirImg_OsmCH(){
 
@@ -262,7 +186,6 @@ map.on('pm:create', function(e){
 			map.addLayer(osmCh); 
 		};
 
-
 	//Fonction qui permet de fermet l'onglet de selection lié au fond de carte
 	function closeFdc(){
 		document.getElementById("OuvrirFdc").style.height = "0px";
@@ -273,10 +196,10 @@ map.on('pm:create', function(e){
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////Fonction qui perment d'ouvrir et de fermer la section liée au données thématiques///////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////////////////////////////////
-////////Fonction qui perment d'ouvrir et de fermer la section liée au données thématiques//////
-///////////////////////////////////////////////////////////////////////////////////////////////
 	  function openDth() {
 		document.getElementById("OuvrirDth").style.height = "260px";
 		document.getElementById("OuvrirDth").style.backgroundColor = 'lightgrey' ; 
@@ -295,7 +218,18 @@ map.on('pm:create', function(e){
 
 	  }
 
-	  // Fonction qui perment d'ouvrir et de fermer la section permettant de mesurer et dessiner sur la carte
+	  $('select#choix_theme').on('change', function(e) {
+		$('#theme_selectionner').text($(this).val());
+	  });
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////Fonction qui perment d'ouvrir et de fermer la section liée aux outils de mesure/////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 	  function openMD() {
 		document.getElementById("OuvrirMD").style.height = "260px";
 		document.getElementById("OuvrirMD").style.backgroundColor = 'lightgrey' ; 
@@ -313,6 +247,108 @@ map.on('pm:create', function(e){
 		document.getElementById("OpenMD").style.color = '#818181' ;
 
 	  }
+
+
+///////////////////////////////////////////////Outils de mesure////////////////////////////////////////////////////////////////////////
+
+
+var featureGroup = L.featureGroup().addTo(map);
+
+        var drawControl = new L.Control.Draw({
+        edit: {
+            featureGroup: featureGroup
+        },
+        draw: {
+            polygon: false,
+            polyline: false,
+            rectangle: false,
+            circle: false,
+            marker: false
+        }
+    });
+
+
+// Modification de l'icon du marker
+L.Marker.prototype.options.icon = L.icon({
+    iconUrl: "C:/Users/user/Documents/GitHub/M-moire_Steven/image/marker.jpg",
+	iconSize: [30, 40],
+});
+
+
+/// Ajout des marqueurs///
+function Marqueur_Act(){
+	var options_marqueurs ={
+		drawMarker:false,
+		snappable: true,
+  		snapDistance: 20,
+		};
+	map.pm.enableDraw('Marker', options_marqueurs);	
+};
+// Fonction permettant d'arrêter d'ajouter des marqueurs sur la carte
+function Marqueur_Inact(){
+	map.pm.disableDraw('Marker');
+};
+
+
+/// Ajout outil mesures de distances ///
+function Mesure_Distance_Act(){
+	var options_mesure_distance ={
+		drawLine:false,
+		snappable: true,
+  		snapDistance: 20,
+		};
+	map.pm.enableDraw('Line', options_mesure_distance);	
+};
+
+
+/// Ajout outils mesures de surfaces ///
+function Mesure_surface_Act(){
+	var options_mesure_surfaces ={
+		drawPolyLine:false,
+		snappable: true,
+  		snapDistance: 20,
+		};
+	map.pm.enableDraw('Poly', options_mesure_surfaces);
+};
+
+
+/// Ajout outils pour effacer les mesures précédentes ///
+function effacer(){
+		map.pm.toggleGlobalRemovalMode();
+};
+
+
+// Fonction permettant de changer la couleur des boutons lorsqu'on click dessus
+$( "button#Marqueur_Act" ).click(function() {
+	$( "button#Marqueur_Act" ).css('background', '#7c92cf');
+	$("button#Marqueur_Inact").css('background', '#F0F0F0');
+	$("button#Mesure_Distance_Act").css('background', '#F0F0F0');
+	$("button#Mesure_surface_Act").css('background', '#F0F0F0');
+  });
+
+$( "button#Marqueur_Inact" ).click(function() {
+	$( "button#Marqueur_Inact" ).css('background', '#7c92cf');
+	$("button#Marqueur_Act").css('background', '#F0F0F0');
+	$("button#Mesure_Distance_Act").css('background', '#F0F0F0');
+	$("button#Mesure_surface_Act").css('background', '#F0F0F0');
+  });
+
+$( "button#Mesure_Distance_Act" ).click(function() {
+	$( "button#Mesure_Distance_Act" ).css('background', '#7c92cf');
+	$("button#Marqueur_Inact").css('background', '#F0F0F0');
+	$("button#Marqueur_Act").css('background', '#F0F0F0');
+	$("button#Mesure_surface_Act").css('background', '#F0F0F0');
+  });
+
+$( "button#Mesure_surface_Act" ).click(function() {
+	$( "button#Mesure_surface_Act" ).css('background', '#7c92cf');
+	$("button#Marqueur_Inact").css('background', '#F0F0F0');
+	$("button#Mesure_Distance_Act").css('background', '#F0F0F0');
+	$("button#Marqueur_Act").css('background', '#F0F0F0');
+  });
+
+
+
 
 	  	  // Fonction qui perment d'ouvrir et de fermer la section permettant d'imprimer la carte
 	  function openImp() {

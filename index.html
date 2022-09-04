@@ -34,7 +34,7 @@
     <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js"></script>  
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
     <body>
     
@@ -79,11 +79,27 @@
                     </div>
                 </div>
 
+
+
                 <div id="boutonDth" class="Dth">
                     <button id="OpenDth" class="OpenDth" onclick="openDth()"> Données thématiques </button>
                     <a href="javascript:void(0)" class="OpenDth" onclick="closeDth()">&times;</a>
 
-                    <div id="OuvrirDth"></div>
+                    <div id="OuvrirDth" class="OuvrirDth">
+                        <select name="Theme" id="choix_theme">
+                            <b><option value="">Selectionner un thème:</option></b>
+                            <option value="Agriculture">Agriculture</option>
+                            <option value="Culture">Culture</option>
+                            <option value="Demographie">Démographie</option>
+                            <option value="Economie">Economie</option>
+                            <option value="Territoire">Territoire</option>
+                            <option value="Tourisme">Toursime</option>
+                        </select>
+
+                        <div id="theme_selectionner">
+
+                        </div>
+                    </div>
                 </div>
 
 
@@ -98,10 +114,11 @@
                                 <li>
                                     <div id="marqueurs" class="marqueurs">
                                         <p>
-                                            <img src="../M-moire_Steven/image/marker.jpg" width="30px", height="40px">&nbsp;
-                                                Ajouter un marqueur&emsp;
-                                            <button id="Marqueur_Act" onclick="Marqueur_Act()"> On</button>
-                                            <button id="Marqueur_Inact" onclick="Marqueur_Inact()"> Off</button>
+                                            <img src="../M-moire_Steven/image/marker.jpg" width="30px", height="40px">&nbsp;&nbsp;
+                                                Ajouter un marqueur  
+                                                <button id="Marqueur_Act" onclick="Marqueur_Act()"> On</button>
+                                                <button id="Marqueur_Inact" onclick="Marqueur_Inact()"> Off</button>
+                                            
                                         </p>
                                      </div>
                                 </li>
@@ -109,30 +126,37 @@
                                 <li>
                                     <div id="distance" class="distance">
                                         <p>
-                                            <img src="../M-moire_Steven/image/ruler.jpg" width="40px", height="40px">&nbsp;
-                                                Mesurer une distance&nbsp;&nbsp;
+                                            <img src="../M-moire_Steven/image/ruler.jpg" width="30px", height="40px">&nbsp;&nbsp;
+                                                Mesurer une distance 
                                             <button id="Mesure_Distance_Act" onclick="Mesure_Distance_Act()"> Activer</button>
                                         </p>
                                      </div>
                                 </li>
 
+                                <li>
                                     <div id="polygone" class="polygone">
                                         <p>
-                                            <img src="../M-moire_Steven/image/surface.jpg" width="40px", height="40px">&nbsp;
-                                                Mesurer une surface&ensp;&ensp;&nbsp;
+                                            <img src="../M-moire_Steven/image/surface.jpg" width="30px", height="40px">&nbsp;&nbsp;
+                                                Mesurer une surface
                                             <button id="Mesure_surface_Act" onclick="Mesure_surface_Act()"> Activer</button>
                                         </p>
                                     </div>
+                                </li>
+
+                                <li>
+                                    <div id="effacer" class="effacer">
+                                        <p>
+                                            <img src="../M-moire_Steven/image/gomme.jpg" width="30px", height="40px">&nbsp;&nbsp;
+                                                Effacer les actions
+                                            <button id="delete" onclick="effacer()"> Activer</button>
+                                        </p>
+                                    </div>
+                                </li>
                                 
                                 <li>Mesurer des surface</li>
                                 <li>Mesurer des distances</li>
                                 <li>Mesurer des surfaces</li>
-                                <li>
-                                    <div id="effacer" class="effacer">
-                                        <p>Effacer les actions</p>
-                                        <button id="delete" onclick="effacer()"> Activer</button>
-                                    </div>
-                                </li>
+                                
                               </ul>
                     </div>
                 </div>

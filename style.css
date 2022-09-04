@@ -65,6 +65,9 @@ h1 {
 
 .sidebar {
     height: 80%;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 5px;
     width: 0;
     position: fixed;
     z-index: 100;
@@ -161,6 +164,7 @@ h1 {
   }
 
 
+
   button.OpenDth {
     cursor: pointer;
     background-color: #111;
@@ -178,7 +182,6 @@ h1 {
 
   a.OpenDth{
     color: black;
-    font-size: 25px;
   }
   a.OpenDth:hover {
     color: black;
@@ -192,11 +195,79 @@ h1 {
     position: relative;
     height: 0px;
     overflow-x: hidden;
+    font-size: 15px;
     background-color: #f1f1f1;
   }
 
+  p.a {
+    margin-top: 10px ;
+    margin-left: 10px;
+  }
 
+  button.Th_agriculture{
+    margin-top: 10px;
+    width: 325px;
+    margin-bottom: 10px;
+    margin-right: 5px;
+  }
 
+  button.Th_culture{
+    margin-top: 5px;
+    width: 325px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+  }
+
+  button.Th_demographie{
+    margin-top: 5px;
+    width: 325px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+  }
+
+  button.Th_economie{
+    margin-top: 5px;
+    width: 325px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+  }
+
+  button.Th_economie{
+    margin-top: 5px;
+    width: 325px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+  }
+
+  button.Th_territoire{
+    margin-top: 5px;
+    width: 325px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+  }
+
+  button.Th_tourisme{
+    margin-top: 5px;
+    width: 325px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+  }
+
+  select#choix_theme{
+    margin-left: 10px;
+    margin-top: 10px;
+    height: 40px;
+    border-radius: 5px;
+    width: 335px;
+    text-align: center;
+  }
+
+  #theme_selectionner{
+    position: relative;
+    height: 200px;
+    overflow-x: hidden;
+    margin-top: 10px;
+  }
 
 
   
@@ -241,13 +312,56 @@ h1 {
     background-color: lightgrey;
   }
 
-  .leaflet-default-icon-path { /* used only in path-guessing heuristic, see L.Icon.Default */
-    background-image: url(../M-moire_Steven/image/marker.jpg);
+  ul, li {
+    margin: 5px;
+    padding: 0;
+    }
+  
+
+ button#Mesure_Distance_Act  {
+  margin-left: 38px;
+  border-radius: 5px;
+  border-width: 1px;
+ }  
+    button#Mesure_Distance_Act:hover {
+      background-color:#7c92cf;
+    }
+    
+
+ button#Mesure_surface_Act  {
+  margin-left: 48px;
+  border-radius: 5px;
+  border-width: 1px;
+ } 
+    button#Mesure_surface_Act:hover {
+      background-color:#7c92cf;
+}
+
+
+ button#Marqueur_Act  {
+  margin-left: 30px;
+  border-radius: 5px;
+  border-width: 1px;
+ }
+ button#Marqueur_Inact  {
+  border-radius: 5px;
+  border-width: 1px;
+ }
+  
+    button#Marqueur_Act:hover {
+      background-color:#7c92cf;
+    }
+    button#Marqueur_Inact:hover {
+      background-color:#7c92cf;
     }
 
-  
+button#delete  {
+      margin-left: 64px;
+      border-radius: 5px;
+      border-width: 1px;
+     }
 
-  
+
 
 
   button.OpenImp {

@@ -63,6 +63,16 @@ h1 {
 }
 */
 
+/* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+  /* ////////////////////////////////////////////////Section liée au Sidebar////////////////////////////////////////////*/
+
+
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+  }
+
 .sidebar {
     height: 80%;
     margin-left: 5px;
@@ -102,6 +112,7 @@ h1 {
   }
   
   .openbtn {
+    margin-left: 5px;
     font-size: 26px;
     cursor: pointer;
     background-color: #111;
@@ -124,11 +135,11 @@ h1 {
     padding: 16px;
   }
   
-  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-  @media screen and (max-height: 450px) {
-    .sidebar {padding-top: 15px;}
-    .sidebar a {font-size: 18px;}
-  }
+
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/* ////////////////////////////////////////////////Section liée à l'onglet Fond de carte//////////////////////////////////////////////*/
+
 
   button.OpenFdc {
     cursor: pointer;
@@ -163,6 +174,74 @@ h1 {
     background-color: #f1f1f1;
   }
 
+
+  .img{
+    position: relative;
+    left: 0px;
+    font-size: 10pt;
+    border-radius: 10px;
+  }
+
+ button.OuvrirImg_sat{ 
+ width: 105px;
+ font-size: small;
+ border-radius: 5px;
+ margin-top: 3px;
+ border-width: 1px;
+ cursor: pointer;
+ }
+.OuvrirImg_sat:hover{
+  background-color: rgb(107, 107, 107);
+  color: #f1f1f1;
+}
+
+
+ button.Img_osm{
+  width: 105px;
+  font-size: small;
+  border-radius: 5px;
+  margin-top: 3px;
+  border-width: 1px;
+  cursor: pointer;
+ }
+ .Img_osm:hover{
+  background-color: rgb(107, 107, 107);
+  color: #f1f1f1;
+}
+
+ button.Img_e{
+  width: 105px;
+  font-size: small;
+  margin-right: 45px;
+  border-radius: 5px;
+  margin-top: 3px;
+  border-width: 1px;
+  cursor: pointer;
+ }
+ .Img_e:hover{
+  background-color: rgb(107, 107, 107);
+  color: #f1f1f1;
+}
+
+
+ button.Img_OsmCH{
+  width: 105px;
+  font-size: small;
+  margin-right: 45px;
+  border-radius: 5px;
+  margin-top: 3px;
+  border-width: 1px;
+  cursor: pointer;
+ }
+ .Img_OsmCH:hover{
+  background-color: rgb(107, 107, 107);
+  color: #f1f1f1;
+}
+
+
+
+  /* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/* ////////////////////////////////////////////////Section liée à l'onglet Données Thématiques////////////////////////////////////////////*/
 
 
   button.OpenDth {
@@ -204,54 +283,6 @@ h1 {
     margin-left: 10px;
   }
 
-  button.Th_agriculture{
-    margin-top: 10px;
-    width: 325px;
-    margin-bottom: 10px;
-    margin-right: 5px;
-  }
-
-  button.Th_culture{
-    margin-top: 5px;
-    width: 325px;
-    margin-bottom: 5px;
-    margin-right: 5px;
-  }
-
-  button.Th_demographie{
-    margin-top: 5px;
-    width: 325px;
-    margin-bottom: 5px;
-    margin-right: 5px;
-  }
-
-  button.Th_economie{
-    margin-top: 5px;
-    width: 325px;
-    margin-bottom: 5px;
-    margin-right: 5px;
-  }
-
-  button.Th_economie{
-    margin-top: 5px;
-    width: 325px;
-    margin-bottom: 5px;
-    margin-right: 5px;
-  }
-
-  button.Th_territoire{
-    margin-top: 5px;
-    width: 325px;
-    margin-bottom: 5px;
-    margin-right: 5px;
-  }
-
-  button.Th_tourisme{
-    margin-top: 5px;
-    width: 325px;
-    margin-bottom: 5px;
-    margin-right: 5px;
-  }
 
   select#choix_theme{
     margin-left: 10px;
@@ -269,7 +300,72 @@ h1 {
     margin-top: 10px;
   }
 
+  #Opt_Agriculture{
+    position: relative;
+    height: 0px;
+    overflow: hidden;
+    background-color: aqua;
+    margin: 5px;
+    border-radius: 5px;
+  }
 
+  #Opt_Culture{
+    position: relative;
+    height: 0px;
+    overflow: hidden;
+    background-color: red;
+    margin: 5px;
+    border-radius: 5px;
+  }
+
+  #Opt_Demographie{
+    position: relative;
+    height: 0px;
+    overflow: hidden;
+    background-color: aqua;
+    margin: 5px;
+    border-radius: 5px;
+  }
+
+  #Opt_Economie{
+    position: relative;
+    height: 0px;
+    overflow: hidden;
+    background-color: aqua;
+    margin: 5px;
+    border-radius: 5px;
+  }
+  #Opt_Environnement{
+    position: relative;
+    height: 0px;
+    overflow: hidden;
+    background-color: aqua;
+    margin: 5px;
+    border-radius: 5px;
+  }
+  
+  #Opt_Territoire{
+    position: relative;
+    height: 0px;
+    overflow: hidden;
+    background-color: aqua;
+    margin: 5px;
+    border-radius: 5px;
+  }
+
+  #Opt_Tourisme{
+    position: relative;
+    height: 0px;
+    overflow: hidden;
+    background-color: aqua;
+    margin: 5px;
+    border-radius: 5px;
+  }
+
+
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/* ////////////////////////////////////////////////Section liée à l'onglet Dessin et Mesures////////////////////////////////////////////*/
   
   button.OpenMD {
     cursor: pointer;
@@ -362,6 +458,8 @@ button#delete  {
      }
 
 
+/* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/* ////////////////////////////////////////////////Section liée à l'onglet Impression////////////////////////////////////////////*/
 
 
   button.OpenImp {
@@ -401,6 +499,10 @@ button#delete  {
   
   }
 
+
+  /* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/* ////////////////////////////////////////////////Section liée à l'onglet Auteur/////////////////////////////////////////////////////*/
+
     
   button.OpenDroits {
     cursor: pointer;
@@ -437,72 +539,5 @@ button#delete  {
     text-align: center;
   
   }
-
-  div.leaflet-control-layers{
-    margin-top: 25px;
-  }
-
-  .img{
-    position: relative;
-    left: 0px;
-    font-size: 10pt;
-    border-radius: 10px;
-  }
-
- button.OuvrirImg_sat{ 
- width: 105px;
- font-size: small;
- border-radius: 5px;
- margin-top: 3px;
- border-width: 1px;
- cursor: pointer;
- }
-.OuvrirImg_sat:hover{
-  background-color: rgb(107, 107, 107);
-  color: #f1f1f1;
-}
-
-
- button.Img_osm{
-  width: 105px;
-  font-size: small;
-  border-radius: 5px;
-  margin-top: 3px;
-  border-width: 1px;
-  cursor: pointer;
- }
- .Img_osm:hover{
-  background-color: rgb(107, 107, 107);
-  color: #f1f1f1;
-}
-
- button.Img_e{
-  width: 105px;
-  font-size: small;
-  margin-right: 45px;
-  border-radius: 5px;
-  margin-top: 3px;
-  border-width: 1px;
-  cursor: pointer;
- }
- .Img_e:hover{
-  background-color: rgb(107, 107, 107);
-  color: #f1f1f1;
-}
-
-
- button.Img_OsmCH{
-  width: 105px;
-  font-size: small;
-  margin-right: 45px;
-  border-radius: 5px;
-  margin-top: 3px;
-  border-width: 1px;
-  cursor: pointer;
- }
- .Img_OsmCH:hover{
-  background-color: rgb(107, 107, 107);
-  color: #f1f1f1;
-}
 
 

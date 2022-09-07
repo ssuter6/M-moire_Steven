@@ -54,8 +54,8 @@ var southWest = L.latLng(46.5, 6.6),
 		};
 
 	var map = 	L.map('Map',{layers:Img_sat,maxBounds:bounds,pmIgnore: false}).setView([46.32, 7.05], 11.5);
-	  
-	
+	L.geoJSON('district_Aigle.json').addTo(map);
+
 	//Add baseLayers to map as control layers
 		c = L.control.layers(baseLayers);
 
@@ -208,7 +208,7 @@ map.on('pm:create', function(e){
 		document.getElementById("OuvrirDth").style.borderBottomrightRadius = '5px'; 
 		document.getElementById("OpenDth").style.backgroundColor = 'grey' ;
 		document.getElementById("OpenDth").style.color = 'white' ;
-	  }	
+	  }	;
 
 	  function closeDth(){
 		document.getElementById("OuvrirDth").style.height = "0px";
@@ -216,12 +216,112 @@ map.on('pm:create', function(e){
 		document.getElementById("OpenDth").style.backgroundColor = '#111' ;
 		document.getElementById("OpenDth").style.color = '#818181' ;
 
-	  }
+	  };
 
-	  $('select#choix_theme').on('change', function(e) {
-		$('#theme_selectionner').text($(this).val());
-	  });
+	  
+	  $(document).ready(function() {
+		$('#choix_theme').on('change', function(e) {
+			
+		  if ($('#choix_theme').val() == 'Agriculture') {
+			document.getElementById("Opt_Agriculture").style.height = "200px";
+			$("#Opt_Agriculture").show();
 
+			 $("#Opt_Economie").hide();
+			 $("#Opt_Culture").hide();
+			 $("#Opt_Demographie").hide();
+			 $("#Opt_Environnement").hide();
+			 $("#Opt_Territoire").hide();
+			 $("#Opt_Tourisme").hide();
+		 	 }
+
+		  else if ($('#choix_theme').val() == 'Culture') {
+			document.getElementById("Opt_Culture").style.height = "200px";
+			$("#Opt_Culture").show();
+
+			$("#Opt_Agriculture").hide();
+			$("#Opt_Economie").hide();
+			$("#Opt_Demographie").hide();
+			$("#Opt_Environnement").hide();
+			$("#Opt_Territoire").hide();
+			$("#Opt_Tourisme").hide();
+			} 
+
+	
+
+			else if ($('#choix_theme').val() == 'Demographie') {
+				document.getElementById("Opt_Demographie").style.height = "200px";
+				$("#Opt_Demographie").show();
+
+				$("#Opt_Agriculture").hide();
+				$("#Opt_Economie").hide();
+				$("#Opt_Culture").hide();
+				$("#Opt_Environnement").hide();
+				$("#Opt_Territoire").hide();
+				$("#Opt_Tourisme").hide();
+			} 
+		
+			else if ($('#choix_theme').val() == 'Economie') {
+				document.getElementById("Opt_Economie").style.height = "200px";
+				$("#Opt_Economie").show();
+
+				 $("#Opt_Agriculture").hide();
+				 $("#Opt_Culture").hide();
+				 $("#Opt_Demographie").hide();
+				 $("#Opt_Environnement").hide();
+			 	$("#Opt_Territoire").hide();
+			 	$("#Opt_Tourisme").hide();
+				} 
+
+				else if ($('#choix_theme').val() == 'Environnement') {
+					document.getElementById("Opt_Environnement").style.height = "200px";
+					$("#Opt_Environnement").show();
+
+					 $("#Opt_Agriculture").hide();
+					 $("#Opt_Culture").hide();
+					 $("#Opt_Demographie").hide();
+					 $("#Opt_Economie").hide();
+					 $("#Opt_Territoire").hide();
+				 	$("#Opt_Tourisme").hide();
+				 }
+
+				 else if ($('#choix_theme').val() == 'Territoire') {
+					document.getElementById("Opt_Territoire").style.height = "200px";
+					$("#Opt_Territoire").show();
+	
+					 $("#Opt_Agriculture").hide();
+					 $("#Opt_Culture").hide();
+					 $("#Opt_Demographie").hide();
+					 $("#Opt_Economie").hide();
+					 $("#Opt_Environnement").hide();
+				 	$("#Opt_Tourisme").hide();
+				 }
+
+				 else if ($('#choix_theme').val() == 'Tourisme') {
+					document.getElementById("Opt_Tourisme").style.height = "200px";
+					$("#Opt_Tourisme").show();
+	
+					 $("#Opt_Agriculture").hide();
+					 $("#Opt_Culture").hide();
+					 $("#Opt_Demographie").hide();
+					 $("#Opt_Economie").hide();
+					 $("#Opt_Territoire").hide();
+				 	$("#Opt_Environnement").hide();
+				 } 
+
+		  		else {
+					$("#Opt_Agriculture").hide();
+					 $("#Opt_Culture").hide();
+					 $("#Opt_Demographie").hide();
+					 $("#Opt_Economie").hide();
+					 $("#Opt_Territoire").hide();
+					 $("#Opt_Tourisme").hide();
+				 	$("#Opt_Environnement").hide();
+		 		 }
+		
+				}).trigger('change');
+
+			});
+	 
 
 
 
@@ -324,6 +424,7 @@ $( "button#Marqueur_Act" ).click(function() {
 	$("button#Marqueur_Inact").css('background', '#F0F0F0');
 	$("button#Mesure_Distance_Act").css('background', '#F0F0F0');
 	$("button#Mesure_surface_Act").css('background', '#F0F0F0');
+	$("button#delete").css('background', '#F0F0F0');
   });
 
 $( "button#Marqueur_Inact" ).click(function() {
@@ -331,6 +432,7 @@ $( "button#Marqueur_Inact" ).click(function() {
 	$("button#Marqueur_Act").css('background', '#F0F0F0');
 	$("button#Mesure_Distance_Act").css('background', '#F0F0F0');
 	$("button#Mesure_surface_Act").css('background', '#F0F0F0');
+	$("button#delete").css('background', '#F0F0F0');
   });
 
 $( "button#Mesure_Distance_Act" ).click(function() {
@@ -338,6 +440,7 @@ $( "button#Mesure_Distance_Act" ).click(function() {
 	$("button#Marqueur_Inact").css('background', '#F0F0F0');
 	$("button#Marqueur_Act").css('background', '#F0F0F0');
 	$("button#Mesure_surface_Act").css('background', '#F0F0F0');
+	$("button#delete").css('background', '#F0F0F0');
   });
 
 $( "button#Mesure_surface_Act" ).click(function() {
@@ -345,8 +448,16 @@ $( "button#Mesure_surface_Act" ).click(function() {
 	$("button#Marqueur_Inact").css('background', '#F0F0F0');
 	$("button#Mesure_Distance_Act").css('background', '#F0F0F0');
 	$("button#Marqueur_Act").css('background', '#F0F0F0');
+	$("button#delete").css('background', '#F0F0F0');
   });
 
+  $( "button#delete" ).click(function() {
+	$( "button#delete" ).css('background', '#7c92cf');
+	$("button#Marqueur_Inact").css('background', '#F0F0F0');
+	$("button#Mesure_Distance_Act").css('background', '#F0F0F0');
+	$("button#Marqueur_Act").css('background', '#F0F0F0');
+	$("button#Mesure_surface_Act").css('background', '#F0F0F0');
+  });
 
 
 

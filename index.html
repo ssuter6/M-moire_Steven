@@ -34,7 +34,7 @@
     <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js"></script>  
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
     <body>
     
@@ -86,18 +86,37 @@
                     <a href="javascript:void(0)" class="OpenDth" onclick="closeDth()">&times;</a>
 
                     <div id="OuvrirDth" class="OuvrirDth">
+
+                        <!-- Bouton qui permet de selectionner les différents choix de données à utiliser-->
                         <select name="Theme" id="choix_theme">
-                            <b><option value="">Selectionner un thème:</option></b>
+                            <option value="">Selectionner un thème:</option>
                             <option value="Agriculture">Agriculture</option>
                             <option value="Culture">Culture</option>
                             <option value="Demographie">Démographie</option>
                             <option value="Economie">Economie</option>
+                            <option value="Environnement">Environnement</option>
                             <option value="Territoire">Territoire</option>
                             <option value="Tourisme">Toursime</option>
                         </select>
-
+                        
                         <div id="theme_selectionner">
 
+                            <div id="Opt_Agriculture">
+                                hjdha
+                            </div>
+
+                            <div id="Opt_Culture">
+                                jij
+                            </div>
+
+                            <div id="Opt_Demographie">
+                                ihi
+                            </div>
+
+                            <div id="Opt_Economie"></div>
+                            <div id="Opt_Environnement"></div>
+                            <div id="Opt_Territoire"></div>
+                            <div id="Opt_Tourisme"></div>
                         </div>
                     </div>
                 </div>
@@ -192,7 +211,7 @@
 
             <!--Onglet visualisation 1-->
             <div id="Visu_info2"></div> 
-            -->
+            
         </div>
         
         <script src="script.js"></script>

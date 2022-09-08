@@ -54,7 +54,7 @@ var southWest = L.latLng(46.5, 6.6),
 		};
 
 	var map = 	L.map('Map',{layers:Img_sat,maxBounds:bounds,pmIgnore: false}).setView([46.32, 7.05], 11.5);
-	L.geoJSON('district_Aigle.json').addTo(map);
+
 
 	//Add baseLayers to map as control layers
 		c = L.control.layers(baseLayers);
@@ -223,7 +223,7 @@ map.on('pm:create', function(e){
 		$('#choix_theme').on('change', function(e) {
 			
 		  if ($('#choix_theme').val() == 'Agriculture') {
-			document.getElementById("Opt_Agriculture").style.height = "200px";
+			document.getElementById("Opt_Agriculture").style.height = "210px";
 			$("#Opt_Agriculture").show();
 
 			 $("#Opt_Economie").hide();

@@ -285,11 +285,11 @@ h1 {
 
 
   select#choix_theme{
-    margin-left: 10px;
+    margin-left: 5px;
     margin-top: 10px;
     height: 40px;
     border-radius: 5px;
-    width: 335px;
+    width: 350px;
     text-align: center;
   }
 
@@ -304,10 +304,48 @@ h1 {
     position: relative;
     height: 0px;
     overflow: hidden;
-    background-color: aqua;
+    background-color: #f1f1f1;
     margin: 5px;
-    border-radius: 5px;
+    margin-top: 0px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: medium;
+    font-family: sans-serif;
   }
+
+  label {
+    display: inline-block;
+    text-align: center;
+    font-size: small;
+    margin-top: 5px;
+}
+
+.checkmark {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+#Entite_geo{
+  margin-bottom: 5px;
+}
+
+#indicateur_geo{
+  margin-top: 25px;
+  margin-bottom: 5px;
+}
+
 
   #Opt_Culture{
     position: relative;

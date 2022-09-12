@@ -53,7 +53,11 @@ var southWest = L.latLng(46.5, 6.6),
 		"Esri": esri
 		};
 
-	var map = 	L.map('Map',{layers:Img_sat,maxBounds:bounds,pmIgnore: false}).setView([46.32, 7.05], 11.5);
+	var map = 	L.map('Map',{layers:esri,maxBounds:bounds,pmIgnore: false}).setView([46.32, 7.15], 11);
+	
+				//L.geoJSON(district_Aigle).addTo(map);
+				L.geoJSON(district_Aigle).addTo(map);
+				
 
 
 	//Add baseLayers to map as control layers
@@ -218,13 +222,24 @@ map.on('pm:create', function(e){
 
 	  };
 
-	  
+	  // Fonction permettant de selectionner un thème de données
 	  $(document).ready(function() {
 		$('#choix_theme').on('change', function(e) {
 			
+		// Selection des données dont la thématique correspond à l'agriculture
 		  if ($('#choix_theme').val() == 'Agriculture') {
-			document.getElementById("Opt_Agriculture").style.height = "210px";
-			$("#Opt_Agriculture").show();
+			document.getElementById("Opt_Agriculture").style.height = "195px";
+			$("#Opt_Agriculture").show(
+
+				function zone_agricole(){
+					var checkbox = document.getElementById('zone_agricole');
+					if (checkbox.checked != false) {
+						L.geoJSON(zone_agricoles).addTo(map);
+					}else{
+						alert("Not Checked")
+					}
+				}
+			);
 
 			 $("#Opt_Economie").hide();
 			 $("#Opt_Culture").hide();
@@ -234,6 +249,10 @@ map.on('pm:create', function(e){
 			 $("#Opt_Tourisme").hide();
 		 	 }
 
+			 
+		
+
+		// Selection des données dont la thématique correspond à la culture
 		  else if ($('#choix_theme').val() == 'Culture') {
 			document.getElementById("Opt_Culture").style.height = "200px";
 			$("#Opt_Culture").show();
@@ -246,8 +265,7 @@ map.on('pm:create', function(e){
 			$("#Opt_Tourisme").hide();
 			} 
 
-	
-
+		// Selection des données dont la thématique correspond à la demographie	
 			else if ($('#choix_theme').val() == 'Demographie') {
 				document.getElementById("Opt_Demographie").style.height = "200px";
 				$("#Opt_Demographie").show();
@@ -260,6 +278,7 @@ map.on('pm:create', function(e){
 				$("#Opt_Tourisme").hide();
 			} 
 		
+		// Selection des données dont la thématique correspond à l'économie	
 			else if ($('#choix_theme').val() == 'Economie') {
 				document.getElementById("Opt_Economie").style.height = "200px";
 				$("#Opt_Economie").show();
@@ -271,7 +290,8 @@ map.on('pm:create', function(e){
 			 	$("#Opt_Territoire").hide();
 			 	$("#Opt_Tourisme").hide();
 				} 
-
+		
+			// Selection des données dont la thématique correspond à l'envrionnement	
 				else if ($('#choix_theme').val() == 'Environnement') {
 					document.getElementById("Opt_Environnement").style.height = "200px";
 					$("#Opt_Environnement").show();
@@ -284,6 +304,7 @@ map.on('pm:create', function(e){
 				 	$("#Opt_Tourisme").hide();
 				 }
 
+				// Selection des données dont la thématique correspond au territoire	
 				 else if ($('#choix_theme').val() == 'Territoire') {
 					document.getElementById("Opt_Territoire").style.height = "200px";
 					$("#Opt_Territoire").show();
@@ -296,6 +317,7 @@ map.on('pm:create', function(e){
 				 	$("#Opt_Tourisme").hide();
 				 }
 
+				// Selection des données dont la thématique correspond au tourisme
 				 else if ($('#choix_theme').val() == 'Tourisme') {
 					document.getElementById("Opt_Tourisme").style.height = "200px";
 					$("#Opt_Tourisme").show();

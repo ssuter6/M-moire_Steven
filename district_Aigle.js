@@ -1,4 +1,4 @@
-var district_Aigle = {
+var district_aigle = {
 "type": "FeatureCollection",
 "name": "district_Aigle",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },

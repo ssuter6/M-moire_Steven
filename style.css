@@ -284,7 +284,7 @@ h1 {
   }
 
 
-  select#choix_theme{
+  #choix_theme{
     margin-left: 5px;
     margin-top: 10px;
     height: 40px;

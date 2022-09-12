@@ -31,7 +31,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
 
     <link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css" />  
-    <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js"></script>  
+    <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js"></script> 
+    
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-tilelayer-swiss@2.3.0/dist/Leaflet.TileLayer.Swiss.umd.js" crossorigin
+    integrity="sha384-M4p8VfZ8RG6qNiPYA3vOCApQXAlLtnJXVPdydMYPAsvvIDsWp2dqqzF2OEeWWNhy"></script>
+
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -106,7 +110,7 @@
                                 <div id="Ent_geo">
                                 <p id="Entite_geo"><b>Selectionner une entité géographique:</b></p>
                                     <label>
-                                        <input type="checkbox">
+                                        <input type="checkbox" id="zone_agricole" onclick="zone_agricole()">
                                         <div class="label">Surfaces Agricoles</div>
                                     </label>&ensp;&ensp;&ensp;
                                      <label>
@@ -245,7 +249,7 @@
             <div id="Visu_info2"></div> 
             
         </div>
-        
+        <script src="../M-moire_Steven/GeoJson/district_Aigle.geojson"></script>
         <script src="script.js"></script>
 
 

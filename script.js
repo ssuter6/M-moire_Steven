@@ -44,6 +44,11 @@ var southWest = L.latLng(46.5, 6.6),
 		});
 
 	
+
+
+		
+
+
 	//////////Definition de nos couche de bases////////////////
 	var baseLayers = {
 		"sat": googleSat,
@@ -55,9 +60,8 @@ var southWest = L.latLng(46.5, 6.6),
 
 	var map = 	L.map('Map',{layers:esri,maxBounds:bounds,pmIgnore: false}).setView([46.32, 7.15], 11);
 	
-				//L.geoJSON(district_Aigle).addTo(map);
 				L.geoJSON(district_Aigle).addTo(map);
-				
+
 
 
 	//Add baseLayers to map as control layers
@@ -233,8 +237,8 @@ map.on('pm:create', function(e){
 
 				function zone_agricole(){
 					var checkbox = document.getElementById('zone_agricole');
-					if (checkbox.checked != false) {
-						L.geoJSON(zone_agricoles).addTo(map);
+					if (checkbox.checked != true) {
+						L.geoJSON(fff).addTo(map);
 					}else{
 						alert("Not Checked")
 					}

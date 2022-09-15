@@ -109,14 +109,23 @@
 
                                 <div id="Ent_geo">
                                 <p id="Entite_geo"><b>Selectionner une entité géographique:</b></p>
-                                    <label>
-                                        <input type="checkbox" id="zone_agricole" onclick="zone_agricole()">
+
+                                    <label for ="zone_agricole">                                
+                                        <input type="checkbox" id="zone_agricole" name="zn_1" value="zn_1">
                                         <div class="label">Surfaces Agricoles</div>
-                                    </label>&ensp;&ensp;&ensp;
+                                        
+                                    </label>
+                                
+                                    
+
+                                        &ensp;&ensp;&ensp;
+
                                      <label>
                                         <input type="checkbox">
                                         <div class="label">Surfaces Viticoles</div>
+
                                     </label>&ensp;&ensp;&ensp;
+
                                     <label>
                                         <input type="checkbox">
                                         <div class="label">Pâturages</div>
@@ -249,7 +258,7 @@
             <div id="Visu_info2"></div> 
             
         </div>
-        <script src="../M-moire_Steven/GeoJson/fff.geojson"></script>
+        <script src="../M-moire_Steven/GeoJson/cadastre_zone_agri.geojson"></script>
         <script src="../M-moire_Steven/GeoJson/district_Aigle.geojson"></script>
 
         <script src="script.js"></script>

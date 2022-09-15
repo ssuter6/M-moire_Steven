@@ -231,19 +231,10 @@ map.on('pm:create', function(e){
 		$('#choix_theme').on('change', function(e) {
 			
 		// Selection des données dont la thématique correspond à l'agriculture
+
 		  if ($('#choix_theme').val() == 'Agriculture') {
 			document.getElementById("Opt_Agriculture").style.height = "195px";
-			$("#Opt_Agriculture").show(
-
-				function zone_agricole(){
-					var checkbox = document.getElementById('zone_agricole');
-					if (checkbox.checked != true) {
-						L.geoJSON(fff).addTo(map);
-					}else{
-						alert("Not Checked")
-					}
-				}
-			);
+			$("#Opt_Agriculture").show();
 
 			 $("#Opt_Economie").hide();
 			 $("#Opt_Culture").hide();
@@ -253,8 +244,6 @@ map.on('pm:create', function(e){
 			 $("#Opt_Tourisme").hide();
 		 	 }
 
-			 
-		
 
 		// Selection des données dont la thématique correspond à la culture
 		  else if ($('#choix_theme').val() == 'Culture') {
@@ -347,6 +336,13 @@ map.on('pm:create', function(e){
 				}).trigger('change');
 
 			});
+
+			zne_agri = L.geoJSON(zones_agricoles);
+
+			document.querySelector("input[name=zn_1]").addEventListener('change', function() {
+				if(this.checked) map.addLayer(zne_agri)
+				  else map.removeLayer(zne_agri)
+				})
 	 
 
 

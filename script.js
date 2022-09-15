@@ -58,9 +58,18 @@ var southWest = L.latLng(46.5, 6.6),
 		"Esri": esri
 		};
 
+		var style_dis_aigle= {
+			"color": "#000000",
+			"weight": 0.6,
+			"opacity": 1,
+			"fillColor" :"none"
+		   };
+
 	var map = 	L.map('Map',{layers:esri,maxBounds:bounds,pmIgnore: false}).setView([46.32, 7.15], 11);
 	
-				L.geoJSON(district_Aigle).addTo(map);
+				L.geoJSON(district_Aigle, 
+					{style:style_dis_aigle,
+					}).addTo(map);
 
 
 
@@ -337,9 +346,48 @@ map.on('pm:create', function(e){
 
 			});
 
-			zne_agri = L.geoJSON(zones_agricoles);
+
+			// fonction permettant d'afficher les GeoJson liée aux zones agricoles à la carte 
+
+			var champs = 'image/agri.jpg'
+
+			var style_zne_agri = {
+				"color": "red",
+				"weight": 0.4,
+				"opacity": 1,
+				"fillColor": 'yellow',
+			   };
+
+			zne_agri = L.geoJSON(zones_agricoles, { 
+				style:style_zne_agri,
+				
+				onEachFeature: function onEachFeature(feature, layer) {
+
+					layer.on('mouseover', function () {
+						this.setStyle({
+						  'fillColor': '#0000ff'
+						});
+					  });
+
+					layer.on('mouseout', function () {
+						this.setStyle({
+						  'fillColor': 'yellow'
+						});
+					  });
+
+					layer.on('click', function(){
+						document.getElementById("box_droite").style.height = "260px";
+
+						$("#agriculture").html('<h4>Informations relatives aux surfaces sélectionnées</h4>'+
+						'<img width="200" alt="bla" height="200" src="image/agri.jpg"> <br>'+
+
+						' <b> Supérficie totale</b>'+' '+':'+' '+ feature.properties.SURFACE)});
+
+					layer.bindPopup('<strong>' + 'Numéro de zone:' +feature.properties.NO_ZONE);
+			}});
 
 			document.querySelector("input[name=zn_1]").addEventListener('change', function() {
+
 				if(this.checked) map.addLayer(zne_agri)
 				  else map.removeLayer(zne_agri)
 				})

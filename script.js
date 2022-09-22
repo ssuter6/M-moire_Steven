@@ -91,18 +91,6 @@ var southWest = L.latLng(46.5, 6.6),
 		map.removeControl(map.zoomControl);
 
 
-/*
-let i = 0
-
-map.on('pm:create', function(e){
-	console.log(e)
-	/*i += 1;
-	let lat1 = e.layer._latlngs[0].lat
-	let lat2 = e.layer._latlngs[1].lat
-	let dist = lat1 - lat2;
-	
-});*/
-
 
 
 
@@ -123,6 +111,7 @@ map.on('pm:create', function(e){
 		document.getElementById("Title").style.marginLeft= "0";
 	  }	
 	  
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////// Les fonction permettant d'ouvrir l'onglet de selection lié aux fonds de cartes////////////////////////
@@ -216,6 +205,7 @@ map.on('pm:create', function(e){
 
 
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////Fonction qui perment d'ouvrir et de fermer la section liée au données thématiques///////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -241,8 +231,10 @@ map.on('pm:create', function(e){
 	  // Fonction permettant de selectionner un thème de données
 	  $(document).ready(function() {
 		$('#choix_theme').on('change', function(e) {
+		
 			
-		// Selection des données dont la thématique correspond à l'agriculture
+		// Selection des données dont la thématique correspond à l'agriculture/////////////////////////////////////////////
+
 
 		  if ($('#choix_theme').val() == 'Agriculture') {
 			document.getElementById("Opt_Agriculture").style.height = "195px";
@@ -351,7 +343,12 @@ map.on('pm:create', function(e){
 
 
 
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// Selection des données dont la thématique correspond à l'agriculture/////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////// paramètres permettant d'afficher les GeoJson liée aux zones agricoles à la carte //////////////////////////7//////
+			
+
 			var champs = 'image/agri.jpg'
 			var style_zne_agri = {
 				"color": "brown",
@@ -436,8 +433,6 @@ document.querySelector("input[name=zn_2]").addEventListener('change', function()
 	});
 
 
-
-
 //////////////////////////////////////////////// Paramètre liés aux surface des zones de pâturages////////////////////////////////////////
 	
 var style_zne_patur = {
@@ -478,6 +473,39 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 	if(this.checked) map.addLayer(zne_patur)
 	  else map.removeLayer(zne_patur)
 	});
+
+
+
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// Selection des données dont la thématique correspond à la culture/////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+		var bar_icon = L.icon({
+			iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/resto_icon.jpg',
+			iconSize: [32, 37],
+			iconAnchor: [16, 37],
+			popupAnchor: [0, -28]
+		  });
+		
+		 var markers = L.markerClusterGroup();
+
+		bars = L.geoJSON(bars, { 
+				pointToLayer: function (feature, latlng) {
+				return L.marker(latlng, {icon: bar_icon	});
+				onEachFeature: function onEachFeature(feature, layer) {
+				bars.bindPopup('<strong>' +feature.properties.name);
+			}}});
+		
+			markers.addLayer(bars);
+		
+	// Ajout des surfaces agricoles si checkbox cochées
+		document.querySelector("input[name=bars]").addEventListener('change', function() {
+			if(this.checked) map.addLayer(markers)
+	 		 else map.removeLayer(markers)
+			});
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////Fonction qui perment d'ouvrir et de fermer la section liée aux outils de mesure/////////////////////////////////////

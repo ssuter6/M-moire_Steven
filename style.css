@@ -294,11 +294,12 @@ h1 {
     overflow-x: hidden;
     margin-top: 10px;
   }
+/* ////////////////////////////////////////////////thématique liées à l'agriculture////////////////////////////////////////////*/
 
   #Opt_Agriculture{
     position: relative;
     height: 0px;
-    overflow: hidden;
+    overflow-y: auto;
     background-color: #f1f1f1;
     margin: 5px;
     margin-top: 0px;
@@ -323,17 +324,59 @@ h1 {
   }
 
   #agriculture {
-    position: relative;
-    height: 400px;
-    width: 380px;
+    position: absolute;
+    height: 600px;
+    width: 365px;
     z-index: 100;
-    margin-top: 25px;
+    margin-top: 10px;
     margin-left: 10px;
     border-radius: 5px;
     color: black;
     background-color: #f1f1f1;
     padding: 10px;
     }
+
+    #znes_agric1{
+      position: relative;
+      height: 255px;
+      width: 345px;
+      z-index: 50;
+      color: black;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      background-color: lightgray;
+      text-align: center;
+    }
+
+    #znes_agric2{
+      position: relative;
+      height: 200px;
+      width: 345px;
+      z-index: 50;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      color: black;
+      background-color: lightgray;
+    }
+
+  p#agricult{
+    text-align: center; 
+    margin: 0;
+  }
+
+  p#info_select{
+    margin-top: 0px;
+  }
+
+  p#supérficie_agr{
+    margin-left: 10px;
+    margin-top: 0px;
+  }
+
+  p#supérficie_viti{
+    margin-left: 10px;
+    margin-top: 0px;
+  }
 
   h4{
     text-align: center;
@@ -372,15 +415,30 @@ h1 {
   margin-bottom: 5px;
 }
 
+/* ////////////////////////////////////////////////thématique liées à la culture////////////////////////////////////////////*/
 
   #Opt_Culture{
     position: relative;
     height: 0px;
     overflow: hidden;
-    background-color: red;
+    background-color: #f1f1f1;
     margin: 5px;
     border-radius: 5px;
+    text-align: center;
   }
+
+ul#checkbox_culture{
+display: block;
+text-align: left;
+margin-left: 10px;
+margin-top: 15px;
+column-count: 2;
+font-size: 12px;
+
+}
+
+
+/* ////////////////////////////////////////////////thématique liées à la démographie////////////////////////////////////////////*/
 
   #Opt_Demographie{
     position: relative;

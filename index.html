@@ -103,8 +103,10 @@
                             <option value="Tourisme">Toursime</option>
                         </select>
                         
+
                         <div id="theme_selectionner">
 
+                        <!--Paramètres liés à la selection de données liées à la thématique de l'agriculture-->
                             <div id="Opt_Agriculture">
 
                                 <div id="Ent_geo">
@@ -114,19 +116,18 @@
                                         <input type="checkbox" id="zone_agricole" name="zn_1" value="zn_1">
                                         <div class="label">Surfaces Agricoles</div>
                                     </label>
-                                
-                                    
 
                                         &ensp;&ensp;&ensp;
 
-                                     <label>
-                                        <input type="checkbox">
-                                        <div class="label">Surfaces Viticoles</div>
+                                    <label for ="zone_viticole">                                
+                                        <input type="checkbox" id="zone_viticole" name="zn_2" value="zn_2">
+                                        <div class="label">Vignobles</div>
+                                    </label>
+                                    
+                                    &ensp;&ensp;&ensp;
 
-                                    </label>&ensp;&ensp;&ensp;
-
-                                    <label>
-                                        <input type="checkbox">
+                                    <label for ="zone_paturage">                                
+                                        <input type="checkbox" id="zone_paturage" name="zn_3" value="zn_3">
                                         <div class="label">Pâturages</div>
                                     </label>
                                 </div>
@@ -147,10 +148,23 @@
 
                             </div>
 
-
+                        <!--Paramètres liés à la selection de données liées à la thématique de la culutre-->
 
                             <div id="Opt_Culture">
-                                jij
+                                
+                                <div id="Ent_geo">
+                                    <p id="Entite_geo"><b>Selectionner des lieux culturel</b></p>
+                                        <ul id="checkbox_culture">
+                                            <li><input type="checkbox"> Bars </li>
+                                            <li><input type="checkbox"> Bibliothèques</li>
+                                            <li><input type="checkbox"> Cinéma</li>
+                                            <li><input type="checkbox"> Conservatoires</li>
+                                            <li><input type="checkbox"> Musées</li>
+                                            <li><input type="checkbox"> Salles de spectacles</li>
+                                            <li><input type="checkbox"> Théatres</li>
+                                       </ul>
+                                </div>
+
                             </div>
 
                             <div id="Opt_Demographie">
@@ -241,9 +255,15 @@
 
             </div>
 
-            <div id="box_droite">
 
+            <div id="box_droite">
+                
                 <div id="agriculture">
+                    <p id="info_select" style="text-align:center; font-size:large;"> <b>Information relatives aux surfaces sélectionnées :</b></p>
+                        <div id="znes_agric1">
+                        </div>
+                        <div id="znes_agric2">
+                        </div>
                 </div>
 
             </div>
@@ -263,6 +283,9 @@
         </div>
         <script src="../M-moire_Steven/GeoJson/cadastre_zone_agri.geojson"></script>
         <script src="../M-moire_Steven/GeoJson/district_Aigle.geojson"></script>
+        <script src="../M-moire_Steven/GeoJson/zone_viticole.geojson"></script>
+        <script src="../M-moire_Steven/GeoJson/paturages.geojson"></script>
+
 
         <script src="script.js"></script>
 

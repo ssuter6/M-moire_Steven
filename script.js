@@ -59,16 +59,19 @@ var southWest = L.latLng(46.5, 6.6),
 		};
 
 		var style_dis_aigle= {
-			"color": "#000000",
-			"weight": 0.6,
-			"opacity": 1,
-			"fillColor" :"none"
+			"color": "#fffff",
+			"opacity": 0,
+			"fill-opacity":"0"
 		   };
 
 	var map = 	L.map('Map',{layers:esri,maxBounds:bounds,pmIgnore: false}).setView([46.32, 7.15], 11);
 	
 				L.geoJSON(district_Aigle, 
 					{style:style_dis_aigle,
+
+						onEachFeature: function onEachFeature(feature, layer) {
+							layer.on('click', function(){
+							layer.bindPopup('<strong>' + "District d'" +feature.properties.NAME)})}						
 					}).addTo(map);
 
 
@@ -256,7 +259,7 @@ map.on('pm:create', function(e){
 
 		// Selection des données dont la thématique correspond à la culture
 		  else if ($('#choix_theme').val() == 'Culture') {
-			document.getElementById("Opt_Culture").style.height = "200px";
+			document.getElementById("Opt_Culture").style.height = "250px";
 			$("#Opt_Culture").show();
 
 			$("#Opt_Agriculture").hide();
@@ -304,10 +307,10 @@ map.on('pm:create', function(e){
 					 $("#Opt_Economie").hide();
 					 $("#Opt_Territoire").hide();
 				 	$("#Opt_Tourisme").hide();
-				 }
+				}
 
 				// Selection des données dont la thématique correspond au territoire	
-				 else if ($('#choix_theme').val() == 'Territoire') {
+				else if ($('#choix_theme').val() == 'Territoire') {
 					document.getElementById("Opt_Territoire").style.height = "200px";
 					$("#Opt_Territoire").show();
 	
@@ -317,10 +320,10 @@ map.on('pm:create', function(e){
 					 $("#Opt_Economie").hide();
 					 $("#Opt_Environnement").hide();
 				 	$("#Opt_Tourisme").hide();
-				 }
+				}
 
 				// Selection des données dont la thématique correspond au tourisme
-				 else if ($('#choix_theme').val() == 'Tourisme') {
+				else if ($('#choix_theme').val() == 'Tourisme') {
 					document.getElementById("Opt_Tourisme").style.height = "200px";
 					$("#Opt_Tourisme").show();
 	
@@ -330,7 +333,7 @@ map.on('pm:create', function(e){
 					 $("#Opt_Economie").hide();
 					 $("#Opt_Territoire").hide();
 				 	$("#Opt_Environnement").hide();
-				 } 
+				} 
 
 		  		else {
 					$("#Opt_Agriculture").hide();
@@ -343,24 +346,24 @@ map.on('pm:create', function(e){
 		 		 }
 		
 				}).trigger('change');
-
 			});
 
 
-			// fonction permettant d'afficher les GeoJson liée aux zones agricoles à la carte 
 
+
+////////////////////////// paramètres permettant d'afficher les GeoJson liée aux zones agricoles à la carte //////////////////////////7//////
 			var champs = 'image/agri.jpg'
-
 			var style_zne_agri = {
-				"color": "red",
-				"weight": 0.4,
+				"color": "brown",
+				"weight": 0.2,
 				"opacity": 1,
 				"fillColor": 'yellow',
 			   };
 
+			// paramètres liés à l'interactivité des zones agri
 			zne_agri = L.geoJSON(zones_agricoles, { 
 				style:style_zne_agri,
-				
+
 				onEachFeature: function onEachFeature(feature, layer) {
 
 					layer.on('mouseover', function () {
@@ -368,32 +371,113 @@ map.on('pm:create', function(e){
 						  'fillColor': '#0000ff'
 						});
 					  });
-
 					layer.on('mouseout', function () {
 						this.setStyle({
 						  'fillColor': 'yellow'
 						});
 					  });
-
 					layer.on('click', function(){
-						document.getElementById("box_droite").style.height = "260px";
+						document.getElementById("box_droite").style.height = "360px";
+						$("#znes_agric1").html('<h4>Surfaces agricoles</h4>'+
+						'<img width="200" alt="bla" height="200" src="image/agri.jpg"> <br>')
 
-						$("#agriculture").html('<h4>Informations relatives aux surfaces sélectionnées</h4>'+
-						'<img width="200" alt="bla" height="200" src="image/agri.jpg"> <br>'+
-
-						' <b> Supérficie totale</b>'+' '+':'+' '+ feature.properties.SURFACE)});
+						$("#znes_agric2").html('<p id="supérficie_agr"><b>Supérficie totale</b>'+' '+':'+' '+ feature.properties.SURFACE+ '</p>')});
 
 					layer.bindPopup('<strong>' + 'Numéro de zone:' +feature.properties.NO_ZONE);
 			}});
 
+			// Ajout des surfaces agricoles si checkbox cochées
 			document.querySelector("input[name=zn_1]").addEventListener('change', function() {
-
 				if(this.checked) map.addLayer(zne_agri)
 				  else map.removeLayer(zne_agri)
-				})
-	 
+				});
 
 
+
+//////////////////////////////////////////////// Paramètre liés aux surface de la zone viticoles////////////////////////////////////////
+	
+var style_zne_vitic = {
+	"color": "brown",
+	"weight": 0.2,
+	"opacity": 1,
+	"fillColor": 'green',
+   };
+
+// paramètres liés à l'interactivité des zones agri
+zne_vitic = L.geoJSON(zne_viti, { 
+	style:style_zne_vitic,
+
+	onEachFeature: function onEachFeature(feature, layer) {
+
+		layer.on('mouseover', function () {
+			this.setStyle({
+			  'fillColor': 'darkgreen'
+			});
+		  });
+		layer.on('mouseout', function () {
+			this.setStyle({
+			  'fillColor': 'green'
+			});
+		  });
+		layer.on('click', function(){
+			document.getElementById("box_droite").style.height = "360px";
+			$("#znes_agric1").html('<h4>Surfaces viticoles </h4>'+
+			'<img width="200" alt="bla" height="200" src="image/vineyard.jpg"> <br>');
+
+			$("#znes_agric2").html('<p id="supérficie_viti"><b> Supérficie totale</b>'+' '+':'+' '+ feature.properties.SURFACE+'</p>')});
+
+		layer.bindPopup('<strong>' + 'Numéro de zone:' +feature.properties.NO_ZONE);
+}});
+
+// Ajout des surfaces agricoles si checkbox cochées
+document.querySelector("input[name=zn_2]").addEventListener('change', function() {
+	if(this.checked) map.addLayer(zne_vitic)
+	  else map.removeLayer(zne_vitic)
+	});
+
+
+
+
+//////////////////////////////////////////////// Paramètre liés aux surface des zones de pâturages////////////////////////////////////////
+	
+var style_zne_patur = {
+	"color": "brown",
+	"weight": 0.2,
+	"opacity": 1,
+	"fillColor": 'blue',
+   };
+
+// paramètres liés à l'interactivité des zones agri
+zne_patur = L.geoJSON(zne_patur, { 
+	style:style_zne_patur,
+
+	onEachFeature: function onEachFeature(feature, layer) {
+
+		layer.on('mouseover', function () {
+			this.setStyle({
+			  'fillColor': 'darkblue'
+			});
+		  });
+		layer.on('mouseout', function () {
+			this.setStyle({
+			  'fillColor': 'blue'
+			});
+		  });
+		layer.on('click', function(){
+			document.getElementById("box_droite").style.height = "360px";
+			$("#znes_agric1").html('<h4>Surfaces liées aux pâturages </h4>'+
+			'<img width="200" alt="bla" height="200" src="image/paturages.jpg"> <br>');
+
+			$("#znes_agric2").html('<p id="supérficie_viti"><b> Supérficie totale</b>'+' '+':'+' '+ feature.properties.SURFACE+'</p>')});
+
+		layer.bindPopup('<strong>' + 'Numéro de zone:' +feature.properties.NO_ZONE);
+}});
+
+// Ajout des surfaces agricoles si checkbox cochées
+document.querySelector("input[name=zn_3]").addEventListener('change', function() {
+	if(this.checked) map.addLayer(zne_patur)
+	  else map.removeLayer(zne_patur)
+	});
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////Fonction qui perment d'ouvrir et de fermer la section liée aux outils de mesure/////////////////////////////////////

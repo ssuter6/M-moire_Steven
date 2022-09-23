@@ -64,11 +64,13 @@
                 <div id="boutonFdc" class="Fdc">
                     <button id="OpenFdc" class="OpenFdc" onclick="openFdc()"> Fond de carte  </button>
                     <a href="javascript:void(0)" class="OpenFdc" onclick="closeFdc()">&times;</a>
-
-                    <div id="OuvrirFdc" class="OuvrirFdc">                        
+                    
+                    
+                    <div id="OuvrirFdc" class="OuvrirFdc">  
+                    <div id="fdc">                      
                         <figure id="img" class="img">
-                            <img src="C:/Users/user/Documents/GitHub/M-moire_Steven/image/OSM_CH.jpg" style="width:105px ;height:105px; margin-right:45px;border-radius: 5px;">
-                            <img src="C:/Users/user/Documents/GitHub/M-moire_Steven/image/esri_osm.jpg" style="width:105px; height:105px;border-radius: 5px;">
+                            <img src="C:/Users/user/Documents/GitHub/M-moire_Steven/image/OSM_CH.jpg" style="width:105px ;height:105px; margin: top 10px; margin-right:45px;border-radius: 5px;">
+                            <img src="C:/Users/user/Documents/GitHub/M-moire_Steven/image/esri_osm.jpg" style="width:105px;margin: top 10px; height:105px;border-radius: 5px;">
 
                             <!--Bouton qui affiche le fond de carte satellite sur la carte-->
                             <button class="Img_OsmCH" onclick="OuvrirImg_OsmCH()"> OSM </button>
@@ -76,8 +78,8 @@
                         </figure>
 
                         <figure id="img" class="img">
-                            <img src="C:/Users/user/Documents/GitHub/M-moire_Steven/image/esri_cartopo.jpg" style="width:105px; height:105px; margin-right:45px; border-radius: 5px;">
-                            <img src="C:/Users/user/Documents/GitHub/M-moire_Steven/image/image_sat_terre.jpg" style="width:105px; height:105px;border-radius: 5px;">
+                            <img src="C:/Users/user/Documents/GitHub/M-moire_Steven/image/esri_cartopo.jpg" style="width:105px; height:105px; margin: top 10px; margin-right:45px; border-radius: 5px;">
+                            <img src="C:/Users/user/Documents/GitHub/M-moire_Steven/image/image_sat_terre.jpg" style="width:105px; height:105px; margin: top 10px;border-radius: 5px;">
 
                             <!--Bouton qui affiche le fond de carte satellite sur la carte-->
                             <figcaption>
@@ -85,7 +87,7 @@
                                 <button id= "OuvrirImg_sat" class="OuvrirImg_sat" onclick="OuvrirImg_sat()"> Photos aériennes </button>
                             </figcaption>
                         </figure>
-                        
+                    </div>
                     </div>
                 </div>
 
@@ -162,7 +164,7 @@
                                     <p id="Entite_geo"><b>Selectionner des lieux culturel</b></p>
                                         <ul id="checkbox_culture">
                                             <li><input type="checkbox" id="bars" name="bars" value="bars"> Bars </li>
-                                            <li><input type="checkbox"> Bibliothèques</li>
+                                            <li><input type="checkbox" id="biblio" name="biblio" value="biblio"> Bibliothèques</li>
                                             <li><input type="checkbox"> Cinéma</li>
                                             <li><input type="checkbox"> Conservatoires</li>
                                             <li><input type="checkbox"> Musées</li>
@@ -292,6 +294,9 @@
         <script src="../M-moire_Steven/GeoJson/zone_viticole.geojson"></script>
         <script src="../M-moire_Steven/GeoJson/paturages.geojson"></script>
         <script src="../M-moire_Steven/GeoJson/restau_bar.geojson"></script>
+        <script src="../M-moire_Steven/GeoJson/biblio.geojson"></script>
+
+
 
         <script src="script.js"></script>
 

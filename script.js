@@ -119,7 +119,9 @@ var southWest = L.latLng(46.5, 6.6),
 
 	  function openFdc() {
 		document.getElementById("OuvrirFdc").style.height = "260px";
-		document.getElementById("OuvrirFdc").style.backgroundColor = 'lightgrey' ; 
+		document.getElementById("fdc").style.height = "300px";
+		document.getElementById("fdc").style.backgroundColor = '#f1f1f1' ; 
+		document.getElementById("OuvrirFdc").style.backgroundColor = '#f1f1f1' ; 
 		document.getElementById("boutonFdc").style.backgroundColor = 'grey' ; 
 		document.getElementById("OuvrirFdc").style.borderBottomLeftRadius = '5px'; 
 		document.getElementById("OuvrirFdc").style.borderBottomrightRadius = '5px'; 
@@ -198,6 +200,7 @@ var southWest = L.latLng(46.5, 6.6),
 	//Fonction qui permet de fermet l'onglet de selection lié au fond de carte
 	function closeFdc(){
 		document.getElementById("OuvrirFdc").style.height = "0px";
+		document.getElementById("fdc").style.height = "0px";
 		document.getElementById("boutonFdc").style.backgroundColor = '#111' ; 
 		document.getElementById("OpenFdc").style.backgroundColor = '#111' ;
 		document.getElementById("OpenFdc").style.color = '#818181' ;
@@ -480,31 +483,53 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 		// Selection des données dont la thématique correspond à la culture/////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+		// Affichage des restaurants,bars et café
 
-		var bar_icon = L.icon({
+		var bars_icon = L.icon({
 			iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/resto_icon.jpg',
 			iconSize: [32, 37],
 			iconAnchor: [16, 37],
 			popupAnchor: [0, -28]
 		  });
 		
-		 var markers = L.markerClusterGroup();
-
-		bars = L.geoJSON(bars, { 
-				pointToLayer: function (feature, latlng) {
-				return L.marker(latlng, {icon: bar_icon	});
+		var bars = L.geoJSON(bars, { 
 				onEachFeature: function onEachFeature(feature, layer) {
-				bars.bindPopup('<strong>' +feature.properties.name);
-			}}});
+					layer.bindPopup('<strong>'+feature.properties.name)},
+					pointToLayer: function (feature, latlng) {
+						return L.marker(latlng, {icon: bars_icon});
+						}
+					});
 		
-			markers.addLayer(bars);
-		
-	// Ajout des surfaces agricoles si checkbox cochées
+		// Ajout des biblio si checkbox est cochées
 		document.querySelector("input[name=bars]").addEventListener('change', function() {
-			if(this.checked) map.addLayer(markers)
-	 		 else map.removeLayer(markers)
+			if(this.checked) map.addLayer(bars)
+			  else map.removeLayer(bars)
 			});
 
+
+
+	// Affichage des bibliothèques
+
+	var biblio_icon = L.icon({
+		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/biblio.jpg',
+		iconSize: [32, 37],
+		iconAnchor: [16, 37],
+		popupAnchor: [0, -28]
+	  });
+	
+	var biblio = L.geoJSON(biblio, { 
+			onEachFeature: function onEachFeature(feature, layer) {
+				layer.bindPopup('<strong>'+feature.properties.name)},
+				pointToLayer: function (feature, latlng) {
+					return L.marker(latlng, {icon: biblio_icon});
+					}
+				});
+	
+	// Ajout des biblio si checkbox est cochées
+	document.querySelector("input[name=biblio]").addEventListener('change', function() {
+		if(this.checked) map.addLayer(biblio)
+		  else map.removeLayer(biblio)
+		});
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -676,5 +701,3 @@ $( "button#Mesure_surface_Act" ).click(function() {
 		document.getElementById("OpenDroits").style.color = '#818181' ;
 
 	  }
-
-	

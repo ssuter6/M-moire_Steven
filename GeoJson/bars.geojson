@@ -1,0 +1,27 @@
+var bars = {
+"type": "FeatureCollection",
+"name": "bars",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": "node/286904938", "@id": "node/286904938", "name": "La Diablotine" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 7.1586101, 46.3500952 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/321986249", "@id": "node/321986249", "name": "Au Diablevin" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 7.1577763, 46.3495302 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/832572312", "@id": "node/832572312", "name": "Le Ranch" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 7.0114109, 46.2516544 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/1619733290", "@id": "node/1619733290", "name": "Cham's Bar" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 7.153192, 46.3522835 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/1946668800", "@id": "node/1946668800", "name": "Le Casino" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 6.9693156, 46.3169466 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/1946676488", "@id": "node/1946676488", "name": "Red Ship Pub" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 6.9687497, 46.3185379 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/2487563826", "@id": "node/2487563826", "name": "Black Bird Bar Cafe" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 6.939497, 46.3152578 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/3699747398", "@id": "node/3699747398", "name": "Saloon" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 7.013184, 46.3427407 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/4729392392", "@id": "node/4729392392", "name": null }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 7.0169584, 46.3473473 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/4920962321", "@id": "node/4920962321", "name": null }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 7.0060591, 46.3428581 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/5056425290", "@id": "node/5056425290", "name": "La Treille d'Or" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 7.0550636, 46.2985565 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/5056464865", "@id": "node/5056464865", "name": "Mini Pub" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 7.0544688, 46.2980872 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/5056464869", "@id": "node/5056464869", "name": "Moon Boot Lounge" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 7.0546128, 46.298622 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/5056513502", "@id": "node/5056513502", "name": "Le p'tit Chalet" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 7.0556945, 46.2959244 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/5056561113", "@id": "node/5056561113", "name": "Blues Bar" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 7.0563698, 46.2953207 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/6237159939", "@id": "node/6237159939", "name": "Freestyle Bar" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 7.0020934, 46.3644074 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/6237207228", "@id": "node/6237207228", "name": "Cable Bar" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 7.017511, 46.3474714 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/8912171559", "@id": "node/8912171559", "name": "Les Amis" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 6.9668896, 46.3184448 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/9687739906", "@id": "node/9687739906", "name": "La Belle Epoque" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 7.005486, 46.2477539 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/9723409798", "@id": "node/9723409798", "name": "La Sirène" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 7.0181828, 46.2039391 ] ] } }
+]
+}

@@ -329,14 +329,21 @@ h1 {
 
   }
 
+a.close_box_droite{
+  margin-left: 325px;
+  color: black;
+}
+
   #agriculture {
     position: absolute;
-    height: 600px;
+    height: 475px;
     width: 365px;
     z-index: 100;
     margin-top: 10px;
+    margin-bottom: 10px;
     margin-left: 10px;
-    border-radius: 5px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: opx;
     color: black;
     background-color: #f1f1f1;
     padding: 10px;
@@ -344,7 +351,7 @@ h1 {
 
     #znes_agric1{
       position: relative;
-      height: 255px;
+      height: 260px;
       width: 345px;
       z-index: 50;
       color: black;
@@ -356,13 +363,14 @@ h1 {
 
     #znes_agric2{
       position: relative;
-      height: 200px;
+      height: 110px;
       width: 345px;
       z-index: 50;
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
       color: black;
       background-color: lightgray;
+      font-size: small;
     }
 
   p#agricult{
@@ -371,7 +379,7 @@ h1 {
   }
 
   p#info_select{
-    margin-top: 0px;
+    margin-top: -10px;
   }
 
   p#supérficie_agr{

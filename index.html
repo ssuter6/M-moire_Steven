@@ -163,11 +163,12 @@
                                 <div id="Ent_geo">
                                     <p id="Entite_geo"><b>Selectionner des lieux culturel</b></p>
                                         <ul id="checkbox_culture">
-                                            <li><input type="checkbox" id="bars" name="bars" value="bars"> Bars </li>
+                                            <li><input type="checkbox" id="bars" name="bars" value="bars"> bars </li>
                                             <li><input type="checkbox" id="biblio" name="biblio" value="biblio"> Bibliothèques</li>
                                             <li><input type="checkbox"> Cinéma</li>
                                             <li><input type="checkbox"> Conservatoires</li>
                                             <li><input type="checkbox"> Musées</li>
+                                            <li><input type="checkbox" id="resto" name="resto" value="resto"> Restaurants</li>
                                             <li><input type="checkbox"> Salles de spectacles</li>
                                             <li><input type="checkbox"> Théatres</li>
                                        </ul>
@@ -265,8 +266,8 @@
 
 
             <div id="box_droite">
-                
                 <div id="agriculture">
+                    <a href="javascript:void(0)" class="close_box_droite" onclick="close_box_droite()">&times;</a>
                     <p id="info_select" style="text-align:center; font-size:large;"> <b>Information relatives aux surfaces sélectionnées :</b></p>
                         <div id="znes_agric1">
                         </div>
@@ -293,8 +294,9 @@
         <script src="../M-moire_Steven/GeoJson/district_Aigle.geojson"></script>
         <script src="../M-moire_Steven/GeoJson/zone_viticole.geojson"></script>
         <script src="../M-moire_Steven/GeoJson/paturages.geojson"></script>
-        <script src="../M-moire_Steven/GeoJson/restau_bar.geojson"></script>
+        <script src="../M-moire_Steven/GeoJson/bars.geojson"></script>
         <script src="../M-moire_Steven/GeoJson/biblio.geojson"></script>
+        <script src="../M-moire_Steven/GeoJson/resto_geojson.geojson"></script>
 
 
 

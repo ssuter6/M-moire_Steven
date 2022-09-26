@@ -59,9 +59,9 @@ var southWest = L.latLng(46.5, 6.6),
 		};
 
 		var style_dis_aigle= {
-			"color": "#fffff",
+			"background-color":"transparent",
 			"opacity": 0,
-			"fill-opacity":"0"
+			"fill-opacity":"10"
 		   };
 
 	var map = 	L.map('Map',{layers:esri,maxBounds:bounds,pmIgnore: false}).setView([46.32, 7.15], 11);
@@ -349,6 +349,11 @@ var southWest = L.latLng(46.5, 6.6),
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Selection des données dont la thématique correspond à l'agriculture/////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		function close_box_droite(){
+			document.getElementById("box_droite").style.height = "0px";
+		  };
+
 ////////////////////////// paramètres permettant d'afficher les GeoJson liée aux zones agricoles à la carte //////////////////////////7//////
 			
 
@@ -377,11 +382,16 @@ var southWest = L.latLng(46.5, 6.6),
 						});
 					  });
 					layer.on('click', function(){
-						document.getElementById("box_droite").style.height = "360px";
+						document.getElementById("box_droite").style.height = "400px";
 						$("#znes_agric1").html('<h4>Surfaces agricoles</h4>'+
 						'<img width="200" alt="bla" height="200" src="image/agri.jpg"> <br>')
 
-						$("#znes_agric2").html('<p id="supérficie_agr"><b>Supérficie totale</b>'+' '+':'+' '+ feature.properties.SURFACE+ '</p>')});
+						$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
+						+':'+' '+ feature.properties.NOM_COMMUNE + '</p>'+
+						'<p id="supérficie_agr"><b>Supérficie totale</b>'+' '
+						+':'+' '+ feature.properties.SURFACE+ 'm2'+'</p>'+
+						'<p id="supérficie_agr"><b>type de surface</b>'+' '
+						+':'+' '+ feature.properties.DENOM_COMM+ '</p>')});
 
 					layer.bindPopup('<strong>' + 'Numéro de zone:' +feature.properties.NO_ZONE);
 			}});
@@ -400,7 +410,7 @@ var style_zne_vitic = {
 	"color": "brown",
 	"weight": 0.2,
 	"opacity": 1,
-	"fillColor": 'green',
+	"fillColor": 'orange',
    };
 
 // paramètres liés à l'interactivité des zones agri
@@ -420,11 +430,16 @@ zne_vitic = L.geoJSON(zne_viti, {
 			});
 		  });
 		layer.on('click', function(){
-			document.getElementById("box_droite").style.height = "360px";
+			document.getElementById("box_droite").style.height = "400px";
 			$("#znes_agric1").html('<h4>Surfaces viticoles </h4>'+
 			'<img width="200" alt="bla" height="200" src="image/vineyard.jpg"> <br>');
 
-			$("#znes_agric2").html('<p id="supérficie_viti"><b> Supérficie totale</b>'+' '+':'+' '+ feature.properties.SURFACE+'</p>')});
+			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
+			+':'+' '+ feature.properties.NOM_COMMUNE + '</p>'+
+			'<p id="supérficie_agr"><b>Supérficie totale</b>'+' '
+			+':'+' '+ feature.properties.SURFACE+ 'm2'+'</p>'+
+			'<p id="supérficie_agr"><b>type de surface</b>'+' '
+			+':'+' '+ feature.properties.DENOM_COMM+ '</p>')});
 
 		layer.bindPopup('<strong>' + 'Numéro de zone:' +feature.properties.NO_ZONE);
 }});
@@ -462,11 +477,16 @@ zne_patur = L.geoJSON(zne_patur, {
 			});
 		  });
 		layer.on('click', function(){
-			document.getElementById("box_droite").style.height = "360px";
+			document.getElementById("box_droite").style.height = "400px";
 			$("#znes_agric1").html('<h4>Surfaces liées aux pâturages </h4>'+
 			'<img width="200" alt="bla" height="200" src="image/paturages.jpg"> <br>');
 
-			$("#znes_agric2").html('<p id="supérficie_viti"><b> Supérficie totale</b>'+' '+':'+' '+ feature.properties.SURFACE+'</p>')});
+			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
+			+':'+' '+ feature.properties.NOM_COMMUNE + '</p>'+
+			'<p id="supérficie_agr"><b>Supérficie totale</b>'+' '
+			+':'+' '+ feature.properties.SURFACE+ 'm2'+'</p>'+
+			'<p id="supérficie_agr"><b>type de surface</b>'+' '
+			+':'+' '+ feature.properties.DENOM_COMM+ '</p>')});
 
 		layer.bindPopup('<strong>' + 'Numéro de zone:' +feature.properties.NO_ZONE);
 }});
@@ -483,28 +503,28 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 		// Selection des données dont la thématique correspond à la culture/////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		// Affichage des restaurants,bars et café
+		// Affichage des bars
 
-		var bars_icon = L.icon({
-			iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/resto_icon.jpg',
-			iconSize: [32, 37],
-			iconAnchor: [16, 37],
-			popupAnchor: [0, -28]
-		  });
-		
-		var bars = L.geoJSON(bars, { 
-				onEachFeature: function onEachFeature(feature, layer) {
-					layer.bindPopup('<strong>'+feature.properties.name)},
-					pointToLayer: function (feature, latlng) {
-						return L.marker(latlng, {icon: bars_icon});
-						}
-					});
-		
-		// Ajout des biblio si checkbox est cochées
-		document.querySelector("input[name=bars]").addEventListener('change', function() {
-			if(this.checked) map.addLayer(bars)
-			  else map.removeLayer(bars)
-			});
+	var bars_icon = L.icon({
+		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/bars.jpg',
+		iconSize: [32, 37],
+		iconAnchor: [16, 37],
+		popupAnchor: [0, -28]
+	  });
+	
+	var bars = L.geoJSON(bars, { 
+			onEachFeature: function onEachFeature(feature, layer) {
+				layer.bindPopup('<strong>'+feature.properties.name)},
+				pointToLayer: function (feature, latlng) {
+					return L.marker(latlng, {icon: bars_icon});
+					}
+				});
+	
+	// Ajout des biblio si checkbox est cochées
+	document.querySelector("input[name=bars]").addEventListener('change', function() {
+		if(this.checked) map.addLayer(bars)
+		  else map.removeLayer(bars)
+		});
 
 
 
@@ -529,6 +549,31 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 	document.querySelector("input[name=biblio]").addEventListener('change', function() {
 		if(this.checked) map.addLayer(biblio)
 		  else map.removeLayer(biblio)
+		});
+
+	
+
+	// Affichage des restaurants
+
+	var resto_icon = L.icon({
+		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/resto_icon.jpg',
+		iconSize: [32, 37],
+		iconAnchor: [16, 37],
+		popupAnchor: [0, -28]
+	  });
+	
+	var resto = L.geoJSON(resto, { 
+			onEachFeature: function onEachFeature(feature, layer) {
+				layer.bindPopup('<strong>'+feature.properties.name)},
+				pointToLayer: function (feature, latlng) {
+					return L.marker(latlng, {icon: resto_icon});
+					}
+				});
+	
+	// Ajout des biblio si checkbox est cochées
+	document.querySelector("input[name=resto]").addEventListener('change', function() {
+		if(this.checked) map.addLayer(resto)
+		  else map.removeLayer(resto)
 		});
 
 

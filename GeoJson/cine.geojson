@@ -1,0 +1,10 @@
+var cine = {
+"type": "FeatureCollection",
+"name": "cine",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": "node/422637850", "name": "Grain d'Sel" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 7.0119894, 46.2517907 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/599221086", "name": "Cosmopolis" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 6.9631181, 46.3160921 ] ] } },
+{ "type": "Feature", "properties": { "id": "node/4949509622", "name": "Cinéma Le Regency" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 7.0142771, 46.3439928 ] ] } }
+]
+}

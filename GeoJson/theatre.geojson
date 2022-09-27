@@ -1,0 +1,10 @@
+var theatres = {
+"type": "FeatureCollection",
+"name": "theatre",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 1, "name": "Théatre de l'Odéon" }, "geometry": { "type": "Point", "coordinates": [ 6.924326468938411, 46.396533323671783 ] } },
+{ "type": "Feature", "properties": { "id": 2, "name": "Théatre WAOUW" }, "geometry": { "type": "Point", "coordinates": [ 6.969585254798029, 46.31700520875475 ] } },
+{ "type": "Feature", "properties": { "id": 3, "name": "La Drame" }, "geometry": { "type": "Point", "coordinates": [ 6.968933142212934, 46.318443727831287 ] } }
+]
+}

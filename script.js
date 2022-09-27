@@ -59,9 +59,15 @@ var southWest = L.latLng(46.5, 6.6),
 		};
 
 		var style_dis_aigle= {
-			"background-color":"transparent",
-			"opacity": 0,
-			"fill-opacity":"10"
+			fillColor: '#800026',
+			fillOpacity: 0,
+			weight:1
+		   };
+
+		var style__hors_dis_aigle= {
+			fillColor: 'black',
+			fillOpacity: 0.2,
+			weight:0
 		   };
 
 	var map = 	L.map('Map',{layers:esri,maxBounds:bounds,pmIgnore: false}).setView([46.32, 7.15], 11);
@@ -73,6 +79,14 @@ var southWest = L.latLng(46.5, 6.6),
 							layer.on('click', function(){
 							layer.bindPopup('<strong>' + "District d'" +feature.properties.NAME)})}						
 					}).addTo(map);
+
+					L.geoJSON(hors_DA, 
+						{style:style__hors_dis_aigle,
+	
+							onEachFeature: function onEachFeature(feature, layer) {
+								layer.on('click', function(){
+								layer.bindPopup('<strong>' + "District d'" +feature.properties.NAME)})}						
+						}).addTo(map);
 
 
 
@@ -254,7 +268,7 @@ var southWest = L.latLng(46.5, 6.6),
 
 		// Selection des données dont la thématique correspond à la culture
 		  else if ($('#choix_theme').val() == 'Culture') {
-			document.getElementById("Opt_Culture").style.height = "250px";
+			document.getElementById("Opt_Culture").style.height = "190px";
 			$("#Opt_Culture").show();
 
 			$("#Opt_Agriculture").hide();
@@ -373,7 +387,7 @@ var southWest = L.latLng(46.5, 6.6),
 
 					layer.on('mouseover', function () {
 						this.setStyle({
-						  'fillColor': '#0000ff'
+						  'fillColor': '#d95f0e'
 						});
 					  });
 					layer.on('mouseout', function () {
@@ -421,12 +435,12 @@ zne_vitic = L.geoJSON(zne_viti, {
 
 		layer.on('mouseover', function () {
 			this.setStyle({
-			  'fillColor': 'darkgreen'
+			  'fillColor': 'darkred'
 			});
 		  });
 		layer.on('mouseout', function () {
 			this.setStyle({
-			  'fillColor': 'green'
+			  'fillColor': 'orange'
 			});
 		  });
 		layer.on('click', function(){
@@ -499,11 +513,13 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 
 
 
-		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		// Selection des données dont la thématique correspond à la culture/////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		// Affichage des bars
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////// Selection des données dont la thématique correspond à la culture/////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////// Affichage des bars ////////////////////////////////////////////////////////////////////
 
 	var bars_icon = L.icon({
 		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/bars.jpg',
@@ -528,7 +544,7 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 
 
 
-	// Affichage des bibliothèques
+///////////////////////////////////////////////////////////// Affichage des bibliothèques ///////////////////////////////////////////////
 
 	var biblio_icon = L.icon({
 		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/biblio.jpg',
@@ -553,7 +569,85 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 
 	
 
-	// Affichage des restaurants
+
+//////////////////////////////////////////////Affichage des cafe////////////////////// /////////////////////////////////////////////////
+
+	var cafe_icon = L.icon({
+		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/cafe.jpg',
+		iconSize: [32, 37],
+		iconAnchor: [16, 37],
+		popupAnchor: [0, -28]
+	  });
+	
+	var cafe = L.geoJSON(cafe, { 
+			onEachFeature: function onEachFeature(feature, layer) {
+				layer.bindPopup('<strong>'+feature.properties.name)},
+				pointToLayer: function (feature, latlng) {
+					return L.marker(latlng, {icon: cafe_icon});
+					}
+				});
+	
+	// Ajout des cine si checkbox est cochées
+	document.querySelector("input[name=cafe]").addEventListener('change', function() {
+		if(this.checked) map.addLayer(cafe)
+		  else map.removeLayer(cafe)
+		});
+
+
+
+
+/////////////////////////////////////////////////////////////// Affichage des cinemas ///////////////////////////////////////////////////
+
+	var cine_icon = L.icon({
+		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/cine.jpg',
+		iconSize: [32, 37],
+		iconAnchor: [16, 37],
+		popupAnchor: [0, -28]
+	  });
+	
+	var cine = L.geoJSON(cine, { 
+			onEachFeature: function onEachFeature(feature, layer) {
+				layer.bindPopup('<strong>'+feature.properties.name)},
+				pointToLayer: function (feature, latlng) {
+					return L.marker(latlng, {icon: cine_icon});
+					}
+				});
+	
+	// Ajout des cine si checkbox est cochées
+	document.querySelector("input[name=cine]").addEventListener('change', function() {
+		if(this.checked) map.addLayer(cine)
+		  else map.removeLayer(cine)
+		});
+
+
+
+////////////////////////////////////////////////////////////////// Affichage des cinemas/////////////////////////////////////////////////
+
+	var muse_icon = L.icon({
+		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/muse.jpg',
+		iconSize: [32, 37],
+		iconAnchor: [16, 37],
+		popupAnchor: [0, -28]
+	  });
+	
+	var muse = L.geoJSON(muse, { 
+			onEachFeature: function onEachFeature(feature, layer) {
+				layer.bindPopup('<strong>'+feature.properties.NAMN1)},
+				pointToLayer: function (feature, latlng) {
+					return L.marker(latlng, {icon: muse_icon});
+					}
+				});
+	
+	// Ajout des cine si checkbox est cochées
+	document.querySelector("input[name=muse]").addEventListener('change', function() {
+		if(this.checked) map.addLayer(muse)
+		  else map.removeLayer(muse)
+		});
+
+
+
+
+////////////////////////////////////////////////// Affichage des restaurants/////////////////////////////////////////////////////////
 
 	var resto_icon = L.icon({
 		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/resto_icon.jpg',
@@ -575,6 +669,57 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 		if(this.checked) map.addLayer(resto)
 		  else map.removeLayer(resto)
 		});
+
+
+
+
+////////////////////////////////////////////////// Affichage des salle de specatles /////////////////////////////////////////////////////////
+
+var gr_salles_icon = L.icon({
+	iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/gr_salles.jpg',
+	iconSize: [32, 37],
+	iconAnchor: [16, 37],
+	popupAnchor: [0, -28]
+  });
+
+var gr_salles = L.geoJSON(gr_salles, { 
+		onEachFeature: function onEachFeature(feature, layer) {
+			layer.bindPopup('<strong>'+feature.properties.name)},
+			pointToLayer: function (feature, latlng) {
+				return L.marker(latlng, {icon: gr_salles_icon});
+				}
+			});
+
+// Ajout des biblio si checkbox est cochées
+document.querySelector("input[name=gr_salles]").addEventListener('change', function() {
+	if(this.checked) map.addLayer(gr_salles)
+	  else map.removeLayer(gr_salles)
+	});
+
+
+////////////////////////////////////////////////// Affichage des théatres /////////////////////////////////////////////////////////
+
+var theatre_icon = L.icon({
+	iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/theatre.jpg',
+	iconSize: [32, 37],
+	iconAnchor: [16, 37],
+	popupAnchor: [0, -28]
+  });
+
+var theatres = L.geoJSON(theatres, { 
+		onEachFeature: function onEachFeature(feature, layer) {
+			layer.bindPopup('<strong>'+feature.properties.name)},
+			pointToLayer: function (feature, latlng) {
+				return L.marker(latlng, {icon: theatre_icon});
+				}
+			});
+
+// Ajout des biblio si checkbox est cochées
+document.querySelector("input[name=theatre]").addEventListener('change', function() {
+	if(this.checked) map.addLayer(theatres)
+	  else map.removeLayer(theatres)
+	});
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

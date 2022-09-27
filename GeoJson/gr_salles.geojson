@@ -1,0 +1,16 @@
+var gr_salles = {
+"type": "FeatureCollection",
+"name": "gr_salles",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 1, "name": "Salle de l'Aiglon" }, "geometry": { "type": "Point", "coordinates": [ 6.966980127861798, 46.315914271832391 ] } },
+{ "type": "Feature", "properties": { "id": 2, "name": "Salle des Glariers" }, "geometry": { "type": "Point", "coordinates": [ 6.96587513284199, 46.322090623476221 ] } },
+{ "type": "Feature", "properties": { "id": 3, "name": "Grande salle d'Ollon" }, "geometry": { "type": "Point", "coordinates": [ 6.995306924874866, 46.297179889019901 ] } },
+{ "type": "Feature", "properties": { "id": 4, "name": "Grande salle d'Huémoz" }, "geometry": { "type": "Point", "coordinates": [ 7.026529323380716, 46.291446779231798 ] } },
+{ "type": "Feature", "properties": { "id": 5, "name": "Grande salle de Villars" }, "geometry": { "type": "Point", "coordinates": [ 7.052216758535721, 46.298815162103537 ] } },
+{ "type": "Feature", "properties": { "id": 6, "name": "Grande salle de Bex" }, "geometry": { "type": "Point", "coordinates": [ 7.010583109485508, 46.251610957947207 ] } },
+{ "type": "Feature", "properties": { "id": 7, "name": "Grande salle de la Barboleuse" }, "geometry": { "type": "Point", "coordinates": [ 7.069390347163703, 46.281387201724336 ] } },
+{ "type": "Feature", "properties": { "id": 8, "name": "Maison des Congrès" }, "geometry": { "type": "Point", "coordinates": [ 7.155207722943629, 46.349024092918775 ] } },
+{ "type": "Feature", "properties": { "id": 9, "name": "Salle de la Rotzérane" }, "geometry": { "type": "Point", "coordinates": [ 6.93034656653676, 46.356374295775105 ] } }
+]
+}

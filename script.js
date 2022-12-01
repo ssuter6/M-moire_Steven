@@ -398,7 +398,7 @@ var southWest = L.latLng(46.5, 6.6),
 					layer.on('click', function(){
 						document.getElementById("box_droite").style.height = "400px";
 						$("#znes_agric1").html('<h4>Surfaces agricoles</h4>'+
-						'<img width="200" alt="bla" height="200" src="image/agri.jpg"> <br>')
+						'<img width="150" alt="bla" height="150" src="image/agri.jpg"> <br>')
 
 						$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
 						+':'+' '+ feature.properties.NOM_COMMUNE + '</p>'+
@@ -446,7 +446,7 @@ zne_vitic = L.geoJSON(zne_viti, {
 		layer.on('click', function(){
 			document.getElementById("box_droite").style.height = "400px";
 			$("#znes_agric1").html('<h4>Surfaces viticoles </h4>'+
-			'<img width="200" alt="bla" height="200" src="image/vineyard.jpg"> <br>');
+			'<img width="150" alt="bla" height="150" src="image/vineyard.jpg"> <br>');
 
 			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
 			+':'+' '+ feature.properties.NOM_COMMUNE + '</p>'+
@@ -493,7 +493,7 @@ zne_patur = L.geoJSON(zne_patur, {
 		layer.on('click', function(){
 			document.getElementById("box_droite").style.height = "400px";
 			$("#znes_agric1").html('<h4>Surfaces liées aux pâturages </h4>'+
-			'<img width="200" alt="bla" height="200" src="image/paturages.jpg"> <br>');
+			'<img width="150" alt="bla" height="150" src="image/paturages.jpg"> <br>');
 
 			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
 			+':'+' '+ feature.properties.NOM_COMMUNE + '</p>'+
@@ -528,7 +528,7 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 		popupAnchor: [0, -28]
 	  });
 	
-	var bars = L.geoJSON(bars, { 
+		var bars = L.geoJSON(bars, { 
 			onEachFeature: function onEachFeature(feature, layer) {
 				layer.bindPopup('<strong>'+feature.properties.name)},
 				pointToLayer: function (feature, latlng) {
@@ -543,7 +543,6 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 		});
 
 
-
 ///////////////////////////////////////////////////////////// Affichage des bibliothèques ///////////////////////////////////////////////
 
 	var biblio_icon = L.icon({
@@ -553,7 +552,7 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 		popupAnchor: [0, -28]
 	  });
 	
-	var biblio = L.geoJSON(biblio, { 
+		var biblio = L.geoJSON(biblio, { 
 			onEachFeature: function onEachFeature(feature, layer) {
 				layer.bindPopup('<strong>'+feature.properties.name)},
 				pointToLayer: function (feature, latlng) {
@@ -568,8 +567,6 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 		});
 
 	
-
-
 //////////////////////////////////////////////Affichage des cafe////////////////////// /////////////////////////////////////////////////
 
 	var cafe_icon = L.icon({
@@ -579,7 +576,7 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 		popupAnchor: [0, -28]
 	  });
 	
-	var cafe = L.geoJSON(cafe, { 
+		var cafe = L.geoJSON(cafe, { 
 			onEachFeature: function onEachFeature(feature, layer) {
 				layer.bindPopup('<strong>'+feature.properties.name)},
 				pointToLayer: function (feature, latlng) {
@@ -594,8 +591,6 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 		});
 
 
-
-
 /////////////////////////////////////////////////////////////// Affichage des cinemas ///////////////////////////////////////////////////
 
 	var cine_icon = L.icon({
@@ -605,7 +600,7 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 		popupAnchor: [0, -28]
 	  });
 	
-	var cine = L.geoJSON(cine, { 
+		var cine = L.geoJSON(cine, { 
 			onEachFeature: function onEachFeature(feature, layer) {
 				layer.bindPopup('<strong>'+feature.properties.name)},
 				pointToLayer: function (feature, latlng) {
@@ -620,7 +615,6 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 		});
 
 
-
 ////////////////////////////////////////////////////////////////// Affichage des cinemas/////////////////////////////////////////////////
 
 	var muse_icon = L.icon({
@@ -630,7 +624,7 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 		popupAnchor: [0, -28]
 	  });
 	
-	var muse = L.geoJSON(muse, { 
+		var muse = L.geoJSON(muse, { 
 			onEachFeature: function onEachFeature(feature, layer) {
 				layer.bindPopup('<strong>'+feature.properties.NAMN1)},
 				pointToLayer: function (feature, latlng) {
@@ -643,8 +637,6 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 		if(this.checked) map.addLayer(muse)
 		  else map.removeLayer(muse)
 		});
-
-
 
 
 ////////////////////////////////////////////////// Affichage des restaurants/////////////////////////////////////////////////////////
@@ -669,8 +661,6 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 		if(this.checked) map.addLayer(resto)
 		  else map.removeLayer(resto)
 		});
-
-
 
 
 ////////////////////////////////////////////////// Affichage des salle de specatles /////////////////////////////////////////////////////////
@@ -719,6 +709,81 @@ document.querySelector("input[name=theatre]").addEventListener('change', functio
 	if(this.checked) map.addLayer(theatres)
 	  else map.removeLayer(theatres)
 	});
+
+
+
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// Selection des données dont la thématique correspond à la démographie/////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+///////////////////////////////////////////////////////////// Affichage indicateur taux de natalité ///////////////////////////////////////////////
+function getColor() {
+    return d > 100 ? '#800026' :
+           d > 50  ? '#BD0026' :
+           d > 20  ? '#E31A1C' :
+           d > 10 ? '#FC4E2A' :
+                      '#FFEDA0';
+}
+
+
+
+// paramètres liés à l'interactivité des zones agri
+naiss = L.geoJSON(naiss, { 
+
+	onEachFeature: function onEachFeature(feature, layer) {
+		function style(feature) {
+			return {
+				fillColor: getColor(feature.properties.naiss_tot_21_NAISS_TOT_21),
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7
+			};
+		}
+
+		layer.on('mouseover', function () {
+			this.setStyle({
+			  'fillColor': 'darkblue'
+			});
+		  });
+		layer.on('mouseout', function () {
+			this.setStyle({
+			  'fillColor': ''
+			});
+		  });
+		layer.on('click', function(){
+			document.getElementById("box_droite").style.height = "400px";
+			$("#znes_agric1").html('<h4>Surfaces liées aux pâturages </h4>'+
+			'<img width="150" alt="bla" height="150" src="image/paturages.jpg"> <br>');
+
+			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
+			+':'+' '+ feature.properties.naiss_tot_21_name + '<br>' +
+			'<b>Naissances</b>'+' '
+			+':'+' '+ feature.naiss_tot_21_NAISS_TOT_21 + 
+			'</p>')});
+
+		layer.bindPopup('<strong>' + 'Numéro de zone:' +feature.properties.name);
+}});
+
+
+// Ajout des surfaces agricoles si checkbox cochées
+document.querySelector("input[name=naissance]").addEventListener('change', function() {
+	if(this.checked) map.addLayer(naiss)
+	  else map.removeLayer(naiss)
+	});
+
+
+
+
+
+
+
+
+
+
 
 
 

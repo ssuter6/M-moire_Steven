@@ -300,6 +300,8 @@ h1 {
     overflow-x: hidden;
     margin-top: 10px;
   }
+
+
 /* ////////////////////////////////////////////////thématique liées à l'agriculture////////////////////////////////////////////*/
 
   #Opt_Agriculture{
@@ -318,11 +320,11 @@ h1 {
   #box_droite{
     position: absolute;
     height: 0px;
-    width: 400px;
+    width: 385px;
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 50;
-    background-color: black;
+    background-color: #f1f1f1;
     margin-top: 50px;
     margin-left: 1115px;
     border-radius: 5px;
@@ -336,10 +338,10 @@ a.close_box_droite{
 
   #agriculture {
     position: absolute;
-    height: 475px;
-    width: 365px;
+    height: 400px;
+    width: 350px;
     z-index: 100;
-    margin-top: 10px;
+    margin-top: 0px;
     margin-bottom: 10px;
     margin-left: 10px;
     border-bottom-left-radius: 0px;
@@ -351,7 +353,7 @@ a.close_box_droite{
 
     #znes_agric1{
       position: relative;
-      height: 260px;
+      height: 200px;
       width: 345px;
       z-index: 50;
       color: black;
@@ -363,7 +365,7 @@ a.close_box_droite{
 
     #znes_agric2{
       position: relative;
-      height: 110px;
+      height: 90px;
       width: 345px;
       z-index: 50;
       border-bottom-left-radius: 5px;
@@ -394,6 +396,7 @@ a.close_box_droite{
 
   h4{
     text-align: center;
+    margin-top: 0px;
   }
 
   label {
@@ -439,6 +442,8 @@ a.close_box_droite{
     margin: 5px;
     border-radius: 5px;
     text-align: center;
+    font-size: medium;
+    font-family: sans-serif;
   }
 
 ul#checkbox_culture{
@@ -458,10 +463,17 @@ font-size: 12px;
     position: relative;
     height: 0px;
     overflow: hidden;
-    background-color: aqua;
+    background-color: #f1f1f1;
     margin: 5px;
     border-radius: 5px;
+    text-align: center;
+    font-size: medium;
+    font-family: sans-serif;
   }
+
+
+
+  /* ////////////////////////////////////////////////thématique liées à la l'économie////////////////////////////////////////////*/
 
   #Opt_Economie{
     position: relative;
@@ -471,6 +483,10 @@ font-size: 12px;
     margin: 5px;
     border-radius: 5px;
   }
+
+
+  /* ////////////////////////////////////////////////thématique liées à l'environnement////////////////////////////////////////////*/
+
   #Opt_Environnement{
     position: relative;
     height: 0px;
@@ -480,6 +496,9 @@ font-size: 12px;
     border-radius: 5px;
   }
   
+
+  /* ////////////////////////////////////////////////thématique liées au territoire////////////////////////////////////////////*/
+
   #Opt_Territoire{
     position: relative;
     height: 0px;
@@ -488,6 +507,9 @@ font-size: 12px;
     margin: 5px;
     border-radius: 5px;
   }
+
+
+  /* ////////////////////////////////////////////////thématique liées au tourisme////////////////////////////////////////////*/
 
   #Opt_Tourisme{
     position: relative;

@@ -45,6 +45,8 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script> 
+
 </head>
     <body>
     
@@ -181,10 +183,26 @@
                                 <div id="Ent_geo">
                                     <p id="Entite_geo"><b>Selectionner un indicateur démographique</b></p>
                                     <ul id="radiobox_demography">
-                                        <li><input type="radio" id="naissance" name="naissance" value="naissance"> Taux de natalité </li>
-                                        <li><input type="radio" id="naissance" name="naissance" value="naissance"> Taux de mortalité</li>
-                                        <li><input type="radio" id="naissance" name="naissance" value="naissance"> Espérance de vie </li>
-                                        <li><input type="radio" id="naissance" name="naissance" value="naissance"> Taux de nuptialité </li>
+                                        <li><label>
+                                            <input type="radio" id="naissance" name="naissance" value="naissance"> Taux de natalité 
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                        <li><label>
+                                            <input type="radio" id="deces" name="deces" value="deces"> Taux de mortalité
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                        <li><label>
+                                            <input type="radio" id="naissance" name="naissance" value="naissance"> Espérance de vie 
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                        <li><label>
+                                            <input type="radio" id="naissance" name="naissance" value="naissance"> Taux de nuptialité
+                                            <span class="checkmark"></span> 
+                                        </label>
+                                    </li>
                                         
 
                                    </ul>
@@ -288,6 +306,14 @@
 
             </div>
 
+            <div id="box_droite_bas">
+                
+                    <a href="javascript:void(0)" class="close_box_droite_bas" onclick="close_box_droite_bas()">&times;</a>
+                    <p id="info_select" style="text-align:center; font-size:large;"> Information statistiques</p>
+                
+
+            </div>
+
             <!--Carte-->
             <div id="Map"></div>
 
@@ -314,7 +340,8 @@
         <script src="../M-moire_Steven/GeoJson/resto_geojson.geojson"></script>
         <script src="../M-moire_Steven/GeoJson/gr_salles.geojson"></script>
         <script src="../M-moire_Steven/GeoJson/theatre.geojson"></script>
-        <script src="../M-moire_Steven/GeoJson/tot_naiss_21.geojson"></script>
+        <script src="../M-moire_Steven/GeoJson/naissance_mortalité.geojson"></script>
+        <script src="../M-moire_Steven/GeoJson/deces.geojson"></script>
 
 
 

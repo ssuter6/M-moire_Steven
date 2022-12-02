@@ -367,7 +367,9 @@ var southWest = L.latLng(46.5, 6.6),
 		function close_box_droite(){
 			document.getElementById("box_droite").style.height = "0px";
 		  };
-
+		function close_box_droite_bas(){
+			document.getElementById("box_droite_bas").style.height = "0px";
+		  };
 ////////////////////////// paramètres permettant d'afficher les GeoJson liée aux zones agricoles à la carte //////////////////////////7//////
 			
 
@@ -405,7 +407,11 @@ var southWest = L.latLng(46.5, 6.6),
 						'<p id="supérficie_agr"><b>Supérficie totale</b>'+' '
 						+':'+' '+ feature.properties.SURFACE+ 'm2'+'</p>'+
 						'<p id="supérficie_agr"><b>type de surface</b>'+' '
-						+':'+' '+ feature.properties.DENOM_COMM+ '</p>')});
+						+':'+' '+ feature.properties.DENOM_COMM+ '</p>')
+					
+					});
+
+					
 
 					layer.bindPopup('<strong>' + 'Numéro de zone:' +feature.properties.NO_ZONE);
 			}});
@@ -719,64 +725,207 @@ document.querySelector("input[name=theatre]").addEventListener('change', functio
 
 
 ///////////////////////////////////////////////////////////// Affichage indicateur taux de natalité ///////////////////////////////////////////////
-function getColor() {
-    return d > 100 ? '#800026' :
-           d > 50  ? '#BD0026' :
-           d > 20  ? '#E31A1C' :
-           d > 10 ? '#FC4E2A' :
+
+// fonction pour l'affichage des indicateurs en couleur
+
+function getColor(d) {
+    return d > 1.2 ? '#800026' :
+           d> 1  ? '#BD0026' :
+           d> 0.8  ? '#E31A1C' :
+           d> 0.6 ?  '#FC4E2A' :
                       '#FFEDA0';
 }
 
+style_naiss = function style(feature) {
+	return {
+		fillColor: getColor(feature.properties.t_natalite),
+		weight: 2,
+		opacity: 1,
+		color: 'white',
+		dashArray: '3',
+		fillOpacity: 0.7
+	};
+}
 
+// ajout info relatives à l'indicateur taux natalité
 
-// paramètres liés à l'interactivité des zones agri
-naiss = L.geoJSON(naiss, { 
+naissance = L.geoJSON(naissance, { 
+	style: style_naiss,
 
 	onEachFeature: function onEachFeature(feature, layer) {
-		function style(feature) {
-			return {
-				fillColor: getColor(feature.properties.naiss_tot_21_NAISS_TOT_21),
-				weight: 2,
-				opacity: 1,
-				color: 'white',
-				dashArray: '3',
-				fillOpacity: 0.7
-			};
-		}
-
-		layer.on('mouseover', function () {
-			this.setStyle({
-			  'fillColor': 'darkblue'
-			});
-		  });
-		layer.on('mouseout', function () {
-			this.setStyle({
-			  'fillColor': ''
-			});
-		  });
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+		
 		layer.on('click', function(){
 			document.getElementById("box_droite").style.height = "400px";
-			$("#znes_agric1").html('<h4>Surfaces liées aux pâturages </h4>'+
+			$("#znes_agric1").html('<h4>Naissances</h4>'+
 			'<img width="150" alt="bla" height="150" src="image/paturages.jpg"> <br>');
 
 			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
-			+':'+' '+ feature.properties.naiss_tot_21_name + '<br>' +
-			'<b>Naissances</b>'+' '
-			+':'+' '+ feature.naiss_tot_21_NAISS_TOT_21 + 
+			+':'+' '+ feature.properties.NAME + '<br>' +
+			'<b>Nombre de naissances</b>'+' '
+			+':'+' '+ feature.properties.Naissance_vivante + '<br>' +
+			'<b>Nombre total habitants </b>'+' '
+			+':'+' '+ feature.properties.Effectif_janvier + 
 			'</p>')});
 
-		layer.bindPopup('<strong>' + 'Numéro de zone:' +feature.properties.name);
+		layer.bindPopup('<strong>' + 'Taux de natalité:' +feature.properties.t_natalite+'%');
 }});
 
+// interactivité au niveau de la carte 
 
-// Ajout des surfaces agricoles si checkbox cochées
+function highlightFeature(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 5,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+
+    layer.bringToFront();
+}
+
+function resetHighlight(e) {
+    naissance.resetStyle(e.target);
+}
+
+function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+}
+
+
+// Ajout thématique démographique (naissances) checkbox cochées
 document.querySelector("input[name=naissance]").addEventListener('change', function() {
-	if(this.checked) map.addLayer(naiss)
-	  else map.removeLayer(naiss)
+	if(this.checked) map.addLayer(naissance)
+	  else map.removeLayer(naissance)
 	});
 
 
 
+///////////////////////////////////////////////////////////// Affichage indicateur taux de mortalité ///////////////////////////////////////////////
+
+// fonction pour l'affichage des indicateurs en couleur
+
+function getColor(d) {
+    return d > 1.2 ? '#800026' :
+           d > 1  ? '#BD0026' :
+           d > 0.8  ? '#E31A1C' :
+           d > 0.6 ?  '#FC4E2A' :
+                      '#FFEDA0';
+}
+
+function style(feature) {
+	return {
+		fillColor: getColor(feature.properties.t_deces),
+		weight: 2,
+		opacity: 1,
+		color: 'white',
+		dashArray: '3',
+		fillOpacity: 0.7
+	};
+}
+
+// ajout info relatives à l'indicateur taux mortalité
+
+deces = L.geoJSON(deces, { 
+	style: style,
+
+	onEachFeature: function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+		
+		layer.on('click', function(){
+			document.getElementById("box_droite").style.height = "400px";
+			$("#znes_agric1").html('<h4>Déces</h4>'+
+			'<img width="150" alt="bla" height="150" src="image/paturages.jpg"> <br>');
+
+			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
+			+':'+' '+ feature.properties.NAME + '<br>' +
+			'<b>Nombre de déces</b>'+' '
+			+':'+' '+ feature.properties.Deces + '<br>' +
+			'<b>Nombre total habitants </b>'+' '
+			+':'+' '+ feature.properties.Effectif_janvier + 
+			'</p>')
+		
+			document.getElementById("box_droite_bas").style.height = "255px";
+			var svg = d3 
+				.select("#box_droite_bas") 
+				.append("svg") 
+				.attr("width", 600) 
+				.attr("height", 500); 
+
+				var svg = d3.select("svg"),  
+				width = svg.attr("width") 
+				height = svg.attr("height")
+
+				var xScale = d3.scaleBand().range([0, width]).padding(0.5); 
+				var yScale = d3.scaleLinear().range([height, 0]); 
+
+				var g = svg.append("g").attr("transform", "translate(" + 100 + "," + 100 + ")"); 
+
+				d3.csv("../naiss_mort.csv").then(function (data) { 
+					xScale.domain( 
+					data.map(function (d) { 
+					return d.NOM; 
+					}) 
+					); 
+					yScale.domain([ 
+					0, 
+					d3.max(data, function (d) { 
+					return d.t_deces; 
+					}), 
+					]); 
+					}); 
+
+					g.append("g") 
+					.attr("transform", "translate(0," + height + ")") 
+					.call(d3.axisBottom(xScale)) ;
+
+					g.append("g") 
+					.call(d3.axisLeft(yScale)) ;
+
+		});
+
+		layer.bindPopup('<strong>' + 'Taux de mortalité:' +feature.properties.t_deces	+'%');
+}});
+
+// interactivité au niveau de la carte 
+
+function highlightFeature(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 5,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+
+    layer.bringToFront();
+}
+
+function resetHighlight(e) {
+    naissance.resetStyle(e.target);
+}
+
+function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+}
+
+
+// Ajout thématique démographique (naissances) checkbox cochées
+document.querySelector("input[name=deces]").addEventListener('change', function() {
+	if(this.checked) map.addLayer(deces)
+	  else map.removeLayer(deces)
+	});
 
 
 
@@ -956,3 +1105,7 @@ $( "button#Mesure_surface_Act" ).click(function() {
 		document.getElementById("OpenDroits").style.color = '#818181' ;
 
 	  }
+
+	  map.eachLayer(function (layer) {
+		map.removeLayer(layer);
+	});

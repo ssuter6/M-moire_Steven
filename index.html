@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <title>Projet de master</title>
 
+
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="style.css">
@@ -14,6 +16,12 @@
         integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
         crossorigin=""></script>
 
+            <!-- search box -->
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+            <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.1.0/dist/geosearch.css"/>
+            <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+            <script src="https://unpkg.com/leaflet-geosearch@3.1.0/dist/bundle.min.js"></script>
+            
            <!-- leaflet cluster marker -->      
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.0/MarkerCluster.Default.min.css" />
@@ -28,6 +36,8 @@
 
     <!--Librairies de fond carte leaflet-->
     <script src="leaflet_provider.js"></script>
+    <script src="../M-moire_Steven/librairie/leaflet-measure.css"></script>
+    <script src="../M-moire_Steven/librairie/leaflet-measure.js"></script>
 
     <!--Librairies pour ajouter des outils à la carte leaflet (outils de mesures)-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.css" />
@@ -45,6 +55,9 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="../M-moire_Steven/librairie/leaflet.browser.print.min.js"></script>
+
     <script src="https://d3js.org/d3.v7.min.js"></script> 
 
 </head>
@@ -145,15 +158,11 @@
                                 <div id="Ind_graph">
                                 <p id="indicateur_geo"><b>Indicateur graphique:</b></p>
                                     <label>
-                                        <input type="radio" name="radio">
+                                        <input type="checkbox" name="radio">
                                         <span class="checkmark"></span>
-                                        <div class="label">NDVI</div>
-                                    </label>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
-                                    <label>
-                                        <input type="radio"  name="radio">
-                                        <span class="checkmark"></span>
-                                        <div class="label">NDWI</div>
+                                        <div class="label">NDVI (aôut 2021)</div>
                                     </label>
+                                  
                                 </div>
 
                             </div>
@@ -194,12 +203,12 @@
                                         </label>
                                     </li>
                                         <li><label>
-                                            <input type="radio" id="naissance" name="naissance" value="naissance"> Espérance de vie 
+                                            <input type="radio" id="demo1" name="demo1" value="demo1"> Espérance de vie 
                                             <span class="checkmark"></span>
                                         </label>
                                     </li>
                                         <li><label>
-                                            <input type="radio" id="naissance" name="naissance" value="naissance"> Taux de nuptialité
+                                            <input type="radio" id="demo2" name="demo2" value="demo2"> Taux de nuptialité
                                             <span class="checkmark"></span> 
                                         </label>
                                     </li>
@@ -209,10 +218,139 @@
                                 </div>
                             </div>
 
-                            <div id="Opt_Economie"></div>
-                            <div id="Opt_Environnement"></div>
-                            <div id="Opt_Territoire"></div>
-                            <div id="Opt_Tourisme"></div>
+                            <div id="Opt_Economie">
+                                <div id="Ent_geo">
+                                    <p id="Entite_geo"><b>Selectionner un indicateur démographique</b></p>
+                                    <ul id="radiobox_demography">
+                                        <li><label>
+                                            <input type="radio" id="naissance" name="naissance" value="naissance"> Taux de natalité 
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                        <li><label>
+                                            <input type="radio" id="deces" name="deces" value="deces"> Taux de mortalité
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                        <li><label>
+                                            <input type="radio" id="demo1" name="demo1" value="demo1"> Espérance de vie 
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                        <li><label>
+                                            <input type="radio" id="demo2" name="demo2" value="demo2"> Taux de nuptialité
+                                            <span class="checkmark"></span> 
+                                        </label>
+                                    </li>
+                                        
+
+                                   </ul>
+                                </div>
+                            </div>
+
+
+                            <div id="Opt_Environnement">
+                                <div id="Ent_geo">
+                                    <p id="Entite_geo"><b>Indicateur environnemental (NDVI)</b></p>
+                                    <ul id="radiobox_envi">
+                                        <li><label>
+                                            <input type="radio" id="NDVI1" name="NDVI1" value="NDVI1"> NDVI (Jan. 2021) 
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                        <li><label>
+                                            <input type="radio" id="NDVI2" name="NDVI2" value="NDVI2"> NDVI (Mars. 2021)
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                        <li><label>
+                                            <input type="radio" id="NDVI3" name="NDVI3" value="NDVI3"> NDVI (Mai 2021)
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                        <li><label>
+                                            <input type="radio" id="NDVI4" name="NDVI4" value="NDVI4"> NDVI (Jui. 2021)
+                                            <span class="checkmark"></span> 
+                                        </label>
+                                    </li>
+                                        <li><label>
+                                            <input type="radio" id="NDVI5" name="NDVI5" value="NDVI5"> NDVI (Sep. 2021)
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                        <li><label>
+                                            <input type="radio" id="NDVI6" name="NDVI6" value="NDVI6"> NDVI (Oct. 2021) 
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                        <li><label>
+                                            <input type="radio" id="NDVI7" name="NDVI7" value="NDVI7"> NDVI (Déc. 2021)
+                                            <span class="checkmark"></span> 
+                                        </label>
+                                    </li>
+                                        
+
+                                   </ul>
+                                </div>
+                            </div>
+
+
+                            <div id="Opt_Territoire">
+                                <div id="Ent_geo">
+                                    <p id="Entite_geo"><b>Selectionner une entité géographique:</b></p>
+    
+                                        <label for ="zone_agricole">                                
+                                            <input type="checkbox" id="zone_agricole" name="zn_1" value="zn_1">
+                                            <div class="label">Surfaces Agricoles</div>
+                                        </label>
+    
+                                            &ensp;&ensp;&ensp;
+    
+                                        <label for ="zone_viticole">                                
+                                            <input type="checkbox" id="zone_viticole" name="zn_2" value="zn_2">
+                                            <div class="label">Vignobles</div>
+                                        </label>
+                                        
+                                        &ensp;&ensp;&ensp;
+    
+                                        <label for ="zone_paturage">                                
+                                            <input type="checkbox" id="zone_paturage" name="zn_3" value="zn_3">
+                                            <div class="label">Pâturages</div>
+                                        </label>
+                                    </div>
+                                      
+                                    <div id="Ind_graph">
+                                    <p id="indicateur_geo"><b>Indicateur graphique:</b></p>
+                                        <label>
+                                            <input type="checkbox" name="radio">
+                                            <span class="checkmark"></span>
+                                            <div class="label">NDVI</div>
+                                        </label>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                                        <label>
+                                            <input type="radio"  name="radio">
+                                            <span class="checkmark"></span>
+                                            <div class="label">NDWI</div>
+                                        </label>
+                                    </div>
+                            </div>
+
+
+                            <div id="Opt_Tourisme">
+                                <div id="Ent_geo">
+                                    <p id="Entite_geo"><b>Selectionner une activité touristique</b></p>
+                                        <ul id="checkbox_culture">
+                                            <li><input type="checkbox" id="bars" name="bars" value="bars"> bars </li>
+                                            <li><input type="checkbox" id="biblio" name="biblio" value="biblio"> Bibliothèques</li>
+                                            <li><input type="checkbox" id="cafe" name="cafe" value="cafe"> Cafés</li>
+                                            <li><input type="checkbox" id="cine" name="cine" value="cine"> Cinéma</li>
+                                            <li><input type="checkbox" id="muse" name="muse" value="muse"> Musées</li>
+                                            <li><input type="checkbox" id="resto" name="resto" value="resto"> Restaurants</li>
+                                            <li><input type="checkbox" id="gr_salles" name="gr_salles" value="gr_salles"> Salles de spectacles</li>
+                                            <li><input type="checkbox" id="theatre" name="theatre" value="theatre"> Théatres</li>
+                                       </ul>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -228,7 +366,7 @@
                                 <li>
                                     <div id="marqueurs" class="marqueurs">
                                         <p>
-                                            <img src="../M-moire_Steven/image/marker.jpg" width="30px", height="40px">&nbsp;&nbsp;
+                                            <img src="../M-moire_Steven/imadecesge/marker.jpg" width="30px", height="40px">&nbsp;&nbsp;
                                                 Ajouter un marqueur  
                                                 <button id="Marqueur_Act" onclick="Marqueur_Act()"> On</button>
                                                 <button id="Marqueur_Inact" onclick="Marqueur_Inact()"> Off</button>
@@ -267,27 +405,23 @@
                                     </div>
                                 </li>
                                 
-                                <li>Mesurer des surface</li>
-                                <li>Mesurer des distances</li>
-                                <li>Mesurer des surfaces</li>
-                                
                               </ul>
                     </div>
                 </div>
-
-                <div id="boutonImp" class="Imp">
-                    <button id="OpenImp" class="OpenImp" onclick="openImp()"> Imprimer </button>
-                    <div id="OuvrirImp" class="OuvrirImp">
-                        <a href="javascript:void(0)" class="closeImp" onclick="closeImp()">&times;</a>
-
-                    </div>
-                </div>
+                
 
                 <div id="boutonDroits" class="Droits">
-                    <button id="OpenDroits" class="OpenDroits" onclick="openDroits()"> Droits/auteurs </button>
-                    <div id="OuvrirDroits" class="OuvrirDroits">
-                        <a href="javascript:void(0)" class="closeDroits" onclick="closeDroits()">&times;</a>
+                    <button id="OpenDroits" class="OpenDroits" onclick="openDroits()"> Info </button>
+                    <a href="javascript:void(0)" class="closeDroits" onclick="closeDroits()">&times;</a>
 
+                    <div id="OuvrirDroits" class="OuvrirDroits">
+                        <div id="Droits1" class="Droits1">
+                            <h5> Le district d'Aigle</h5> 
+                                <img src="../M-moire_Steven/image/District_Aigle_canton_vaud.png" class="center" width="225px", height="125px">
+                                <p id="descr">Considéré comme le grand district des Aples Vaudoise, le district d'Aigle ce compose de 15 communes et se situe à l'extrémité Est du canton de Vaud en Suisse Occidentale.
+                             Le district compte un total de  45'589 habitants qui sont répartis sur les 434 km carré  de territoire qui définissent cette région.
+                            </p>
+                        </div>
                     </div>
                 </div>
 
@@ -302,6 +436,16 @@
                         </div>
                         <div id="znes_agric2">
                         </div>
+                </div>
+
+                <div id="box_ndvi">
+                    <div id="ndviii">
+                        <a href="javascript:void(0)" class="close_box_droite1" onclick="close_box_droite1()">&times;</a>
+                        <p id="info_select1" style="text-align:center; font-size:large;"> <b>Information liée à l'indicateur NDVI</b></p>
+                            <div id="znes_ndvi">
+                            </div>
+                    </div>
+    
                 </div>
 
             </div>
@@ -327,21 +471,22 @@
             <div id="Visu_info2"></div> 
             
         </div>
-        <script src="../M-moire_Steven/GeoJson/cadastre_zone_agri.geojson"></script>
-        <script src="../M-moire_Steven/GeoJson/district_Aigle.geojson"></script>
-        <script src="../M-moire_Steven/GeoJson/hors_DA.geojson"></script>
-        <script src="../M-moire_Steven/GeoJson/zone_viticole.geojson"></script>
-        <script src="../M-moire_Steven/GeoJson/paturages.geojson"></script>
-        <script src="../M-moire_Steven/GeoJson/bars.geojson"></script>
-        <script src="../M-moire_Steven/GeoJson/biblio.geojson"></script>
-        <script src="../M-moire_Steven/GeoJson/cine.geojson"></script>
-        <script src="../M-moire_Steven/GeoJson/cafe.geojson"></script>
-        <script src="../M-moire_Steven/GeoJson/muse.geojson"></script>
-        <script src="../M-moire_Steven/GeoJson/resto_geojson.geojson"></script>
-        <script src="../M-moire_Steven/GeoJson/gr_salles.geojson"></script>
-        <script src="../M-moire_Steven/GeoJson/theatre.geojson"></script>
-        <script src="../M-moire_Steven/GeoJson/naissance_mortalité.geojson"></script>
-        <script src="../M-moire_Steven/GeoJson/deces.geojson"></script>
+        <script src="../M-moire_Steven/GeoJson/cadastre_zone_agri.geojson"type="text/javascript"></script>
+        <script src="../M-moire_Steven/GeoJson/district_Aigle.geojson"type="text/javascript"></script>
+        <script src="../M-moire_Steven/GeoJson/hors_DA.geojson"type="text/javascript"></script>
+        <script src="../M-moire_Steven/GeoJson/zone_viticole.geojson"type="text/javascript"></script>
+        <script src="../M-moire_Steven/GeoJson/paturages.geojson"type="text/javascript"></script>
+        <script src="../M-moire_Steven/GeoJson/bars.geojson"type="text/javascript"></script>
+        <script src="../M-moire_Steven/GeoJson/biblio.geojson"type="text/javascript"></script>
+        <script src="../M-moire_Steven/GeoJson/cine.geojson"type="text/javascript"></script>
+        <script src="../M-moire_Steven/GeoJson/cafe.geojson"type="text/javascript"></script>
+        <script src="../M-moire_Steven/GeoJson/muse.geojson"type="text/javascript"></script>
+        <script src="../M-moire_Steven/GeoJson/resto_geojson.geojson"type="text/javascript"></script>
+        <script src="../M-moire_Steven/GeoJson/gr_salles.geojson"type="text/javascript"></script>
+        <script src="../M-moire_Steven/GeoJson/theatre.geojson"type="text/javascript"></script>
+        <script src="../M-moire_Steven/GeoJson/naissance_mortalité.geojson"type="text/javascript"></script>
+        <script src="../M-moire_Steven/GeoJson/deces.geojson"type="text/javascript"></script>
+        <script src="../M-moire_Steven/GeoJson/demo1.geojson"type="text/javascript"></script>
 
 
 

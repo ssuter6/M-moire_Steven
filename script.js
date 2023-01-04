@@ -96,7 +96,7 @@ var southWest = L.latLng(46.5, 6.6),
 								layer.bindPopup('<strong>' + "District d'" +feature.properties.NAME)})}						
 						}).addTo(map);
 
-
+						var browserControl = L.control.browserPrint({position: 'bottomleft'}).addTo(map);
 
 	//Add baseLayers to map as control layers
 		c = L.control.layers(baseLayers);
@@ -113,6 +113,31 @@ var southWest = L.latLng(46.5, 6.6),
 		map.removeControl(map.zoomControl);
 
 
+// ajout de la search box 
+
+
+// interactivité au niveau de la carte 
+
+function highlightFeature(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 5,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+
+    layer.bringToFront();
+}
+
+function resetHighlight(e) {
+    naissance.resetStyle(e.target);
+}
+
+function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+}
 
 
 
@@ -140,7 +165,7 @@ var southWest = L.latLng(46.5, 6.6),
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	  function openFdc() {
-		document.getElementById("OuvrirFdc").style.height = "260px";
+		document.getElementById("OuvrirFdc").style.height = "305px";
 		document.getElementById("fdc").style.height = "300px";
 		document.getElementById("fdc").style.backgroundColor = '#f1f1f1' ; 
 		document.getElementById("OuvrirFdc").style.backgroundColor = '#f1f1f1' ; 
@@ -390,6 +415,9 @@ var southWest = L.latLng(46.5, 6.6),
 						  'fillColor': 'yellow'
 						});
 					  });
+
+					  layer.on({click:zoomToFeature});
+
 					layer.on('click', function(){
 						document.getElementById("box_droite").style.height = "400px";
 						$("#znes_agric1").html('<h4>Surfaces agricoles</h4>'+
@@ -442,6 +470,9 @@ zne_vitic = L.geoJSON(zne_viti, {
 			  'fillColor': 'orange'
 			});
 		  });
+
+		  layer.on({click:zoomToFeature});
+
 		layer.on('click', function(){
 			document.getElementById("box_droite").style.height = "400px";
 			$("#znes_agric1").html('<h4>Surfaces viticoles </h4>'+
@@ -489,6 +520,8 @@ zne_patur = L.geoJSON(zne_patur, {
 			  'fillColor': 'blue'
 			});
 		  });
+
+		layer.on({click:zoomToFeature});
 		layer.on('click', function(){
 			document.getElementById("box_droite").style.height = "400px";
 			$("#znes_agric1").html('<h4>Surfaces liées aux pâturages </h4>'+
@@ -511,14 +544,98 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 	});
 
 
+	document.querySelector("input[name=radio]").addEventListener('change', function() {
+		if(this.checked){
+			map.eachLayer(function (layer) {
+				map.removeLayer(layer);
+				});
 
-//fonction qui permet d'ourir le fond de carte google satellite
+			document.getElementById("box_droite").style.height = "400px";
+			$("#znes_agric1").html('<h4>Information relative au calcul du NDVI </h4>'+
+			'<img width="150" alt="bla" height="150" src="image/ndvi_ana.jpg"> <br>');
+	
+			//création de la nouvelle couche
+			map.addLayer(Img_sat);
+			map.addLayer(ndvi);
+	
+			}
+			else(map.removeLayer(ndvi));
+});
+	
 
-document.querySelector("input[name=radio]").addEventListener('change', function() {
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////// Selection des données dont la thématique correspond à l'environnement'/////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+document.querySelector("input[name=NDVI1]").addEventListener('change', function() {
+	if(this.checked){
+		map.eachLayer(function (layer) {
+			map.removeLayer(layer);
+			});
+
+		document.getElementById("box_ndvi").style.height = "400px";
+		$("#znes_ndvi").html('<h4>Information relative au calcul du NDVI </h4>'+
+		'<img width="150" alt="bla" height="150" src="image/ndvi_ana.jpg"> <br>');
+
+		NDVI2.checked = false;
+		NDVI3.checked = false;
+		NDVI4.checked = false;
+		NDVI5.checked = false;
+		NDVI6.checked = false;
+		NDVI7.checked = false;
+	//création de la nouvelle couche
+	map.addLayer(esri);
+	map.addLayer(ndvi);
+
+}});
+
+document.querySelector("input[name=NDVI2]").addEventListener('change', function() {
 	if(this.checked){
 		map.eachLayer(function (layer) {
 			map.removeLayer(layer);
 		});
+		NDVI1.checked = false;
+		NDVI3.checked = false;
+		NDVI4.checked = false;
+		NDVI5.checked = false;
+		NDVI6.checked = false;
+		NDVI7.checked = false;
+
+	//création de la nouvelle couche
+	map.addLayer(esri);
+	map.addLayer(ndvi);
+}});
+
+document.querySelector("input[name=NDVI3]").addEventListener('change', function() {
+	if(this.checked){
+		map.eachLayer(function (layer) {
+			map.removeLayer(layer);
+		});
+		NDVI1.checked = false;
+		NDVI2.checked = false;
+		NDVI4.checked = false;
+		NDVI5.checked = false;
+		NDVI6.checked = false;
+		NDVI7.checked = false;
+
+	//création de la nouvelle couche
+	map.addLayer(esri);
+	map.addLayer(ndvi);
+}});
+
+document.querySelector("input[name=NDVI4]").addEventListener('change', function() {
+	if(this.checked){
+		map.eachLayer(function (layer) {
+			map.removeLayer(layer);
+		});
+		NDVI1.checked = false;
+		NDVI3.checked = false;
+		NDVI2.checked = false;
+		NDVI5.checked = false;
+		NDVI6.checked = false;
+		NDVI7.checked = false;
 
 	//création de la nouvelle couche
 	map.addLayer(esri);
@@ -526,6 +643,57 @@ document.querySelector("input[name=radio]").addEventListener('change', function(
 }});
 
 
+document.querySelector("input[name=NDVI5]").addEventListener('change', function() {
+	if(this.checked){
+		map.eachLayer(function (layer) {
+			map.removeLayer(layer);
+		});
+		NDVI1.checked = false;
+		NDVI3.checked = false;
+		NDVI4.checked = false;
+		NDVI2.checked = false;
+		NDVI6.checked = false;
+		NDVI7.checked = false;
+
+	//création de la nouvelle couche
+	map.addLayer(esri);
+	map.addLayer(ndvi);
+}});
+
+
+document.querySelector("input[name=NDVI6]").addEventListener('change', function() {
+	if(this.checked){
+		map.eachLayer(function (layer) {
+			map.removeLayer(layer);
+		});
+		NDVI1.checked = false;
+		NDVI3.checked = false;
+		NDVI4.checked = false;
+		NDVI5.checked = false;
+		NDVI2.checked = false;
+		NDVI7.checked = false;
+
+	//création de la nouvelle couche
+	map.addLayer(esri);
+	map.addLayer(ndvi);
+}});
+
+document.querySelector("input[name=NDVI7]").addEventListener('change', function() {
+	if(this.checked){
+		map.eachLayer(function (layer) {
+			map.removeLayer(layer);
+		});
+		NDVI1.checked = false;
+		NDVI3.checked = false;
+		NDVI4.checked = false;
+		NDVI5.checked = false;
+		NDVI6.checked = false;
+		NDVI2.checked = false;
+
+	//création de la nouvelle couche
+	map.addLayer(esri);
+	map.addLayer(ndvi);
+}});
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////// Selection des données dont la thématique correspond à la culture/////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -724,13 +892,32 @@ document.querySelector("input[name=theatre]").addEventListener('change', functio
 
 
 
-		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		// Selection des données dont la thématique correspond à la démographie/////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////// Selection des données dont la thématique correspond à la démographie/////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/////////////////////////////////// Affichage indicateur taux de natalité ////////////////
 
+// mise en évidence des polygone quand la souris passe par dessus
 
-///////////////////////////////////////////////////////////// Affichage indicateur taux de natalité ///////////////////////////////////////////////
+function highlightFeature(e) {
+    var layer = e.target;
+    layer.setStyle({
+        weight: 5,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+    layer.bringToFront();
+}
+
+function resetHighlight(e) {
+    naissance.resetStyle(e.target);
+}
+function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+}
+
 
 // fonction pour l'affichage des indicateurs en couleur
 
@@ -753,7 +940,8 @@ style_naiss = function style(feature) {
 	};
 }
 
-// ajout info relatives à l'indicateur taux natalité
+
+// ajout d'info relatives à l'indicateur taux natalité
 
 naissance = L.geoJSON(naissance, { 
 	style: style_naiss,
@@ -766,9 +954,9 @@ naissance = L.geoJSON(naissance, {
 		});
 		
 		layer.on('click', function(){
-			document.getElementById("box_droite").style.height = "400px";
-			$("#znes_agric1").html('<h4>Naissances</h4>'+
-			'<img width="150" alt="bla" height="150" src="image/paturages.jpg"> <br>');
+				document.getElementById("box_droite").style.height = "400px";
+			$("#znes_agric1").html('<h4>Naissances</h4>'+ '<br>' +
+			'<img width="100" alt="bla" height="100" src="image/baby.png"> ');
 
 			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
 			+':'+' '+ feature.properties.NAME + '<br>' +
@@ -781,39 +969,25 @@ naissance = L.geoJSON(naissance, {
 		layer.bindPopup('<strong>' + 'Taux de natalité:' +feature.properties.t_natalite+'%');
 }});
 
-// interactivité au niveau de la carte 
 
-function highlightFeature(e) {
-    var layer = e.target;
-
-    layer.setStyle({
-        weight: 5,
-        color: '#666',
-        dashArray: '',
-        fillOpacity: 0.7
-    });
-
-    layer.bringToFront();
-}
-
-function resetHighlight(e) {
-    naissance.resetStyle(e.target);
-}
-
-function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
-}
-
-
-// Ajout thématique démographique (naissances) checkbox cochées
 document.querySelector("input[name=naissance]").addEventListener('change', function() {
-	if(this.checked) map.addLayer(naissance)
-	  else map.removeLayer(naissance)
-	});
+	if(this.checked){
+		map.eachLayer(function (layer) {
+			map.removeLayer(deces);
+			map.removeLayer(demo);
+			map.removeLayer(demo2);
+			map.addLayer(esri);
+			map.addLayer(DA);
+			map.addLayer(naissance)
+			});
+		deces.checked = false;
+		demo1.checked = false;
+		demo2.checked = false;
+	}});
 
 
 
-///////////////////////////////////////////////////////////// Affichage indicateur taux de mortalité ///////////////////////////////////////////////
+/////////////////////////////////Affichage indicateur taux de mortalité ///////////////////////////////////////////////
 
 // fonction pour l'affichage des indicateurs en couleur
 
@@ -825,7 +999,7 @@ function getColor(d) {
                       '#FFEDA0';
 }
 
-function style(feature) {
+style_deces = function style(feature) {
 	return {
 		fillColor: getColor(feature.properties.t_deces),
 		weight: 2,
@@ -839,7 +1013,7 @@ function style(feature) {
 // ajout info relatives à l'indicateur taux mortalité
 
 deces = L.geoJSON(deces, { 
-	style: style,
+	style: style_deces,
 
 	onEachFeature: function onEachFeature(feature, layer) {
 		layer.on({
@@ -859,8 +1033,9 @@ deces = L.geoJSON(deces, {
 			+':'+' '+ feature.properties.Deces + '<br>' +
 			'<b>Nombre total habitants </b>'+' '
 			+':'+' '+ feature.properties.Effectif_janvier + 
-			'</p>')
+			'</p>')});
 		
+			/*
 			document.getElementById("box_droite_bas").style.height = "255px";
 			var svg = d3 
 				.select("#box_droite_bas") 
@@ -898,46 +1073,100 @@ deces = L.geoJSON(deces, {
 					g.append("g") 
 					.call(d3.axisLeft(yScale)) ;
 
-		});
+		});*/
 
 		layer.bindPopup('<strong>' + 'Taux de mortalité:' +feature.properties.t_deces	+'%');
-}});
-
-// interactivité au niveau de la carte 
-
-function highlightFeature(e) {
-    var layer = e.target;
-
-    layer.setStyle({
-        weight: 5,
-        color: '#666',
-        dashArray: '',
-        fillOpacity: 0.7
-    });
-
-    layer.bringToFront();
-}
-
-function resetHighlight(e) {
-    naissance.resetStyle(e.target);
-}
-
-function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
-}
+	}});
 
 
-// Ajout thématique démographique (naissances) checkbox cochées
+// Ajout thématique démographique (deces) checkbox cochées
 document.querySelector("input[name=deces]").addEventListener('change', function() {
-	if(this.checked) map.addLayer(deces)
-	  else map.removeLayer(deces)
-	});
+	if(this.checked){
+		map.eachLayer(function (layer) {
+			map.removeLayer(naissance);
+			map.removeLayer(demo);
+			map.removeLayer(demo2);
+			map.addLayer(esri);
+			map.addLayer(DA);
+			map.addLayer(deces)
+			});
+			naissance.checked = false;
+			demo1.checked = false;
+			demo2.checked = false;
+		}});
 
 
 
 
+//////////////////////////////// Affichage indicateur taux de natalité ////////////////
+// ajout d'info relatives à l'indicateur taux natalité
+/////////////////////////////////Affichage indicateur taux de mortalité ///////////////////////////////////////////////
+
+// fonction pour l'affichage des indicateurs en couleur
+
+function getColor(d) {
+    return d > 1.2 ? '#800026' :
+           d > 1  ? '#BD0026' :
+           d > 0.8  ? '#E31A1C' :
+           d > 0.6 ?  '#FC4E2A' :
+                      '#FFEDA0';
+}
+
+style_dem01 = function style(feature) {
+	return {
+		fillColor: getColor(feature.properties.t_deces),
+		weight: 2,
+		opacity: 1,
+		color: 'white',
+		dashArray: '3',
+		fillOpacity: 0.7
+	};
+}
+
+// ajout info relatives à l'indicateur taux mortalité
+
+demo = L.geoJSON(demo, { 
+	style: style_dem01,
+
+	onEachFeature: function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+		
+		layer.on('click', function(){
+			document.getElementById("box_droite").style.height = "400px";
+			$("#znes_agric1").html('<h4>Déces</h4>'+
+			'<img width="150" alt="bla" height="150" src="image/paturages.jpg"> <br>');
+
+			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
+			+':'+' '+ feature.properties.NAME + '<br>' +
+			'<b>Nombre de déces</b>'+' '
+			+':'+' '+ feature.properties.Deces + '<br>' +
+			'<b>Nombre total habitants </b>'+' '
+			+':'+' '+ feature.properties.Effectif_janvier + 
+			'</p>')});
+		
+		
+		layer.bindPopup('<strong>' + 'Taux de mortalité:' +feature.properties.t_deces	+'%');
+	}});
 
 
+// Ajout thématique démographique (deces) checkbox cochées
+document.querySelector("input[name=demo1]").addEventListener('change', function() {
+	if(this.checked){
+		map.eachLayer(function (layer) {
+			map.removeLayer(naissance);
+			map.removeLayer(deces);
+			map.removeLayer(demo2);
+			map.addLayer(esri);
+			map.addLayer(DA);
+			map.addLayer(demo)
+			})
+		naissance.checked = false;
+		deces.checked = false;
+		}});
 
 
 
@@ -969,6 +1198,7 @@ document.querySelector("input[name=deces]").addEventListener('change', function(
 ///////////////////////////////////////////////Outils de mesure////////////////////////////////////////////////////////////////////////
 
 
+
 var featureGroup = L.featureGroup().addTo(map);
 
         var drawControl = new L.Control.Draw({
@@ -976,8 +1206,14 @@ var featureGroup = L.featureGroup().addTo(map);
             featureGroup: featureGroup
         },
         draw: {
-            polygon: false,
-            polyline: false,
+            polygon: false, 
+            polyline: {
+				shapeOptions: {
+					color: 'red',
+				},
+				metric: false,
+				feet: true,
+			},
             rectangle: false,
             circle: false,
             marker: false
@@ -1079,11 +1315,14 @@ $( "button#Mesure_surface_Act" ).click(function() {
 
 
 	  	  // Fonction qui perment d'ouvrir et de fermer la section permettant d'imprimer la carte
+		  /*
 	  function openImp() {
-		document.getElementById("OuvrirImp").style.height = "260px";
-		document.getElementById("OuvrirImp").style.backgroundColor = 'green' ; 
-		document.getElementById("boutonImp").style.backgroundColor = 'green' ; 
-		document.getElementById("OpenImp").style.backgroundColor = 'green' ;
+		document.getElementById("OuvrirImp").style.height = "150px";
+		document.getElementById("OuvrirImp").style.backgroundColor = 'lightgrey' ; 
+		document.getElementById("boutonImp").style.backgroundColor = 'grey' ; 
+		document.getElementById("OuvrirImp").style.borderBottomLeftRadius = '5px'; 
+		document.getElementById("OuvrirImp").style.borderBottomrightRadius = '5px';
+		document.getElementById("OpenImp").style.backgroundColor = 'grey' ;
 		document.getElementById("OpenImp").style.color = 'white' ;
 	  }	
 
@@ -1095,20 +1334,29 @@ $( "button#Mesure_surface_Act" ).click(function() {
 
 	  }
 
+*/
+	
+
+
 	// Fonction qui perment d'ouvrir et de fermer la section liée au droits du projet
 	  function openDroits() {
-		document.getElementById("OuvrirDroits").style.height = "200px";
-		document.getElementById("OuvrirDroits").style.backgroundColor = 'green' ; 
-		document.getElementById("boutonDroits").style.backgroundColor = 'green' ; 
-		document.getElementById("OpenDroits").style.backgroundColor = 'green' ;
+		document.getElementById("OuvrirDroits").style.height = "300px";
+		document.getElementById("OuvrirDroits").style.backgroundColor = 'lightgrey' ; 
+		document.getElementById("boutonDroits").style.backgroundColor = 'grey' ; 
+		document.getElementById("OuvrirDroits").style.borderBottomLeftRadius = '5px'; 
+		document.getElementById("OuvrirDroits").style.borderBottomrightRadius = '5px';
+		document.getElementById("OpenDroits").style.backgroundColor = 'grey' ;
 		document.getElementById("OpenDroits").style.color = 'white' ;
+		document.getElementById("mySidebar").style.height = "75%";
+
 	  }	
 
 	  function closeDroits(){
 		document.getElementById("OuvrirDroits").style.height = "0px";
-		document.getElementById("boutonDroits").style.backgroundColor = 'black' ; 
-		document.getElementById("OpenDroits").style.backgroundColor = 'black' ;
+		document.getElementById("boutonDroits").style.backgroundColor = '#111' ; 
+		document.getElementById("OpenDroits").style.backgroundColor = '#111' ;
 		document.getElementById("OpenDroits").style.color = '#818181' ;
+		document.getElementById("mySidebar").style.height = "65%";
 
 	  }
 

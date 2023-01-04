@@ -26,42 +26,7 @@ h1 {
     z-index: 1;
 }
 
-/*
-#Info{
-    position: absolute;
-    left: 365px;
-    top: 600px;
-    height: 145px;
-    width: 850px;
-    border-style:solid ;
-    border-color: black;
-    background-color: rgb(255, 255, 255);
-}
 
-#Visu_info1{
-    position: absolute;
-    left: 1225px;
-    top: 140px;
-    height: 297.5px;
-    right: 5px;
-    border-style:solid ;
-    border-color: black;
-    background-color: rgb(255, 255, 255);
-
-}
-
-#Visu_info2{
-    position: absolute;
-    left: 1225px;
-    top: 447.5px;
-    height: 297.5px;
-    right: 5px;
-    border-style:solid ;
-    border-color: black;
-    background-color: rgb(255, 255, 255);
-
-}
-*/
 
 /* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
   /* ////////////////////////////////////////////////Section liée au Sidebar////////////////////////////////////////////*/
@@ -74,10 +39,11 @@ h1 {
   }
 
 .sidebar {
-    height: 80%;
-    margin-left: 5px;
+    height: 65%;
+    margin-left: 0px;
     margin-right: 5px;
-    border-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     width: 0;
     position: fixed;
     z-index: 100;
@@ -176,7 +142,7 @@ h1 {
   #fdc{
     height: 0px;
     z-index: 100;
-    margin: 0px;
+    margin-top: -10px;
     border-radius: 5px;
   }
 
@@ -239,7 +205,9 @@ h1 {
   color: #f1f1f1;
 }
 
-
+figure#img.img{
+  padding: 0;
+}
 
   /* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 /* ////////////////////////////////////////////////Section liée à l'onglet Données Thématiques////////////////////////////////////////////*/
@@ -331,7 +299,42 @@ h1 {
 
   }
 
+  #box_ndvi{
+    position: absolute;
+    height: 0px;
+    width: 385px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 50;
+    background-color: #f1f1f1;
+    margin-top: 50px;
+    margin-left: 1125px;
+    border-radius: 5px;
+
+  }
+
+  #NDVIII {
+    position: absolute;
+    height: 400px;
+    width: 350px;
+    z-index: 100;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: opx;
+    color: black;
+    background-color: #f1f1f1;
+    padding: 10px;
+    }
+
+
 a.close_box_droite{
+  margin-left: 325px;
+  color: black;
+}
+
+a.close_box_droite1{
   margin-left: 325px;
   color: black;
 }
@@ -370,6 +373,22 @@ color: black;
     padding: 10px;
     }
 
+    #ndviii {
+      position: absolute;
+      height: 400px;
+      width: 350px;
+      z-index: 100;
+      margin-top: 0px;
+      margin-bottom: 10px;
+      margin-left: 10px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: opx;
+      color: black;
+      background-color: #f1f1f1;
+      padding: 10px;
+      }
+
+
     #znes_agric1{
       position: relative;
       height: 200px;
@@ -394,12 +413,31 @@ color: black;
       font-size: small;
     }
 
+
+    #znes_ndvi{
+      position: relative;
+      height: 200px;
+      width: 345px;
+      z-index: 50;
+      color: black;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      background-color: lightgray;
+      text-align: center;
+    }
+
+
+    
   p#agricult{
     text-align: center; 
     margin: 0;
   }
 
   p#info_select{
+    margin-top: -10px;
+  }
+
+  p#info_select1{
     margin-top: -10px;
   }
 
@@ -448,7 +486,7 @@ color: black;
 }
 
 #indicateur_geo{
-  margin-top: 25px;
+  margin-top: 20px;
   margin-bottom: 5px;
 }
 
@@ -499,9 +537,12 @@ font-size: 12px;
     position: relative;
     height: 0px;
     overflow: hidden;
-    background-color: aqua;
+    background-color: #f1f1f1;
     margin: 5px;
     border-radius: 5px;
+    text-align: center;
+    font-size: medium;
+    font-family: sans-serif;
   }
 
 
@@ -510,22 +551,40 @@ font-size: 12px;
   #Opt_Environnement{
     position: relative;
     height: 0px;
-    overflow: hidden;
-    background-color: aqua;
+    overflow-y: auto;
+    background-color: #f1f1f1;
     margin: 5px;
-    border-radius: 5px;
+    margin-top: 0px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: medium;
+    font-family: sans-serif;
   }
   
+  ul#radiobox_envi{
+    display: block;
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 20px;
+    column-count: 2;
+    font-size: 12px;
+    
+    }
+
 
   /* ////////////////////////////////////////////////thématique liées au territoire////////////////////////////////////////////*/
 
   #Opt_Territoire{
     position: relative;
     height: 0px;
-    overflow: hidden;
-    background-color: aqua;
+    overflow-y: auto;
+    background-color: #f1f1f1;
     margin: 5px;
-    border-radius: 5px;
+    margin-top: 0px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: medium;
+    font-family: sans-serif;
   }
 
 
@@ -535,9 +594,12 @@ font-size: 12px;
     position: relative;
     height: 0px;
     overflow: hidden;
-    background-color: aqua;
+    background-color: #f1f1f1;
     margin: 5px;
     border-radius: 5px;
+    text-align: center;
+    font-size: medium;
+    font-family: sans-serif;
   }
 
 
@@ -646,35 +708,34 @@ button#delete  {
     border: none;
     position: relative;
     z-index: 50;
-    border-radius: 10px;
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
-    display: block;
     transition: 0.0s;
+    float: left;
   }
 
-  .OpenImp:hover {
+
+
+  a.closeImp{
+    color: black;
+    font-size: 25px;
+  }
+  a.closeImp:hover {
+    color: black;
+  }
+
+  .closeImp:hover {
     color: #f1f1f1
   }
 
   .OuvrirImp {
     position: relative;
     height: 0px;
+    font-size: 15px;
     overflow-x: hidden;
     background-color: #f1f1f1;
-  }
-
-  a.closeImp{
-    position:absolute;
-    top:-20px;
-    right: 25px;
-    font-size: 26px;
-    margin-left: 50px;
-    color: #f1f1f1;
-    text-align: center;
-  
   }
 
 
@@ -682,40 +743,63 @@ button#delete  {
 /* ////////////////////////////////////////////////Section liée à l'onglet Auteur/////////////////////////////////////////////////////*/
 
     
-  button.OpenDroits {
-    cursor: pointer;
-    background-color: #111;
-    border: none;
-    position: relative;
-    z-index: 50;
-    border-radius: 10px;
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.0s;
-  }
+button.OpenDroits {
+  cursor: pointer;
+  background-color: #111;
+  border: none;
+  position: relative;
+  z-index: 50;
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.0s;
+  float: left;
+}
 
-  .OpenDroits:hover {
-    color: #f1f1f1
-  }
+a.closeDroits{
+  color: black;
+  font-size: 25px;
+}
+a.closeroits:hover {
+  color: black;
+}
 
-  .OuvrirDroits {
-    position: relative;
-    height: 0px;
-    overflow-x: hidden;
-    background-color: #f1f1f1;
-  }
+.closeDroits:hover {
+  color: #f1f1f1
+}
 
-  a.closeDroits{
-    position:absolute;
-    top:-20px;
-    font-size: 26px;
-    margin-left: 50px;
-    color: #f1f1f1;
-    text-align: center;
-  
-  }
+.OuvrirDroits {
+  position: relative;
+  height: 0px;
+  font-size: 15px;
+  overflow-x: hidden;
+  background-color: #f1f1f1;
+}
 
+.Droits1{
+  position: relative;
+  background-color: #f1f1f1;
+  margin: 10px;
+  border-radius: 5px;
+}
 
+h5{
+  padding-top: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.center{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+}
+
+p#descr{
+  font-size: 11pt;
+  text-align: justify;
+  margin: 10px;
+}

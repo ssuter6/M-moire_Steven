@@ -49,10 +49,6 @@ var southWest = L.latLng(46.5, 6.6),
 		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 		maxBounds: bounds,
 		});
-
-	
-
-
 		
 
 
@@ -80,6 +76,8 @@ var southWest = L.latLng(46.5, 6.6),
 
 	var map = 	L.map('Map',{layers:esri,maxBounds:bounds,pmIgnore: false}).setView([46.32, 7.15], 11);
 	
+
+	////// Ajout de la délimitation du district d'aigle 
 	var DA =	L.geoJSON(district_Aigle, 
 					{style:style_dis_aigle,
 
@@ -113,11 +111,10 @@ var southWest = L.latLng(46.5, 6.6),
 		map.removeControl(map.zoomControl);
 
 
-// ajout de la search box 
 
 
-// interactivité au niveau de la carte 
-
+//////////////////// fonction qui permettent d'ajouter de l'interactivité au niveau de la carte 
+/// permet de mettre en surbrillance certains élément lorsque le curseur passe au dessus
 function highlightFeature(e) {
     var layer = e.target;
 
@@ -135,6 +132,7 @@ function resetHighlight(e) {
     naissance.resetStyle(e.target);
 }
 
+/// permet de zoomer sur une entité lorsqu'on clique dessus
 function zoomToFeature(e) {
     map.fitBounds(e.target.getBounds());
 }
@@ -176,7 +174,7 @@ function zoomToFeature(e) {
 		document.getElementById("OpenFdc").style.color = 'white' ;
 	  };
 
-	//fonction qui permet d'ourir le fond de carte google satellite
+//fonction qui permet d'ourir le fond de carte google satellite
 		function OuvrirImg_sat() {
 
 			map.eachLayer(function (layer) {
@@ -189,7 +187,7 @@ function zoomToFeature(e) {
 			map.addLayer(Img_sat);
 		};
 			
-	//fonction qui permet d'ourir le fond de carte OSM
+//fonction qui permet d'ourir le fond de carte OSM
 		function OuvrirImg_OSM(){
 
 			map.eachLayer(function (layer) {
@@ -203,7 +201,7 @@ function zoomToFeature(e) {
 	
 		};
 
-	//fonction qui permet d'ourir le fond de carte Esri terrain
+//fonction qui permet d'ourir le fond de carte Esri terrain
 		function OuvrirImg_E(){
 
 			map.eachLayer(function (layer) {
@@ -216,7 +214,7 @@ function zoomToFeature(e) {
 			map.addLayer(esri);
 		};
 
-	//fonction qui permet d'ourir le fond de carte OSM CH
+//fonction qui permet d'ourir le fond de carte OSM CH
 		function OuvrirImg_OsmCH(){
 
 			map.eachLayer(function (layer) {
@@ -229,7 +227,7 @@ function zoomToFeature(e) {
 			
 		};
 
-	//Fonction qui permet de fermet l'onglet de selection lié au fond de carte
+//Fonction qui permet de fermet l'onglet de selection lié au fond de carte
 	function closeFdc(){
 		document.getElementById("OuvrirFdc").style.height = "0px";
 		document.getElementById("fdc").style.height = "0px";
@@ -378,9 +376,9 @@ function zoomToFeature(e) {
 
 
 
-		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		// Selection des données dont la thématique correspond à l'agriculture/////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Selection des données dont la thématique correspond à l'agriculture/////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		function close_box_droite(){
 			document.getElementById("box_droite").style.height = "0px";
@@ -399,7 +397,7 @@ function zoomToFeature(e) {
 				"fillColor": 'yellow',
 			   };
 
-			// paramètres liés à l'interactivité des zones agri
+// paramètres liés à l'interactivité des zones agri
 			zne_agri = L.geoJSON(zones_agricoles, { 
 				style:style_zne_agri,
 
@@ -437,7 +435,7 @@ function zoomToFeature(e) {
 					layer.bindPopup('<strong>' + 'Numéro de zone:' +feature.properties.NO_ZONE);
 			}});
 
-			// Ajout des surfaces agricoles si checkbox cochées
+// Ajout des surfaces agricoles si checkbox cochées
 			document.querySelector("input[name=zn_1]").addEventListener('change', function() {
 				if(this.checked) map.addLayer(zne_agri)
 				  else map.removeLayer(zne_agri)
@@ -454,7 +452,7 @@ var style_zne_vitic = {
 	"fillColor": 'orange',
    };
 
-// paramètres liés à l'interactivité des zones agri
+// paramètres liés à l'interactivité des zones viticoles
 zne_vitic = L.geoJSON(zne_viti, { 
 	style:style_zne_vitic,
 
@@ -488,7 +486,7 @@ zne_vitic = L.geoJSON(zne_viti, {
 		layer.bindPopup('<strong>' + 'Numéro de zone:' +feature.properties.NO_ZONE);
 }});
 
-// Ajout des surfaces agricoles si checkbox cochées
+// Ajout des surfaces viticoles si checkbox cochées
 document.querySelector("input[name=zn_2]").addEventListener('change', function() {
 	if(this.checked) map.addLayer(zne_vitic)
 	  else map.removeLayer(zne_vitic)
@@ -504,7 +502,7 @@ var style_zne_patur = {
 	"fillColor": 'blue',
    };
 
-// paramètres liés à l'interactivité des zones agri
+// paramètres liés à l'interactivité des zones de pâturage
 zne_patur = L.geoJSON(zne_patur, { 
 	style:style_zne_patur,
 
@@ -537,12 +535,13 @@ zne_patur = L.geoJSON(zne_patur, {
 		layer.bindPopup('<strong>' + 'Numéro de zone:' +feature.properties.NO_ZONE);
 }});
 
-// Ajout des surfaces agricoles si checkbox cochées
+// Ajout des surfaces de pâturage si checkbox cochées
 document.querySelector("input[name=zn_3]").addEventListener('change', function() {
 	if(this.checked) map.addLayer(zne_patur)
 	  else map.removeLayer(zne_patur)
 	});
 
+// Ajout d'une couche NDVI
 
 	document.querySelector("input[name=radio]").addEventListener('change', function() {
 		if(this.checked){
@@ -563,6 +562,692 @@ document.querySelector("input[name=zn_3]").addEventListener('change', function()
 });
 	
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////// Selection des données dont la thématique correspond à la culture/////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////// Affichage des bars ////////////////////////////////////////////////////////////////////
+
+	var bars_icon = L.icon({
+		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/bars.jpg',
+		iconSize: [32, 37],
+		iconAnchor: [16, 37],
+		popupAnchor: [0, -28]
+	  });
+	
+		var bars = L.geoJSON(bars, { 
+			onEachFeature: function onEachFeature(feature, layer) {
+				layer.bindPopup('<strong>'+feature.properties.name)},
+				pointToLayer: function (feature, latlng) {
+					return L.marker(latlng, {icon: bars_icon});
+					}
+				});
+	
+	document.querySelector("input[name=bars]").addEventListener('change', function() {
+		if(this.checked) map.addLayer(bars)
+		  else map.removeLayer(bars)
+		});
+
+
+///////////////////////////////////////////////////////////// Affichage des bibliothèques ///////////////////////////////////////////////
+
+	var biblio_icon = L.icon({
+		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/biblio.jpg',
+		iconSize: [32, 37],
+		iconAnchor: [16, 37],
+		popupAnchor: [0, -28]
+	  });
+	
+		var biblio = L.geoJSON(biblio, { 
+			onEachFeature: function onEachFeature(feature, layer) {
+				layer.bindPopup('<strong>'+feature.properties.name)},
+				pointToLayer: function (feature, latlng) {
+					return L.marker(latlng, {icon: biblio_icon});
+					}
+				});
+	
+	document.querySelector("input[name=biblio]").addEventListener('change', function() {
+		if(this.checked) map.addLayer(biblio)
+		  else map.removeLayer(biblio)
+		});
+
+	
+//////////////////////////////////////////////Affichage des cafe////////////////////// /////////////////////////////////////////////////
+
+	var cafe_icon = L.icon({
+		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/cafe.jpg',
+		iconSize: [32, 37],
+		iconAnchor: [16, 37],
+		popupAnchor: [0, -28]
+	  });
+	
+		var cafe = L.geoJSON(cafe, { 
+			onEachFeature: function onEachFeature(feature, layer) {
+				layer.bindPopup('<strong>'+feature.properties.name)},
+				pointToLayer: function (feature, latlng) {
+					return L.marker(latlng, {icon: cafe_icon});
+					}
+				});
+	
+	document.querySelector("input[name=cafe]").addEventListener('change', function() {
+		if(this.checked) map.addLayer(cafe)
+		  else map.removeLayer(cafe)
+		});
+
+
+/////////////////////////////////////////////////////////////// Affichage des cinemas ///////////////////////////////////////////////////
+
+	var cine_icon = L.icon({
+		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/cine.jpg',
+		iconSize: [32, 37],
+		iconAnchor: [16, 37],
+		popupAnchor: [0, -28]
+	  });
+	
+		var cine = L.geoJSON(cine, { 
+			onEachFeature: function onEachFeature(feature, layer) {
+				layer.bindPopup('<strong>'+feature.properties.name)},
+				pointToLayer: function (feature, latlng) {
+					return L.marker(latlng, {icon: cine_icon});
+					}
+				});
+	
+	document.querySelector("input[name=cine]").addEventListener('change', function() {
+		if(this.checked) map.addLayer(cine)
+		  else map.removeLayer(cine)
+		});
+
+
+////////////////////////////////////////////////////////////////// Affichage des cinemas/////////////////////////////////////////////////
+
+	var muse_icon = L.icon({
+		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/muse.jpg',
+		iconSize: [32, 37],
+		iconAnchor: [16, 37],
+		popupAnchor: [0, -28]
+	  });
+	
+		var muse = L.geoJSON(muse, { 
+			onEachFeature: function onEachFeature(feature, layer) {
+				layer.bindPopup('<strong>'+feature.properties.NAMN1)},
+				pointToLayer: function (feature, latlng) {
+					return L.marker(latlng, {icon: muse_icon});
+					}
+				});
+	
+	document.querySelector("input[name=muse]").addEventListener('change', function() {
+		if(this.checked) map.addLayer(muse)
+		  else map.removeLayer(muse)
+		});
+
+
+////////////////////////////////////////////////// Affichage des restaurants/////////////////////////////////////////////////////////
+
+	var resto_icon = L.icon({
+		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/resto_icon.jpg',
+		iconSize: [32, 37],
+		iconAnchor: [16, 37],
+		popupAnchor: [0, -28]
+	  });
+	
+	var resto = L.geoJSON(resto, { 
+			onEachFeature: function onEachFeature(feature, layer) {
+				layer.bindPopup('<strong>'+feature.properties.name)},
+				pointToLayer: function (feature, latlng) {
+					return L.marker(latlng, {icon: resto_icon});
+					}
+				});
+	
+	document.querySelector("input[name=resto]").addEventListener('change', function() {
+		if(this.checked) map.addLayer(resto)
+		  else map.removeLayer(resto)
+		});
+
+
+////////////////////////////////////////////////// Affichage des salle de specatles /////////////////////////////////////////////////////////
+
+var gr_salles_icon = L.icon({
+	iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/gr_salles.jpg',
+	iconSize: [32, 37],
+	iconAnchor: [16, 37],
+	popupAnchor: [0, -28]
+  });
+
+var gr_salles = L.geoJSON(gr_salles, { 
+		onEachFeature: function onEachFeature(feature, layer) {
+			layer.bindPopup('<strong>'+feature.properties.name)},
+			pointToLayer: function (feature, latlng) {
+				return L.marker(latlng, {icon: gr_salles_icon});
+				}
+			});
+
+document.querySelector("input[name=gr_salles]").addEventListener('change', function() {
+	if(this.checked) map.addLayer(gr_salles)
+	  else map.removeLayer(gr_salles)
+	});
+
+
+////////////////////////////////////////////////// Affichage des théatres /////////////////////////////////////////////////////////
+
+var theatre_icon = L.icon({
+	iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/theatre.jpg',
+	iconSize: [32, 37],
+	iconAnchor: [16, 37],
+	popupAnchor: [0, -28]
+  });
+
+var theatres = L.geoJSON(theatres, { 
+		onEachFeature: function onEachFeature(feature, layer) {
+			layer.bindPopup('<strong>'+feature.properties.name)},
+			pointToLayer: function (feature, latlng) {
+				return L.marker(latlng, {icon: theatre_icon});
+				}
+			});
+
+document.querySelector("input[name=theatre]").addEventListener('change', function() {
+	if(this.checked) map.addLayer(theatres)
+	  else map.removeLayer(theatres)
+	});
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////// Selection des données dont la thématique correspond à la démographie//////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+/////////////////////////////////// Affichage indicateur taux de natalité ////////////////////////////////////////////////////////////////
+
+// fonction qui permettre de mettre en évidence des polygone quand la souris passe par dessus
+function highlightFeature(e) {
+    var layer = e.target;
+    layer.setStyle({
+        weight: 5,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+    layer.bringToFront();
+}
+
+
+
+
+function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+}
+
+
+//fonction pour l'affichage des indicateurs "taux de naissace " en couleur
+function getColor(d) {
+    return d > 1.2 ? '#800026' :
+           d> 1  ? '#BD0026' :
+           d> 0.8  ? '#E31A1C' :
+           d> 0.6 ?  '#FC4E2A' :
+                      '#FFEDA0';
+}
+
+style_naiss = function style(feature) {
+	return {
+		fillColor: getColor(feature.properties.t_natalite),
+		weight: 2,
+		opacity: 1,
+		color: 'white',
+		dashArray: '3',
+		fillOpacity: 0.7
+	};
+}
+
+//ajout de la couche permettant de voir le taux de naissance sur la carte
+t_naissance = L.geoJSON(taux_naissance, {
+	style: style_naiss,
+
+	onEachFeature: function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: function resetHighlight(e) {
+				t_naissance.resetStyle(e.target);
+			},
+			click: zoomToFeature});
+
+			layer.on('click', function(){
+				document.getElementById("box_droite").style.height = "420px";
+			$("#znes_agric1").html('<h4>NAISSANCES</h4>'+ '<br>' +
+			'<img width="100" alt="bla" height="100" src="image/baby.png"> ');
+
+			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
+			+':'+' '+ feature.properties.NAME + '<br>' +'<br>' +
+			'<b>Nombre de naissances</b>'+' '
+			+':'+' '+ feature.properties.Naissance_vivante + '<br>' +'<br>' +
+			'<b>Nombre total habitants </b>'+' '
+			+':'+' '+ feature.properties.Effectif_janvier + 
+			'</p>')});
+
+			layer.bindPopup('<strong>' + 'Taux de natalité:' +feature.properties.t_natalite+'%');
+
+		}});
+
+document.querySelector("input[name=ta_naissance]").addEventListener('change', function() {
+	if(this.checked) map.addLayer(t_naissance)
+	map.removeLayer(t_deces)
+	map.removeLayer(t_f)
+	map.removeLayer(t_h)
+
+
+	document.querySelector("input[name=ta_deces]").checked = false;
+	document.querySelector("input[name=ta_femme]").checked = false;
+	document.querySelector("input[name=ta_homme]").checked = false;
+
+	});
+
+
+
+/////////////////////////////////// Affichage indicateur taux de décès ////////////////////////////////////////////////////////////////
+
+
+
+//fonction pour l'affichage des indicateurs "taux de naissace " en couleur
+function getColore(d) {
+    return d > 1.1 ? '#800026' :
+           d> 0.9  ? '#BD0026' :
+           d> 0.7  ? '#E31A1C' :
+           d> 0.5 ?  '#FC4E2A' :
+                      '#FFEDA0';
+}
+
+style_deces = function style(feature) {
+	return {
+		fillColor: getColore(feature.properties.t_deces),
+		weight: 2,
+		opacity: 1,
+		color: 'white',
+		dashArray: '3',
+		fillOpacity: 0.7
+	};
+}
+
+//ajout de la couche permettant de voir le taux de naissance sur la carte
+t_deces = L.geoJSON(taux_deces, {
+	style: style_deces,
+
+	onEachFeature: function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: function resetHighlight(e) {
+				t_deces.resetStyle(e.target);
+			},
+			click: zoomToFeature});
+
+			layer.on('click', function(){
+				document.getElementById("box_droite").style.height = "420px";
+			$("#znes_agric1").html('<h4>DECES</h4>'+ '<br>' +
+			'<img width="100" alt="bla" height="100" src="image/death.png"> ');
+
+			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
+			+':'+' '+ feature.properties.NAME + '<br>' +'<br>' +
+			'<b>Nombre de décès</b>'+' '
+			+':'+' '+ feature.properties.Deces + '<br>' +'<br>' +
+			'<b>Nombre total habitants </b>'+' '
+			+':'+' '+ feature.properties.Effectif_janvier + 
+			'</p>')})
+
+			layer.bindPopup('<strong>' + 'Taux de mortalité:' +feature.properties.t_deces+'%');
+
+		}});
+
+document.querySelector("input[name=ta_deces]").addEventListener('change', function() {
+	if(this.checked) map.addLayer(t_deces)
+
+	map.removeLayer(t_naissance)
+	map.removeLayer(t_f)
+	map.removeLayer(t_h)
+
+
+
+	document.querySelector("input[name=ta_naissance]").checked = false;
+	document.querySelector("input[name=ta_femme]").checked = false;
+	document.querySelector("input[name=ta_homme]").checked = false;
+
+	});
+
+
+
+/////////////////////////////////// Affichage indicateur taux de femmes ////////////////////////////////////////////////////////////////
+
+
+
+//fonction pour l'affichage des indicateurs "taux de naissace " en couleur
+function getColoreee(d) {
+    return d > 0.52 ? '#800026' :
+           d> 0.51  ? '#BD0026' :
+           d> 0.5  ? '#E31A1C' :
+           d> 0.49 ?  '#FC4E2A' :
+                      '#FFEDA0';
+}
+
+style_f = function style(feature) {
+	return {
+		fillColor: getColoreee(feature.properties.prop_f),
+		weight: 2,
+		opacity: 1,
+		color: 'white',
+		dashArray: '3',
+		fillOpacity: 0.7
+	};
+}
+
+//ajout de la couche permettant de voir le taux de naissance sur la carte
+t_f = L.geoJSON(prop_hommes_femmes, {
+	style: style_f,
+
+	onEachFeature: function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: function resetHighlight(e) {
+				t_f.resetStyle(e.target);
+			},
+			click: zoomToFeature});
+
+			layer.on('click', function(){
+				document.getElementById("box_droite").style.height = "420px";
+			$("#znes_agric1").html('<h4>Population feminine</h4>'+ '<br>' +
+			'<img width="100" alt="bla" height="100" src="image/femmes.png"> ');
+
+			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
+			+':'+' '+ feature.properties.NAME + '<br>' +'<br>' +
+			'<b>Nombre de femmes</b>'+' '
+			+':'+' '+ feature.properties.fe + '<br>' +'<br>' +
+			'<b>Nombre total habitants </b>'+' '
+			+':'+' '+ feature.properties.tot + 
+			'</p>')})
+
+			layer.bindPopup('<strong>' + 'Taux de mortalité:' +feature.properties.prop_f+'%');
+
+		}});
+
+document.querySelector("input[name=ta_femme]").addEventListener('change', function() {
+	if(this.checked) map.addLayer(t_f)
+
+	map.removeLayer(t_naissance)
+	map.removeLayer(t_deces)
+	map.removeLayer(t_h)
+
+
+	document.querySelector("input[name=ta_naissance]").checked = false;
+	document.querySelector("input[name=ta_deces]").checked = false;
+	document.querySelector("input[name=ta_homme]").checked = false;
+
+	});
+
+
+
+
+/////////////////////////////////// Affichage indicateur taux de homme ////////////////////////////////////////////////////////////////
+
+//fonction pour l'affichage des indicateurs "taux de naissace " en couleur
+function getColoreeee(d) {
+    return d > 0.51 ? '#800026' :
+           d> 0.5  ? '#BD0026' :
+           d> 0.49  ? '#E31A1C' :
+           d> 0.48 ?  '#FC4E2A' :
+                      '#FFEDA0';
+}
+
+style_h = function style(feature) {
+	return {
+		fillColor: getColoreee(feature.properties.prop_h),
+		weight: 2,
+		opacity: 1,
+		color: 'white',
+		dashArray: '3',
+		fillOpacity: 0.7
+	};
+}
+
+//ajout de la couche permettant de voir le taux de naissance sur la carte
+t_h = L.geoJSON(prop_hommes_femmes, {
+	style: style_h,
+
+	onEachFeature: function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: function resetHighlight(e) {
+				t_h.resetStyle(e.target);
+			},
+			click: zoomToFeature});
+
+			layer.on('click', function(){
+				document.getElementById("box_droite").style.height = "420px";
+			$("#znes_agric1").html('<h4>Population masculine</h4>'+ '<br>' +
+			'<img width="100" alt="bla" height="100" src="image/femmes.png"> ');
+
+			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
+			+':'+' '+ feature.properties.NAME + '<br>' +'<br>' +
+			'<b>Nombre hommes </b>'+' '
+			+':'+' '+ feature.properties.ho + '<br>' +'<br>' +
+			'<b>Nombre total habitants </b>'+' '
+			+':'+' '+ feature.properties.tot + 
+			'</p>')})
+
+			layer.bindPopup('<strong>' + 'Taux de mortalité:' +feature.properties.prop_h+'%');
+
+		}});
+
+document.querySelector("input[name=ta_homme]").addEventListener('change', function() {
+	if(this.checked) map.addLayer(t_h)
+
+	map.removeLayer(t_naissance)
+	map.removeLayer(t_deces)
+	map.removeLayer(t_f)
+
+
+	document.querySelector("input[name=ta_naissance]").checked = false;
+	document.querySelector("input[name=ta_deces]").checked = false;
+	document.querySelector("input[name=ta_femme]").checked = false;
+
+
+	});
+/*
+// ajout d'info relatives à l'indicateur taux natalité
+
+naissance = L.geoJSON(naissance, { 
+	style: style_naiss,
+
+	onEachFeature: function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+		
+		layer.on('click', function(){
+				document.getElementById("box_droite").style.height = "400px";
+			$("#znes_agric1").html('<h4>Naissances</h4>'+ '<br>' +
+			'<img width="100" alt="bla" height="100" src="image/baby.png"> ');
+
+			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
+			+':'+' '+ feature.properties.NAME + '<br>' +
+			'<b>Nombre de naissances</b>'+' '
+			+':'+' '+ feature.properties.Naissance_vivante + '<br>' +
+			'<b>Nombre total habitants </b>'+' '
+			+':'+' '+ feature.properties.Effectif_janvier + 
+			'</p>')});
+
+		layer.bindPopup('<strong>' + 'Taux de natalité:' +feature.properties.t_natalite+'%');
+}});
+
+
+document.querySelector("input[name=naissance]").addEventListener('change', function() {
+	if(this.checked){
+		map.eachLayer(function (layer) {
+			map.removeLayer(layer);
+			});
+
+		deces.checked = false;
+		prop_h.checked = false;
+		prop_f.checked = false;
+
+	//création de la nouvelle couche
+	map.addLayer(esri);
+	map.addLayer(naissance);
+
+}});
+
+
+
+
+
+/////////////////////////////////Affichage indicateur taux de mortalité ///////////////////////////////////////////////
+
+// fonction pour l'affichage des indicateurs en couleur
+
+function getColor(d) {
+    return d > 1.2 ? '#800026' :
+           d > 1  ? '#BD0026' :
+           d > 0.8  ? '#E31A1C' :
+           d > 0.6 ?  '#FC4E2A' :
+                      '#FFEDA0';
+}
+
+style_deces = function style(feature) {
+	return {
+		fillColor: getColor(feature.properties.t_deces),
+		weight: 2,
+		opacity: 1,
+		color: 'white',
+		dashArray: '3',
+		fillOpacity: 0.7
+	};
+}
+
+// ajout info relatives à l'indicateur taux mortalité
+
+deces = L.geoJSON(deces, { 
+	style: style_deces,
+
+	onEachFeature: function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+		
+		layer.on('click', function(){
+			document.getElementById("box_droite").style.height = "400px";
+			$("#znes_agric1").html('<h4>Déces</h4>'+
+			'<img width="150" alt="bla" height="150" src="image/paturages.jpg"> <br>');
+
+			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
+			+':'+' '+ feature.properties.NAME + '<br>' +
+			'<b>Nombre de déces</b>'+' '
+			+':'+' '+ feature.properties.Deces + '<br>' +
+			'<b>Nombre total habitants </b>'+' '
+			+':'+' '+ feature.properties.Effectif_janvier + 
+			'</p>')});
+		
+
+
+		layer.bindPopup('<strong>' + 'Taux de mortalité:' +feature.properties.t_deces	+'%');
+	}});
+
+
+	document.querySelector("input[name=deces]").addEventListener('change', function() {
+		if(this.checked){
+			map.eachLayer(function (layer) {
+				map.removeLayer(layer);
+				});
+	
+			naissance.checked = false;
+			prop_h.checked = false;
+			prop_f.checked = false;
+	
+		//création de la nouvelle couche
+		map.addLayer(esri);
+		map.addLayer(deces);
+	
+	}});
+
+
+
+
+//////////////////////////////// Affichage indicateur taux de natalité ////////////////
+// ajout d'info relatives à l'indicateur taux natalité
+/////////////////////////////////Affichage indicateur taux de mortalité ///////////////////////////////////////////////
+
+// fonction pour l'affichage des indicateurs en couleur
+
+function getColor(d) {
+    return d > 1.2 ? '#800026' :
+           d > 1  ? '#BD0026' :
+           d > 0.8  ? '#E31A1C' :
+           d > 0.6 ?  '#FC4E2A' :
+                      '#FFEDA0';
+}
+
+style_dem01 = function style(feature) {
+	return {
+		fillColor: getColor(feature.properties.t_deces),
+		weight: 2,
+		opacity: 1,
+		color: 'white',
+		dashArray: '3',
+		fillOpacity: 0.7
+	};
+}
+
+// ajout info relatives à l'indicateur taux mortalité
+
+demo = L.geoJSON(demo, { 
+	style: style_dem01,
+
+	onEachFeature: function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+		
+		layer.on('click', function(){
+			document.getElementById("box_droite").style.height = "400px";
+			$("#znes_agric1").html('<h4>Déces</h4>'+
+			'<img width="150" alt="bla" height="150" src="image/paturages.jpg"> <br>');
+
+			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
+			+':'+' '+ feature.properties.NAME + '<br>' +
+			'<b>Nombre de déces</b>'+' '
+			+':'+' '+ feature.properties.Deces + '<br>' +
+			'<b>Nombre total habitants </b>'+' '
+			+':'+' '+ feature.properties.Effectif_janvier + 
+			'</p>')});
+		
+		
+		layer.bindPopup('<strong>' + 'Taux de mortalité:' +feature.properties.t_deces	+'%');
+	}});
+
+
+// Ajout thématique démographique (deces) checkbox cochées
+document.querySelector("input[name=demo1]").addEventListener('change', function() {
+	if(this.checked){
+		map.eachLayer(function (layer) {
+			map.removeLayer(naissance);
+			map.removeLayer(deces);
+			map.removeLayer(demo2);
+			map.addLayer(esri);
+			map.addLayer(DA);
+			map.addLayer(demo)
+			})
+		naissance.checked = false;
+		deces.checked = false;
+		}});
+
+
+*/
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -694,481 +1379,6 @@ document.querySelector("input[name=NDVI7]").addEventListener('change', function(
 	map.addLayer(esri);
 	map.addLayer(ndvi);
 }});
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////// Selection des données dont la thématique correspond à la culture/////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-////////////////////////////////////////////////// Affichage des bars ////////////////////////////////////////////////////////////////////
-
-	var bars_icon = L.icon({
-		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/bars.jpg',
-		iconSize: [32, 37],
-		iconAnchor: [16, 37],
-		popupAnchor: [0, -28]
-	  });
-	
-		var bars = L.geoJSON(bars, { 
-			onEachFeature: function onEachFeature(feature, layer) {
-				layer.bindPopup('<strong>'+feature.properties.name)},
-				pointToLayer: function (feature, latlng) {
-					return L.marker(latlng, {icon: bars_icon});
-					}
-				});
-	
-	// Ajout des biblio si checkbox est cochées
-	document.querySelector("input[name=bars]").addEventListener('change', function() {
-		if(this.checked) map.addLayer(bars)
-		  else map.removeLayer(bars)
-		});
-
-
-///////////////////////////////////////////////////////////// Affichage des bibliothèques ///////////////////////////////////////////////
-
-	var biblio_icon = L.icon({
-		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/biblio.jpg',
-		iconSize: [32, 37],
-		iconAnchor: [16, 37],
-		popupAnchor: [0, -28]
-	  });
-	
-		var biblio = L.geoJSON(biblio, { 
-			onEachFeature: function onEachFeature(feature, layer) {
-				layer.bindPopup('<strong>'+feature.properties.name)},
-				pointToLayer: function (feature, latlng) {
-					return L.marker(latlng, {icon: biblio_icon});
-					}
-				});
-	
-	// Ajout des biblio si checkbox est cochées
-	document.querySelector("input[name=biblio]").addEventListener('change', function() {
-		if(this.checked) map.addLayer(biblio)
-		  else map.removeLayer(biblio)
-		});
-
-	
-//////////////////////////////////////////////Affichage des cafe////////////////////// /////////////////////////////////////////////////
-
-	var cafe_icon = L.icon({
-		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/cafe.jpg',
-		iconSize: [32, 37],
-		iconAnchor: [16, 37],
-		popupAnchor: [0, -28]
-	  });
-	
-		var cafe = L.geoJSON(cafe, { 
-			onEachFeature: function onEachFeature(feature, layer) {
-				layer.bindPopup('<strong>'+feature.properties.name)},
-				pointToLayer: function (feature, latlng) {
-					return L.marker(latlng, {icon: cafe_icon});
-					}
-				});
-	
-	// Ajout des cine si checkbox est cochées
-	document.querySelector("input[name=cafe]").addEventListener('change', function() {
-		if(this.checked) map.addLayer(cafe)
-		  else map.removeLayer(cafe)
-		});
-
-
-/////////////////////////////////////////////////////////////// Affichage des cinemas ///////////////////////////////////////////////////
-
-	var cine_icon = L.icon({
-		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/cine.jpg',
-		iconSize: [32, 37],
-		iconAnchor: [16, 37],
-		popupAnchor: [0, -28]
-	  });
-	
-		var cine = L.geoJSON(cine, { 
-			onEachFeature: function onEachFeature(feature, layer) {
-				layer.bindPopup('<strong>'+feature.properties.name)},
-				pointToLayer: function (feature, latlng) {
-					return L.marker(latlng, {icon: cine_icon});
-					}
-				});
-	
-	// Ajout des cine si checkbox est cochées
-	document.querySelector("input[name=cine]").addEventListener('change', function() {
-		if(this.checked) map.addLayer(cine)
-		  else map.removeLayer(cine)
-		});
-
-
-////////////////////////////////////////////////////////////////// Affichage des cinemas/////////////////////////////////////////////////
-
-	var muse_icon = L.icon({
-		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/muse.jpg',
-		iconSize: [32, 37],
-		iconAnchor: [16, 37],
-		popupAnchor: [0, -28]
-	  });
-	
-		var muse = L.geoJSON(muse, { 
-			onEachFeature: function onEachFeature(feature, layer) {
-				layer.bindPopup('<strong>'+feature.properties.NAMN1)},
-				pointToLayer: function (feature, latlng) {
-					return L.marker(latlng, {icon: muse_icon});
-					}
-				});
-	
-	// Ajout des cine si checkbox est cochées
-	document.querySelector("input[name=muse]").addEventListener('change', function() {
-		if(this.checked) map.addLayer(muse)
-		  else map.removeLayer(muse)
-		});
-
-
-////////////////////////////////////////////////// Affichage des restaurants/////////////////////////////////////////////////////////
-
-	var resto_icon = L.icon({
-		iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/resto_icon.jpg',
-		iconSize: [32, 37],
-		iconAnchor: [16, 37],
-		popupAnchor: [0, -28]
-	  });
-	
-	var resto = L.geoJSON(resto, { 
-			onEachFeature: function onEachFeature(feature, layer) {
-				layer.bindPopup('<strong>'+feature.properties.name)},
-				pointToLayer: function (feature, latlng) {
-					return L.marker(latlng, {icon: resto_icon});
-					}
-				});
-	
-	// Ajout des biblio si checkbox est cochées
-	document.querySelector("input[name=resto]").addEventListener('change', function() {
-		if(this.checked) map.addLayer(resto)
-		  else map.removeLayer(resto)
-		});
-
-
-////////////////////////////////////////////////// Affichage des salle de specatles /////////////////////////////////////////////////////////
-
-var gr_salles_icon = L.icon({
-	iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/gr_salles.jpg',
-	iconSize: [32, 37],
-	iconAnchor: [16, 37],
-	popupAnchor: [0, -28]
-  });
-
-var gr_salles = L.geoJSON(gr_salles, { 
-		onEachFeature: function onEachFeature(feature, layer) {
-			layer.bindPopup('<strong>'+feature.properties.name)},
-			pointToLayer: function (feature, latlng) {
-				return L.marker(latlng, {icon: gr_salles_icon});
-				}
-			});
-
-// Ajout des biblio si checkbox est cochées
-document.querySelector("input[name=gr_salles]").addEventListener('change', function() {
-	if(this.checked) map.addLayer(gr_salles)
-	  else map.removeLayer(gr_salles)
-	});
-
-
-////////////////////////////////////////////////// Affichage des théatres /////////////////////////////////////////////////////////
-
-var theatre_icon = L.icon({
-	iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/theatre.jpg',
-	iconSize: [32, 37],
-	iconAnchor: [16, 37],
-	popupAnchor: [0, -28]
-  });
-
-var theatres = L.geoJSON(theatres, { 
-		onEachFeature: function onEachFeature(feature, layer) {
-			layer.bindPopup('<strong>'+feature.properties.name)},
-			pointToLayer: function (feature, latlng) {
-				return L.marker(latlng, {icon: theatre_icon});
-				}
-			});
-
-// Ajout des biblio si checkbox est cochées
-document.querySelector("input[name=theatre]").addEventListener('change', function() {
-	if(this.checked) map.addLayer(theatres)
-	  else map.removeLayer(theatres)
-	});
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////// Selection des données dont la thématique correspond à la démographie/////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/////////////////////////////////// Affichage indicateur taux de natalité ////////////////
-
-// mise en évidence des polygone quand la souris passe par dessus
-
-function highlightFeature(e) {
-    var layer = e.target;
-    layer.setStyle({
-        weight: 5,
-        color: '#666',
-        dashArray: '',
-        fillOpacity: 0.7
-    });
-    layer.bringToFront();
-}
-
-function resetHighlight(e) {
-    naissance.resetStyle(e.target);
-}
-function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
-}
-
-
-// fonction pour l'affichage des indicateurs en couleur
-
-function getColor(d) {
-    return d > 1.2 ? '#800026' :
-           d> 1  ? '#BD0026' :
-           d> 0.8  ? '#E31A1C' :
-           d> 0.6 ?  '#FC4E2A' :
-                      '#FFEDA0';
-}
-
-style_naiss = function style(feature) {
-	return {
-		fillColor: getColor(feature.properties.t_natalite),
-		weight: 2,
-		opacity: 1,
-		color: 'white',
-		dashArray: '3',
-		fillOpacity: 0.7
-	};
-}
-
-
-// ajout d'info relatives à l'indicateur taux natalité
-
-naissance = L.geoJSON(naissance, { 
-	style: style_naiss,
-
-	onEachFeature: function onEachFeature(feature, layer) {
-		layer.on({
-			mouseover: highlightFeature,
-			mouseout: resetHighlight,
-			click: zoomToFeature
-		});
-		
-		layer.on('click', function(){
-				document.getElementById("box_droite").style.height = "400px";
-			$("#znes_agric1").html('<h4>Naissances</h4>'+ '<br>' +
-			'<img width="100" alt="bla" height="100" src="image/baby.png"> ');
-
-			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
-			+':'+' '+ feature.properties.NAME + '<br>' +
-			'<b>Nombre de naissances</b>'+' '
-			+':'+' '+ feature.properties.Naissance_vivante + '<br>' +
-			'<b>Nombre total habitants </b>'+' '
-			+':'+' '+ feature.properties.Effectif_janvier + 
-			'</p>')});
-
-		layer.bindPopup('<strong>' + 'Taux de natalité:' +feature.properties.t_natalite+'%');
-}});
-
-
-document.querySelector("input[name=naissance]").addEventListener('change', function() {
-	if(this.checked){
-		map.eachLayer(function (layer) {
-			map.removeLayer(deces);
-			map.removeLayer(demo);
-			map.removeLayer(demo2);
-			map.addLayer(esri);
-			map.addLayer(DA);
-			map.addLayer(naissance)
-			});
-		deces.checked = false;
-		demo1.checked = false;
-		demo2.checked = false;
-	}});
-
-
-
-/////////////////////////////////Affichage indicateur taux de mortalité ///////////////////////////////////////////////
-
-// fonction pour l'affichage des indicateurs en couleur
-
-function getColor(d) {
-    return d > 1.2 ? '#800026' :
-           d > 1  ? '#BD0026' :
-           d > 0.8  ? '#E31A1C' :
-           d > 0.6 ?  '#FC4E2A' :
-                      '#FFEDA0';
-}
-
-style_deces = function style(feature) {
-	return {
-		fillColor: getColor(feature.properties.t_deces),
-		weight: 2,
-		opacity: 1,
-		color: 'white',
-		dashArray: '3',
-		fillOpacity: 0.7
-	};
-}
-
-// ajout info relatives à l'indicateur taux mortalité
-
-deces = L.geoJSON(deces, { 
-	style: style_deces,
-
-	onEachFeature: function onEachFeature(feature, layer) {
-		layer.on({
-			mouseover: highlightFeature,
-			mouseout: resetHighlight,
-			click: zoomToFeature
-		});
-		
-		layer.on('click', function(){
-			document.getElementById("box_droite").style.height = "400px";
-			$("#znes_agric1").html('<h4>Déces</h4>'+
-			'<img width="150" alt="bla" height="150" src="image/paturages.jpg"> <br>');
-
-			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
-			+':'+' '+ feature.properties.NAME + '<br>' +
-			'<b>Nombre de déces</b>'+' '
-			+':'+' '+ feature.properties.Deces + '<br>' +
-			'<b>Nombre total habitants </b>'+' '
-			+':'+' '+ feature.properties.Effectif_janvier + 
-			'</p>')});
-		
-			/*
-			document.getElementById("box_droite_bas").style.height = "255px";
-			var svg = d3 
-				.select("#box_droite_bas") 
-				.append("svg") 
-				.attr("width", 600) 
-				.attr("height", 500); 
-
-				var svg = d3.select("svg"),  
-				width = svg.attr("width") 
-				height = svg.attr("height")
-
-				var xScale = d3.scaleBand().range([0, width]).padding(0.5); 
-				var yScale = d3.scaleLinear().range([height, 0]); 
-
-				var g = svg.append("g").attr("transform", "translate(" + 100 + "," + 100 + ")"); 
-
-				d3.csv("../naiss_mort.csv").then(function (data) { 
-					xScale.domain( 
-					data.map(function (d) { 
-					return d.NOM; 
-					}) 
-					); 
-					yScale.domain([ 
-					0, 
-					d3.max(data, function (d) { 
-					return d.t_deces; 
-					}), 
-					]); 
-					}); 
-
-					g.append("g") 
-					.attr("transform", "translate(0," + height + ")") 
-					.call(d3.axisBottom(xScale)) ;
-
-					g.append("g") 
-					.call(d3.axisLeft(yScale)) ;
-
-		});*/
-
-		layer.bindPopup('<strong>' + 'Taux de mortalité:' +feature.properties.t_deces	+'%');
-	}});
-
-
-// Ajout thématique démographique (deces) checkbox cochées
-document.querySelector("input[name=deces]").addEventListener('change', function() {
-	if(this.checked){
-		map.eachLayer(function (layer) {
-			map.removeLayer(naissance);
-			map.removeLayer(demo);
-			map.removeLayer(demo2);
-			map.addLayer(esri);
-			map.addLayer(DA);
-			map.addLayer(deces)
-			});
-			naissance.checked = false;
-			demo1.checked = false;
-			demo2.checked = false;
-		}});
-
-
-
-
-//////////////////////////////// Affichage indicateur taux de natalité ////////////////
-// ajout d'info relatives à l'indicateur taux natalité
-/////////////////////////////////Affichage indicateur taux de mortalité ///////////////////////////////////////////////
-
-// fonction pour l'affichage des indicateurs en couleur
-
-function getColor(d) {
-    return d > 1.2 ? '#800026' :
-           d > 1  ? '#BD0026' :
-           d > 0.8  ? '#E31A1C' :
-           d > 0.6 ?  '#FC4E2A' :
-                      '#FFEDA0';
-}
-
-style_dem01 = function style(feature) {
-	return {
-		fillColor: getColor(feature.properties.t_deces),
-		weight: 2,
-		opacity: 1,
-		color: 'white',
-		dashArray: '3',
-		fillOpacity: 0.7
-	};
-}
-
-// ajout info relatives à l'indicateur taux mortalité
-
-demo = L.geoJSON(demo, { 
-	style: style_dem01,
-
-	onEachFeature: function onEachFeature(feature, layer) {
-		layer.on({
-			mouseover: highlightFeature,
-			mouseout: resetHighlight,
-			click: zoomToFeature
-		});
-		
-		layer.on('click', function(){
-			document.getElementById("box_droite").style.height = "400px";
-			$("#znes_agric1").html('<h4>Déces</h4>'+
-			'<img width="150" alt="bla" height="150" src="image/paturages.jpg"> <br>');
-
-			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
-			+':'+' '+ feature.properties.NAME + '<br>' +
-			'<b>Nombre de déces</b>'+' '
-			+':'+' '+ feature.properties.Deces + '<br>' +
-			'<b>Nombre total habitants </b>'+' '
-			+':'+' '+ feature.properties.Effectif_janvier + 
-			'</p>')});
-		
-		
-		layer.bindPopup('<strong>' + 'Taux de mortalité:' +feature.properties.t_deces	+'%');
-	}});
-
-
-// Ajout thématique démographique (deces) checkbox cochées
-document.querySelector("input[name=demo1]").addEventListener('change', function() {
-	if(this.checked){
-		map.eachLayer(function (layer) {
-			map.removeLayer(naissance);
-			map.removeLayer(deces);
-			map.removeLayer(demo2);
-			map.addLayer(esri);
-			map.addLayer(DA);
-			map.addLayer(demo)
-			})
-		naissance.checked = false;
-		deces.checked = false;
-		}});
-
-
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1313,28 +1523,6 @@ $( "button#Mesure_surface_Act" ).click(function() {
   });
 
 
-
-	  	  // Fonction qui perment d'ouvrir et de fermer la section permettant d'imprimer la carte
-		  /*
-	  function openImp() {
-		document.getElementById("OuvrirImp").style.height = "150px";
-		document.getElementById("OuvrirImp").style.backgroundColor = 'lightgrey' ; 
-		document.getElementById("boutonImp").style.backgroundColor = 'grey' ; 
-		document.getElementById("OuvrirImp").style.borderBottomLeftRadius = '5px'; 
-		document.getElementById("OuvrirImp").style.borderBottomrightRadius = '5px';
-		document.getElementById("OpenImp").style.backgroundColor = 'grey' ;
-		document.getElementById("OpenImp").style.color = 'white' ;
-	  }	
-
-	  function closeImp(){
-		document.getElementById("OuvrirImp").style.height = "0px";
-		document.getElementById("boutonImp").style.backgroundColor = 'black' ; 
-		document.getElementById("OpenImp").style.backgroundColor = 'black' ;
-		document.getElementById("OpenImp").style.color = '#818181' ;
-
-	  }
-
-*/
 	
 
 

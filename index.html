@@ -187,72 +187,47 @@
 
                             </div>
 
+
+
+                        <!--Paramètres liés à la selection de données liées à la thématique "demographie"-->
+
                             <div id="Opt_Demographie">
                                 
                                 <div id="Ent_geo">
-                                    <p id="Entite_geo"><b>Selectionner un indicateur démographique</b></p>
+                                    <p id="Entite_geo"><b>Selectionner un indicateur démographique</b><br></p>
+
                                     <ul id="radiobox_demography">
-                                        <li><label>
-                                            <input type="radio" id="naissance" name="naissance" value="naissance"> Taux de natalité 
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                        <li><label>
-                                            <input type="radio" id="deces" name="deces" value="deces"> Taux de mortalité
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                        <li><label>
-                                            <input type="radio" id="demo1" name="demo1" value="demo1"> Espérance de vie 
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                        <li><label>
-                                            <input type="radio" id="demo2" name="demo2" value="demo2"> Taux de nuptialité
-                                            <span class="checkmark"></span> 
-                                        </label>
-                                    </li>
                                         
+                                        <li><label>
+                                            <input type="radio" id="ta_naissance" name="ta_naissance" value="ta_naissance"> Taux de natalité 
+                                        </label>
+                                    </li>
+                                        <li><label>
+                                            <input type="radio" id="ta_deces" name="ta_deces" value="ta_deces"> Taux de mortalité
+                                        </label>
+                                    </li>
+                                        <li><label>
+                                            <input type="radio" id="ta_homme" name="ta_homme" value="ta_homme"> Proportion d'hommes 
+                                        </label>
+                                    </li>
+                                        <li><label>
+                                            <input type="radio" id="ta_femme" name="ta_femme" value="ta_femme"> Proportion de femmes
+                                        </label>
+                                    </li>
 
                                    </ul>
                                 </div>
                             </div>
 
-                            <div id="Opt_Economie">
-                                <div id="Ent_geo">
-                                    <p id="Entite_geo"><b>Selectionner un indicateur démographique</b></p>
-                                    <ul id="radiobox_demography">
-                                        <li><label>
-                                            <input type="radio" id="naissance" name="naissance" value="naissance"> Taux de natalité 
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                        <li><label>
-                                            <input type="radio" id="deces" name="deces" value="deces"> Taux de mortalité
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                        <li><label>
-                                            <input type="radio" id="demo1" name="demo1" value="demo1"> Espérance de vie 
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </li>
-                                        <li><label>
-                                            <input type="radio" id="demo2" name="demo2" value="demo2"> Taux de nuptialité
-                                            <span class="checkmark"></span> 
-                                        </label>
-                                    </li>
-                                        
-
-                                   </ul>
-                                </div>
-                            </div>
+                            
 
 
                             <div id="Opt_Environnement">
                                 <div id="Ent_geo">
                                     <p id="Entite_geo"><b>Indicateur environnemental (NDVI)</b></p>
+
                                     <ul id="radiobox_envi">
+
                                         <li><label>
                                             <input type="radio" id="NDVI1" name="NDVI1" value="NDVI1"> NDVI (Jan. 2021) 
                                             <span class="checkmark"></span>
@@ -486,7 +461,8 @@
         <script src="../M-moire_Steven/GeoJson/theatre.geojson"type="text/javascript"></script>
         <script src="../M-moire_Steven/GeoJson/naissance_mortalité.geojson"type="text/javascript"></script>
         <script src="../M-moire_Steven/GeoJson/deces.geojson"type="text/javascript"></script>
-        <script src="../M-moire_Steven/GeoJson/demo1.geojson"type="text/javascript"></script>
+        <script src="../M-moire_Steven/GeoJson/prop_ho_fe.geojson"type="text/javascript"></script>
+
 
 
 

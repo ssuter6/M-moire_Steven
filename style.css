@@ -403,7 +403,7 @@ color: black;
 
     #znes_agric2{
       position: relative;
-      height: 90px;
+      height: 110px;
       width: 345px;
       z-index: 50;
       border-bottom-left-radius: 5px;
@@ -449,6 +449,10 @@ color: black;
   p#supérficie_viti{
     margin-left: 10px;
     margin-top: 0px;
+  }
+
+  p#Entite_geo{
+    margin-top: 5px;
   }
 
   h4{

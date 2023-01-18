@@ -219,6 +219,47 @@
                                 </div>
                             </div>
 
+
+
+ <!--Paramètres liés à la selection de données liées à la thématique "demographie"-->
+
+    <div id="Opt_Economie">
+                                
+        <div id="Ent_geo">
+            <p id="Entite_geo"><b>Selectionner un indicateur économique</b><br></p>
+
+                <ul id="radiobox_economy">
+                                        
+                    <li>
+                        <label>
+                            <input type="radio" id="ta_chomage" name="ta_chomage" value="ta_chomage"> Taux de chômage
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="radio" id="pop_act" name="pop_act" value="pop_act"> Part de population active
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="radio" id="sec_prim" name="sec_prim" value="sec_prim"> Part d'emploi secteur primaire
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="radio" id="prop_emp_sec" name="prop_emp_sec" value="prop_emp_sec"> Part d'emploi secteur secondaire
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="radio" id="prop_emp_ter" name="prop_emp_ter" value="prop_emp_ter"> Part d'emploi secteur tertiaire
+                        </label>
+                    </li>
+
+                </ul>
+        </div>
+    </div>
+
                             
 
 
@@ -341,7 +382,7 @@
                                 <li>
                                     <div id="marqueurs" class="marqueurs">
                                         <p>
-                                            <img src="../M-moire_Steven/imadecesge/marker.jpg" width="30px", height="40px">&nbsp;&nbsp;
+                                            <img src="../M-moire_Steven/image/marker.jpg" width="30px", height="40px">&nbsp;&nbsp;
                                                 Ajouter un marqueur  
                                                 <button id="Marqueur_Act" onclick="Marqueur_Act()"> On</button>
                                                 <button id="Marqueur_Inact" onclick="Marqueur_Inact()"> Off</button>
@@ -462,6 +503,9 @@
         <script src="../M-moire_Steven/GeoJson/naissance_mortalité.geojson"type="text/javascript"></script>
         <script src="../M-moire_Steven/GeoJson/deces.geojson"type="text/javascript"></script>
         <script src="../M-moire_Steven/GeoJson/prop_ho_fe.geojson"type="text/javascript"></script>
+        <script src="../M-moire_Steven/GeoJson/sect_eco.geojson"type="text/javascript"></script>
+        <script src="../M-moire_Steven/GeoJson/chom_act.geojson"type="text/javascript"></script>
+
 
 
 

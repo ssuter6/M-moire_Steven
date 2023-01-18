@@ -813,8 +813,7 @@ t_naissance = L.geoJSON(taux_naissance, {
 			mouseover: highlightFeature,
 			mouseout: function resetHighlight(e) {
 				t_naissance.resetStyle(e.target);
-			},
-			click: zoomToFeature});
+			}});
 
 			layer.on('click', function(){
 				document.getElementById("box_droite").style.height = "420px";
@@ -881,8 +880,7 @@ t_deces = L.geoJSON(taux_deces, {
 			mouseover: highlightFeature,
 			mouseout: function resetHighlight(e) {
 				t_deces.resetStyle(e.target);
-			},
-			click: zoomToFeature});
+			}});
 
 			layer.on('click', function(){
 				document.getElementById("box_droite").style.height = "420px";
@@ -951,8 +949,7 @@ t_f = L.geoJSON(prop_hommes_femmes, {
 			mouseover: highlightFeature,
 			mouseout: function resetHighlight(e) {
 				t_f.resetStyle(e.target);
-			},
-			click: zoomToFeature});
+			}});
 
 			layer.on('click', function(){
 				document.getElementById("box_droite").style.height = "420px";
@@ -967,7 +964,7 @@ t_f = L.geoJSON(prop_hommes_femmes, {
 			+':'+' '+ feature.properties.tot + 
 			'</p>')})
 
-			layer.bindPopup('<strong>' + 'Taux de mortalité:' +feature.properties.prop_f+'%');
+			layer.bindPopup('<strong>' + 'Proportion de femmes:' +feature.properties.prop_f+'%');
 
 		}});
 
@@ -1019,13 +1016,12 @@ t_h = L.geoJSON(prop_hommes_femmes, {
 			mouseover: highlightFeature,
 			mouseout: function resetHighlight(e) {
 				t_h.resetStyle(e.target);
-			},
-			click: zoomToFeature});
+			}});
 
 			layer.on('click', function(){
 				document.getElementById("box_droite").style.height = "420px";
 			$("#znes_agric1").html('<h4>Population masculine</h4>'+ '<br>' +
-			'<img width="100" alt="bla" height="100" src="image/femmes.png"> ');
+			'<img width="100" alt="bla" height="100" src="image/homme.png"> ');
 
 			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
 			+':'+' '+ feature.properties.NAME + '<br>' +'<br>' +
@@ -1035,7 +1031,7 @@ t_h = L.geoJSON(prop_hommes_femmes, {
 			+':'+' '+ feature.properties.tot + 
 			'</p>')})
 
-			layer.bindPopup('<strong>' + 'Taux de mortalité:' +feature.properties.prop_h+'%');
+			layer.bindPopup('<strong>' + 'Proportion hommes:' +feature.properties.prop_h+'%');
 
 		}});
 
@@ -1053,71 +1049,31 @@ document.querySelector("input[name=ta_homme]").addEventListener('change', functi
 
 
 	});
-/*
-// ajout d'info relatives à l'indicateur taux natalité
-
-naissance = L.geoJSON(naissance, { 
-	style: style_naiss,
-
-	onEachFeature: function onEachFeature(feature, layer) {
-		layer.on({
-			mouseover: highlightFeature,
-			mouseout: resetHighlight,
-			click: zoomToFeature
-		});
-		
-		layer.on('click', function(){
-				document.getElementById("box_droite").style.height = "400px";
-			$("#znes_agric1").html('<h4>Naissances</h4>'+ '<br>' +
-			'<img width="100" alt="bla" height="100" src="image/baby.png"> ');
-
-			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
-			+':'+' '+ feature.properties.NAME + '<br>' +
-			'<b>Nombre de naissances</b>'+' '
-			+':'+' '+ feature.properties.Naissance_vivante + '<br>' +
-			'<b>Nombre total habitants </b>'+' '
-			+':'+' '+ feature.properties.Effectif_janvier + 
-			'</p>')});
-
-		layer.bindPopup('<strong>' + 'Taux de natalité:' +feature.properties.t_natalite+'%');
-}});
-
-
-document.querySelector("input[name=naissance]").addEventListener('change', function() {
-	if(this.checked){
-		map.eachLayer(function (layer) {
-			map.removeLayer(layer);
-			});
-
-		deces.checked = false;
-		prop_h.checked = false;
-		prop_f.checked = false;
-
-	//création de la nouvelle couche
-	map.addLayer(esri);
-	map.addLayer(naissance);
-
-}});
 
 
 
 
 
-/////////////////////////////////Affichage indicateur taux de mortalité ///////////////////////////////////////////////
 
-// fonction pour l'affichage des indicateurs en couleur
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////// Selection des données dont la thématique correspond à l'économie'//////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function getColor(d) {
-    return d > 1.2 ? '#800026' :
-           d > 1  ? '#BD0026' :
-           d > 0.8  ? '#E31A1C' :
-           d > 0.6 ?  '#FC4E2A' :
+
+/////////////////////////////////// Affichage indicateur pop active  ////////////////////////////////////////////////////////////////
+
+//fonction pour l'affichage des indicateurs "population active " en couleur
+function getColorecoa(d) {
+    return d > 0.75 ? '#800026' :
+           d> 0.7  ? '#BD0026' :
+           d> 0.65  ? '#E31A1C' :
+           d> 0.55 ?  '#FC4E2A' :
                       '#FFEDA0';
 }
 
-style_deces = function style(feature) {
+style_act = function style(feature) {
 	return {
-		fillColor: getColor(feature.properties.t_deces),
+		fillColor: getColorecoa(feature.properties.part_pop_active),
 		weight: 2,
 		opacity: 1,
 		color: 'white',
@@ -1126,128 +1082,321 @@ style_deces = function style(feature) {
 	};
 }
 
-// ajout info relatives à l'indicateur taux mortalité
-
-deces = L.geoJSON(deces, { 
-	style: style_deces,
+p_act = L.geoJSON(chom_act, {
+	style: style_act,
 
 	onEachFeature: function onEachFeature(feature, layer) {
 		layer.on({
 			mouseover: highlightFeature,
-			mouseout: resetHighlight,
-			click: zoomToFeature
-		});
-		
-		layer.on('click', function(){
-			document.getElementById("box_droite").style.height = "400px";
-			$("#znes_agric1").html('<h4>Déces</h4>'+
-			'<img width="150" alt="bla" height="150" src="image/paturages.jpg"> <br>');
+			mouseout: function resetHighlight(e) {
+				p_act.resetStyle(e.target);
+			}});
+
+			layer.on('click', function(){
+				document.getElementById("box_droite").style.height = "420px";
+			$("#znes_agric1").html('<h4>Population active (2000)</h4>'+ '<br>' +
+			'<img width="100" alt="bla" height="100" src="image/pop_act.png"> ');
 
 			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
-			+':'+' '+ feature.properties.NAME + '<br>' +
-			'<b>Nombre de déces</b>'+' '
-			+':'+' '+ feature.properties.Deces + '<br>' +
-			'<b>Nombre total habitants </b>'+' '
-			+':'+' '+ feature.properties.Effectif_janvier + 
+			+':'+' '+ feature.properties.NAME + '<br>' +'<br>' +
+			'<b>Nombre de personnes actives</b>'+' '
+			+':'+' '+ feature.properties.pers_active + '<br>' +'<br>' +
+			'<b>Nombre emplois total </b>'+' '
+			+':'+' '+ feature.properties.Tot_sect + 
 			'</p>')});
-		
 
+			layer.bindPopup('<strong>' + 'Part de personnes actives:' +feature.properties.part_pop_active+'%');
 
-		layer.bindPopup('<strong>' + 'Taux de mortalité:' +feature.properties.t_deces	+'%');
-	}});
-
-
-	document.querySelector("input[name=deces]").addEventListener('change', function() {
-		if(this.checked){
-			map.eachLayer(function (layer) {
-				map.removeLayer(layer);
-				});
-	
-			naissance.checked = false;
-			prop_h.checked = false;
-			prop_f.checked = false;
-	
-		//création de la nouvelle couche
-		map.addLayer(esri);
-		map.addLayer(deces);
-	
-	}});
-
-
-
-
-//////////////////////////////// Affichage indicateur taux de natalité ////////////////
-// ajout d'info relatives à l'indicateur taux natalité
-/////////////////////////////////Affichage indicateur taux de mortalité ///////////////////////////////////////////////
-
-// fonction pour l'affichage des indicateurs en couleur
-
-function getColor(d) {
-    return d > 1.2 ? '#800026' :
-           d > 1  ? '#BD0026' :
-           d > 0.8  ? '#E31A1C' :
-           d > 0.6 ?  '#FC4E2A' :
-                      '#FFEDA0';
-}
-
-style_dem01 = function style(feature) {
-	return {
-		fillColor: getColor(feature.properties.t_deces),
-		weight: 2,
-		opacity: 1,
-		color: 'white',
-		dashArray: '3',
-		fillOpacity: 0.7
-	};
-}
-
-// ajout info relatives à l'indicateur taux mortalité
-
-demo = L.geoJSON(demo, { 
-	style: style_dem01,
-
-	onEachFeature: function onEachFeature(feature, layer) {
-		layer.on({
-			mouseover: highlightFeature,
-			mouseout: resetHighlight,
-			click: zoomToFeature
-		});
-		
-		layer.on('click', function(){
-			document.getElementById("box_droite").style.height = "400px";
-			$("#znes_agric1").html('<h4>Déces</h4>'+
-			'<img width="150" alt="bla" height="150" src="image/paturages.jpg"> <br>');
-
-			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
-			+':'+' '+ feature.properties.NAME + '<br>' +
-			'<b>Nombre de déces</b>'+' '
-			+':'+' '+ feature.properties.Deces + '<br>' +
-			'<b>Nombre total habitants </b>'+' '
-			+':'+' '+ feature.properties.Effectif_janvier + 
-			'</p>')});
-		
-		
-		layer.bindPopup('<strong>' + 'Taux de mortalité:' +feature.properties.t_deces	+'%');
-	}});
-
-
-// Ajout thématique démographique (deces) checkbox cochées
-document.querySelector("input[name=demo1]").addEventListener('change', function() {
-	if(this.checked){
-		map.eachLayer(function (layer) {
-			map.removeLayer(naissance);
-			map.removeLayer(deces);
-			map.removeLayer(demo2);
-			map.addLayer(esri);
-			map.addLayer(DA);
-			map.addLayer(demo)
-			})
-		naissance.checked = false;
-		deces.checked = false;
 		}});
 
+document.querySelector("input[name=pop_act]").addEventListener('change', function() {
+	if(this.checked) map.addLayer(p_act)
 
-*/
+	map.removeLayer(p_sect_primaire)
+	map.removeLayer(p_sect_secondaire)
+	map.removeLayer(p_sect_tertiaire)
+	map.removeLayer(p_chom)
+
+	document.querySelector("input[name=ta_chomage]").checked = false;
+	document.querySelector("input[name=sec_prim]").checked = false;
+	document.querySelector("input[name=prop_emp_sec]").checked = false;
+	document.querySelector("input[name=prop_emp_ter]").checked = false;
+
+
+	});
+
+
+
+/////////////////////////////////// Affichage indicateur chômage  ////////////////////////////////////////////////////////////////
+
+//fonction pour l'affichage des indicateurs "population active " en couleur
+function getColorecho(d) {
+    return d > 0.025 ? '#800026' :
+           d> 0.02  ? '#BD0026' :
+           d> 0.014  ? '#E31A1C' :
+           d> 0.012 ?  '#FC4E2A' :
+                      '#FFEDA0';
+}
+
+style_chom = function style(feature) {
+	return {
+		fillColor: getColorecho(feature.properties.ta_chom),
+		weight: 2,
+		opacity: 1,
+		color: 'white',
+		dashArray: '3',
+		fillOpacity: 0.7
+	};
+}
+
+p_chom = L.geoJSON(chom_act, {
+	style: style_chom,
+
+	onEachFeature: function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: function resetHighlight(e) {
+				p_chom.resetStyle(e.target);
+			}});
+
+			layer.on('click', function(){
+				document.getElementById("box_droite").style.height = "420px";
+			$("#znes_agric1").html('<h4>Population au chômage</h4>'+ '<br>' +
+			'<img width="100" alt="bla" height="100" src="image/chomage.png"> ');
+
+			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
+			+':'+' '+ feature.properties.NAME + '<br>' +'<br>' +
+			'<b>Nombre de personnes au chômage</b>'+' '
+			+':'+' '+ feature.properties.chomage + '<br>' +'<br>' +
+			'<b>Nombre emplois total </b>'+' '
+			+':'+' '+ feature.properties.Tot_sect + 
+			'</p>')});
+
+			layer.bindPopup('<strong>' + 'Part de personnes actives:' +feature.properties.ta_chom+'%');
+
+		}});
+
+document.querySelector("input[name=ta_chomage]").addEventListener('change', function() {
+	if(this.checked) map.addLayer(p_chom)
+
+	map.removeLayer(p_sect_primaire)
+	map.removeLayer(p_sect_secondaire)
+	map.removeLayer(p_sect_tertiaire)
+	map.removeLayer(p_act)
+
+	document.querySelector("input[name=pop_act]").checked = false;
+	document.querySelector("input[name=sec_prim]").checked = false;
+	document.querySelector("input[name=prop_emp_sec]").checked = false;
+	document.querySelector("input[name=prop_emp_ter]").checked = false;
+
+
+	});
+
+
+/////////////////////////////////// Affichage indicateur prop secteur primaire  ////////////////////////////////////////////////////////////////
+
+//fonction pour l'affichage des indicateurs "taux de naissace " en couleur
+function getColoreco(d) {
+    return d > 0.5 ? '#800026' :
+           d> 0.2  ? '#BD0026' :
+           d> 0.08  ? '#E31A1C' :
+           d> 0.04 ?  '#FC4E2A' :
+                      '#FFEDA0';
+}
+
+style_sect_prim = function style(feature) {
+	return {
+		fillColor: getColoreco(feature.properties.prop_prim),
+		weight: 2,
+		opacity: 1,
+		color: 'white',
+		dashArray: '3',
+		fillOpacity: 0.7
+	};
+}
+
+//ajout de la couche permettant de voir le taux de naissance sur la carte
+p_sect_primaire = L.geoJSON(sect_economique, {
+	style: style_sect_prim,
+
+	onEachFeature: function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: function resetHighlight(e) {
+				p_sect_primaire.resetStyle(e.target);
+			}});
+
+			layer.on('click', function(){
+				document.getElementById("box_droite").style.height = "420px";
+			$("#znes_agric1").html('<h4>Secteur primaire</h4>'+ '<br>' +
+			'<img width="100" alt="bla" height="100" src="image/sec_prim.png"> ');
+
+			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
+			+':'+' '+ feature.properties.NAME + '<br>' +'<br>' +
+			'<b>Emplois dans le secteur primaire</b>'+' '
+			+':'+' '+ feature.properties.Sect_prim + '<br>' +'<br>' +
+			'<b>Nombre emplois total </b>'+' '
+			+':'+' '+ feature.properties.Tot_sect + 
+			'</p>')});
+
+			layer.bindPopup('<strong>' + 'Part emplois secteur primaire:' +feature.properties.prop_prim+'%');
+
+		}});
+
+document.querySelector("input[name=sec_prim]").addEventListener('change', function() {
+	if(this.checked) map.addLayer(p_sect_primaire)
+
+	map.removeLayer(p_act)
+	map.removeLayer(p_sect_tertiaire)
+	map.removeLayer(p_sect_tertiaire)
+	map.removeLayer(p_chom)
+
+	document.querySelector("input[name=ta_chomage]").checked = false;
+	document.querySelector("input[name=pop_act]").checked = false;
+	document.querySelector("input[name=prop_emp_sec]").checked = false;
+	document.querySelector("input[name=prop_emp_ter]").checked = false;
+
+
+	});
+
+
+
+
+/////////////////////////////////// Affichage indicateur prop secteur primaire  ////////////////////////////////////////////////////////////////
+
+//fonction pour l'affichage des indicateurs "taux de naissace " en couleur
+function getColorecosec(d) {
+    return d > 0.5 ? '#800026' :
+           d> 0.4  ? '#BD0026' :
+           d> 0.2  ? '#E31A1C' :
+           d> 0.1 ?  '#FC4E2A' :
+                      '#FFEDA0';
+}
+
+style_sect_sec = function style(feature) {
+	return {
+		fillColor: getColorecosec(feature.properties.prop_sec),
+		weight: 2,
+		opacity: 1,
+		color: 'white',
+		dashArray: '3',
+		fillOpacity: 0.7
+	};
+}
+
+//ajout de la couche permettant de voir le taux de naissance sur la carte
+p_sect_secondaire = L.geoJSON(sect_economique, {
+	style: style_sect_sec,
+
+	onEachFeature: function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: function resetHighlight(e) {
+				p_sect_secondaire.resetStyle(e.target);
+			}});
+
+			layer.on('click', function(){
+				document.getElementById("box_droite").style.height = "420px";
+			$("#znes_agric1").html('<h4>Secteur secondaire</h4>'+ '<br>' +
+			'<img width="100" alt="bla" height="100" src="image/sect_sec.png"> ');
+
+			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
+			+':'+' '+ feature.properties.NAME + '<br>' +'<br>' +
+			'<b>Emplois dans le secteur secondaire</b>'+' '
+			+':'+' '+ feature.properties.Sect_sec + '<br>' +'<br>' +
+			'<b>Nombre emmplois total </b>'+' '
+			+':'+' '+ feature.properties.Tot_sect + 
+			'</p>')});
+
+			layer.bindPopup('<strong>' + 'Part emplois secteur secondaire:' +feature.properties.prop_sec+'%');
+
+		}});
+
+document.querySelector("input[name=prop_emp_sec]").addEventListener('change', function() {
+	if(this.checked) map.addLayer(p_sect_secondaire)
+
+	map.removeLayer(p_sect_primaire)
+	map.removeLayer(p_sect_tertiaire)
+	map.removeLayer(p_chom)
+	map.removeLayer(p_act)
+
+	document.querySelector("input[name=pop_act]").checked = false;
+	document.querySelector("input[name=ta_chomage]").checked = false;
+	document.querySelector("input[name=sec_prim]").checked = false;
+	document.querySelector("input[name=prop_emp_ter]").checked = false;
+
+
+	});
+
+
+
+
+	/////////////////////////////////// Affichage indicateur prop secteur tertiaire  ////////////////////////////////////////////////////////////////
+
+//fonction pour l'affichage de l'indicateur "proportion d'emploi secteur tertiaire " en couleur
+function getColorecoter(d) {
+    return d > 0.8 ? '#800026' :
+           d> 0.65  ? '#BD0026' :
+           d> 0.5  ? '#E31A1C' :
+           d> 0.3 ?  '#FC4E2A' :
+                      '#FFEDA0';
+}
+
+style_sect_ter = function style(feature) {
+	return {
+		fillColor: getColorecoter(feature.properties.prop_tert),
+		weight: 2,
+		opacity: 1,
+		color: 'white',
+		dashArray: '3',
+		fillOpacity: 0.7
+	};
+}
+
+//ajout de la couche permettant de voir le taux de naissance sur la carte
+p_sect_tertiaire = L.geoJSON(sect_economique, {
+	style: style_sect_ter,
+
+	onEachFeature: function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: function resetHighlight(e) {
+				p_sect_tertiaire.resetStyle(e.target);
+			}});
+
+			layer.on('click', function(){
+				document.getElementById("box_droite").style.height = "420px";
+			$("#znes_agric1").html('<h4>Secteur tertiaire</h4>'+ '<br>' +
+			'<img width="100" alt="bla" height="100" src="image/sec_ter.png"> ');
+
+			$("#znes_agric2").html('<p id="supérficie_agr"><b>Commune</b>'+' '
+			+':'+' '+ feature.properties.NAME + '<br>' +'<br>' +
+			'<b>Emplois dans le secteur tertiaire</b>'+' '
+			+':'+' '+ feature.properties.Sect_tert + '<br>' +'<br>' +
+			'<b>Nombre emmplois total </b>'+' '
+			+':'+' '+ feature.properties.Tot_sect + 
+			'</p>')});
+
+			layer.bindPopup('<strong>' + 'Part emplois secteur tertiaire:' +feature.properties.prop_tert+'%');
+
+		}});
+
+document.querySelector("input[name=prop_emp_ter]").addEventListener('change', function() {
+	if(this.checked) map.addLayer(p_sect_tertiaire)
+
+	map.removeLayer(p_sect_primaire)
+	map.removeLayer(p_sect_secondaire)
+	map.removeLayer(p_chom)
+	map.removeLayer(p_act)
+
+	document.querySelector("input[name=pop_act]").checked = false;
+	document.querySelector("input[name=ta_chomage]").checked = false;
+	document.querySelector("input[name=sec_prim]").checked = false;
+	document.querySelector("input[name=prop_emp_sec]").checked = false;
+
+
+	});
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1433,7 +1582,7 @@ var featureGroup = L.featureGroup().addTo(map);
 
 // Modification de l'icon du marker
 L.Marker.prototype.options.icon = L.icon({
-    iconUrl: "C:/Users/user/Documents/GitHub/M-moire_Steven/image/marker.jpg",
+    iconUrl: 'C:/Users/user/Documents/GitHub/M-moire_Steven/image/marker.jpg',
 	iconSize: [30, 40],
 });
 

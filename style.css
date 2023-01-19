@@ -3,7 +3,8 @@
     left: 0px;
     right: 5px;
     top: 0px;
-    height: 55px;
+    height: 50px;
+    z-index: 0;
     background-color: rgb(255, 255, 255);
     border-top: 2px solid black;
     border-bottom: 2px solid black;
@@ -20,13 +21,23 @@ h1 {
 #Map{
     position: absolute;
     left: 0px;
-    top: 55px;
-    height:698px;
+    top: 50px;
+    height:695px;
     width: 100%;
     z-index: 1;
 }
 
-
+#closeALL{
+  cursor: pointer;
+  position: absolute;
+  left: 1460px;
+  top: 5.5px;
+  height: 0px;
+  width: 50px;
+  border-radius: 5px;
+  background-color: black;
+  z-index: 2;
+}
 
 /* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
   /* ////////////////////////////////////////////////Section liée au Sidebar////////////////////////////////////////////*/
@@ -702,45 +713,7 @@ button#delete  {
      }
 
 
-/* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-/* ////////////////////////////////////////////////Section liée à l'onglet Impression////////////////////////////////////////////*/
 
-
-  button.OpenImp {
-    cursor: pointer;
-    background-color: #111;
-    border: none;
-    position: relative;
-    z-index: 50;
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    transition: 0.0s;
-    float: left;
-  }
-
-
-
-  a.closeImp{
-    color: black;
-    font-size: 25px;
-  }
-  a.closeImp:hover {
-    color: black;
-  }
-
-  .closeImp:hover {
-    color: #f1f1f1
-  }
-
-  .OuvrirImp {
-    position: relative;
-    height: 0px;
-    font-size: 15px;
-    overflow-x: hidden;
-    background-color: #f1f1f1;
-  }
 
 
   /* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
@@ -761,6 +734,8 @@ button.OpenDroits {
   transition: 0.0s;
   float: left;
 }
+
+
 
 a.closeDroits{
   color: black;

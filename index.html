@@ -44,6 +44,8 @@
     <script src="leaflet_provider.js"></script>
     <script src="../M-moire_Steven/librairie/leaflet-measure.css"></script>
     <script src="../M-moire_Steven/librairie/leaflet-measure.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
 
     <!--Librairies pour ajouter des outils à la carte leaflet (outils de mesures)-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.css" />
@@ -167,7 +169,7 @@
                                     <label>
                                         <input type="checkbox" name="radio">
                                         <span class="checkmark"></span>
-                                        <div class="label">NDVI (aôut 2021)</div>
+                                        <div class="label">NDVI (juillet 2022)</div>
                                     </label>
                                   
                                 </div>
@@ -322,16 +324,16 @@
                                 <div id="Ent_geo">
                                     <p id="Entite_geo"><b>Selectionner une entité géographique:</b></p>
     
-                                        <label for ="zone_agricole">                                
-                                            <input type="checkbox" id="zone_agricole" name="zn_1" value="zn_1">
-                                            <div class="label">Surfaces Agricoles</div>
+                                        <label>                                
+                                            <input type="checkbox" id="mnt" name="mnt" value="mnt">
+                                            <div class="label">Topographie</div>
                                         </label>
     
                                             &ensp;&ensp;&ensp;
     
-                                        <label for ="zone_viticole">                                
-                                            <input type="checkbox" id="zone_viticole" name="zn_2" value="zn_2">
-                                            <div class="label">Vignobles</div>
+                                        <label>                                
+                                            <input type="checkbox" id="lig_niv" name="lig_niv" value="lig_niv">
+                                            <div class="label">Lignes de niveau</div>
                                         </label>
                                         
                                         &ensp;&ensp;&ensp;
@@ -346,12 +348,10 @@
                                     <p id="indicateur_geo"><b>Indicateur graphique:</b></p>
                                         <label>
                                             <input type="checkbox" name="radio">
-                                            <span class="checkmark"></span>
                                             <div class="label">NDVI</div>
                                         </label>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
                                         <label>
                                             <input type="radio"  name="radio">
-                                            <span class="checkmark"></span>
                                             <div class="label">NDWI</div>
                                         </label>
                                     </div>
@@ -512,6 +512,7 @@
         <script src="../M-moire_Steven/GeoJson/prop_ho_fe.geojson"type="text/javascript"></script>
         <script src="../M-moire_Steven/GeoJson/sect_eco.geojson"type="text/javascript"></script>
         <script src="../M-moire_Steven/GeoJson/chom_act.geojson"type="text/javascript"></script>
+        <script src="../M-moire_Steven/GeoJson/ligne_niveau.geojson"type="text/javascript"></script>
 
 
 
